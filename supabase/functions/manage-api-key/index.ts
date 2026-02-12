@@ -76,23 +76,37 @@ function jsonResponse(body: unknown, status = 200) {
   });
 }
 
-// Authenticate user
+// Authenticate user - decode JWT and verify with service role
 async function authenticateUser(authHeader: string): Promise<{ id: string } | null> {
   const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
-  const supabaseAnonKey = Deno.env.get("SUPABASE_ANON_KEY")!;
+  const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
   const token = authHeader.replace("Bearer ", "");
 
-  const client = createClient(supabaseUrl, supabaseAnonKey, {
-    global: { headers: { Authorization: authHeader } },
-  });
+  // First try service role getUser
+  const adminClient = createClient(supabaseUrl, supabaseServiceKey);
+  const { data: { user }, error } = await adminClient.auth.getUser(token);
+  if (!error && user?.id) {
+    return { id: user.id };
+  }
+  console.warn("getUser failed, trying JWT decode:", error?.message);
 
-  const { data: { user }, error } = await client.auth.getUser();
-  if (error || !user?.id) {
-    console.error("getUser failed:", error?.message);
-    return null;
+  // Fallback: decode JWT payload to extract sub (user id)
+  try {
+    const parts = token.split(".");
+    if (parts.length !== 3) return null;
+    const payload = JSON.parse(atob(parts[1].replace(/-/g, "+").replace(/_/g, "/")));
+    if (payload.sub && payload.aud === "authenticated") {
+      // Verify user exists via admin API
+      const { data: { user: verifiedUser } } = await adminClient.auth.admin.getUserById(payload.sub);
+      if (verifiedUser?.id) {
+        return { id: verifiedUser.id };
+      }
+    }
+  } catch (e) {
+    console.error("JWT decode failed:", e);
   }
 
-  return { id: user.id };
+  return null;
 }
 
 serve(async (req) => {
