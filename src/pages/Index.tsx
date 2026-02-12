@@ -1,5 +1,6 @@
 import { useState } from "react";
 import AppHeader from "../components/AppHeader";
+import PriceTicker from "../components/PriceTicker";
 import TabNav from "../components/TabNav";
 import PromptGeneratorTab from "../components/PromptGeneratorTab";
 import CodingPromptTab from "../components/CodingPromptTab";
@@ -37,6 +38,7 @@ const Index = () => {
 
       <div className="relative z-10">
         <AppHeader />
+        <PriceTicker />
 
         <main className="max-w-3xl mx-auto px-4 md:px-6 py-6">
           {/* Tab Navigation */}
