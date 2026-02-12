@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
-import { Sparkles, Mail, Lock, User, Eye, EyeOff } from "lucide-react";
+import { Mail, Lock, User, Eye, EyeOff } from "lucide-react";
+import GlossyTitle from "@/components/GlossyTitle";
 import ForgotPasswordModal from "@/components/ForgotPasswordModal";
 import StarryBackground from "@/components/StarryBackground";
 
@@ -76,16 +77,9 @@ const Auth = () => {
       
       <div className="relative z-10 w-full max-w-md">
         {/* Logo */}
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="w-14 h-14 rounded-2xl bg-gradient-subtle glow-border flex items-center justify-center">
-              <Sparkles className="w-7 h-7 text-primary" />
-            </div>
-          </div>
-          <h1 className="text-3xl font-bold tracking-tight">
-            AI <span className="text-gradient">Prompt Book</span>
-          </h1>
-          <p className="text-sm text-muted-foreground mt-2">Advanced AI Generation Suite</p>
+        <div className="text-center mb-8 flex flex-col items-center">
+          <GlossyTitle />
+          <p className="text-sm text-muted-foreground mt-3">Advanced AI Generation Suite</p>
         </div>
 
         {/* Auth Card */}
