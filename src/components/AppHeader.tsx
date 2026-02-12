@@ -7,6 +7,7 @@ import ModelSettingsModal from "./ModelSettingsModal";
 import GlossyTitle from "./GlossyTitle";
 import ThemeSwitch from "./ThemeSwitch";
 import AiRobotFace from "./AiRobotFace";
+import DigitalClock from "./DigitalClock";
 
 const AppHeader = () => {
   const { user, profile, isAdmin, signOut } = useAuth();
@@ -22,6 +23,7 @@ const AppHeader = () => {
 
           <div className="flex items-center gap-2">
             <AiRobotFace />
+            <DigitalClock />
             <ThemeSwitch />
 
             {user && (
