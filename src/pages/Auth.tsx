@@ -68,12 +68,8 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background relative flex items-center justify-center px-4 overflow-hidden">
+    <div className="min-h-screen relative flex items-center justify-center px-4 overflow-hidden">
       <StarryBackground />
-
-      {/* Gradient orbs */}
-      <div className="fixed top-[-15%] right-[-10%] w-[500px] h-[500px] rounded-full bg-gradient-to-bl from-primary/12 to-transparent blur-[120px] pointer-events-none" />
-      <div className="fixed bottom-[-15%] left-[-10%] w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-accent/12 to-transparent blur-[120px] pointer-events-none" />
       
       <div className="relative z-10 w-full max-w-md">
         {/* Logo */}
@@ -83,7 +79,7 @@ const Auth = () => {
         </div>
 
         {/* Auth Card */}
-        <div className="glass rounded-2xl p-7 card-hover">
+        <div className="rounded-2xl p-7 bg-background/40 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/20">
           <h2 className="text-lg font-semibold text-foreground mb-6 text-center">
             {isLogin ? "Welcome Back" : "Create Account"}
           </h2>

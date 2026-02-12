@@ -1,18 +1,28 @@
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+import { useTheme } from "@/hooks/useTheme";
 
 const StarryBackground = () => {
   const vantaRef = useRef<HTMLDivElement>(null);
-  const [vantaEffect, setVantaEffect] = useState<any>(null);
+  const effectRef = useRef<any>(null);
+  const { theme } = useTheme();
 
   useEffect(() => {
     let effect: any = null;
 
     const initVanta = async () => {
-      if (vantaEffect) return;
+      // Destroy previous
+      if (effectRef.current) {
+        effectRef.current.destroy();
+        effectRef.current = null;
+      }
+
       try {
         const WAVES = (await import("vanta/dist/vanta.waves.min")).default;
         if (!vantaRef.current) return;
+
+        const isDark = theme === "dark";
+
         effect = WAVES({
           el: vantaRef.current,
           THREE,
@@ -23,9 +33,9 @@ const StarryBackground = () => {
           minWidth: 200.0,
           scale: 1.0,
           scaleMobile: 1.0,
-          color: 0x0,
+          color: isDark ? 0x0 : 0x60718b,
         });
-        setVantaEffect(effect);
+        effectRef.current = effect;
       } catch (err) {
         console.error("Vanta init error:", err);
       }
@@ -36,7 +46,7 @@ const StarryBackground = () => {
     return () => {
       if (effect) effect.destroy();
     };
-  }, []);
+  }, [theme]);
 
   return (
     <div
