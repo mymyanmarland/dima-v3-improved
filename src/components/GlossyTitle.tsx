@@ -8,8 +8,8 @@ const GlossyTitle = () => {
         <div className="glossy-title-inner">
           <Sparkles className="w-5 h-5 text-[#ff7a3c] drop-shadow-[0_0_8px_rgba(255,122,60,0.6)]" />
           <div className="glossy-title-text">
-            <span className="glossy-title-main">Prompt</span>
-            <span className="glossy-title-sub">Engine</span>
+            <span className="glossy-title-main">DIMA</span>
+            <span className="glossy-title-sub">Prompt Gen</span>
           </div>
         </div>
         <div className="glossy-title-glow" />

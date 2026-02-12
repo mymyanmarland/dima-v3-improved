@@ -113,7 +113,7 @@ const HowToUseTab = () => {
           <h2 className="text-xl font-bold text-foreground">အသုံးပြုနည်း လမ်းညွှန်</h2>
         </div>
         <p className="text-sm text-muted-foreground max-w-xl mx-auto">
-          KMN Prompt Generator ရဲ့ Feature တွေအားလုံးကို ဘယ်လိုအသုံးပြုရမလဲဆိုတာ အသေးစိတ်ရှင်းပြထားပါတယ်
+          DIMA Prompt Gen ရဲ့ Feature တွေအားလုံးကို ဘယ်လိုအသုံးပြုရမလဲဆိုတာ အသေးစိတ်ရှင်းပြထားပါတယ်
         </p>
       </div>
 
