@@ -9,15 +9,34 @@ interface ModelSettingsModalProps {
 }
 
 const OPENROUTER_MODELS = [
-  { id: "openai/gpt-4o-mini", label: "GPT-4o Mini", description: "Fast & affordable, good quality" },
-  { id: "openai/gpt-4o", label: "GPT-4o", description: "Most capable, higher cost" },
-  { id: "google/gemini-2.0-flash-001", label: "Gemini 2.0 Flash", description: "Google's fast model" },
+  // --- Premium Models ---
+  { id: "openai/gpt-4.1", label: "GPT-4.1", description: "OpenAI's latest flagship model" },
+  { id: "openai/gpt-4.1-mini", label: "GPT-4.1 Mini", description: "Fast & affordable, great quality" },
+  { id: "openai/gpt-4.1-nano", label: "GPT-4.1 Nano", description: "Ultra-fast, cheapest OpenAI" },
+  { id: "openai/gpt-4o", label: "GPT-4o", description: "Powerful multimodal model" },
+  { id: "openai/gpt-4o-mini", label: "GPT-4o Mini", description: "Compact & efficient" },
+  { id: "openai/o3", label: "O3", description: "OpenAI reasoning model" },
+  { id: "openai/o3-mini", label: "O3 Mini", description: "Fast reasoning model" },
+  { id: "openai/o4-mini", label: "O4 Mini", description: "Latest reasoning model" },
+  { id: "anthropic/claude-sonnet-4", label: "Claude Sonnet 4", description: "Most capable Claude" },
   { id: "anthropic/claude-3.5-haiku", label: "Claude 3.5 Haiku", description: "Fast Claude model" },
-  { id: "anthropic/claude-sonnet-4", label: "Claude Sonnet 4", description: "Powerful Claude model" },
+  { id: "google/gemini-2.5-pro-preview", label: "Gemini 2.5 Pro", description: "Google's top model" },
+  { id: "google/gemini-2.5-flash-preview", label: "Gemini 2.5 Flash", description: "Fast Gemini model" },
+  { id: "google/gemini-2.0-flash-001", label: "Gemini 2.0 Flash", description: "Previous gen fast model" },
+  { id: "meta-llama/llama-4-maverick", label: "Llama 4 Maverick", description: "Meta's latest model" },
+  { id: "meta-llama/llama-4-scout", label: "Llama 4 Scout", description: "Meta's efficient model" },
   { id: "meta-llama/llama-3.3-70b-instruct", label: "Llama 3.3 70B", description: "Meta's open model" },
+  { id: "deepseek/deepseek-chat-v3-0324", label: "DeepSeek V3", description: "Strong coding & reasoning" },
+  { id: "deepseek/deepseek-r1", label: "DeepSeek R1", description: "DeepSeek reasoning model" },
+  { id: "mistralai/mistral-large-2411", label: "Mistral Large", description: "Mistral's flagship" },
+  { id: "qwen/qwen-2.5-72b-instruct", label: "Qwen 2.5 72B", description: "Alibaba's top model" },
+  // --- Free Models ---
   { id: "google/gemma-3-1b-it:free", label: "Gemma 3 1B (Free)", description: "Free, basic tasks" },
   { id: "meta-llama/llama-3.2-3b-instruct:free", label: "Llama 3.2 3B (Free)", description: "Free Llama model" },
   { id: "mistralai/mistral-small-3.1-24b-instruct:free", label: "Mistral Small (Free)", description: "Free Mistral model" },
+  { id: "nousresearch/hermes-3-llama-3.1-405b:free", label: "Hermes 3 405B (Free)", description: "Free large model" },
+  { id: "deepseek/deepseek-chat-v3-0324:free", label: "DeepSeek V3 (Free)", description: "Free DeepSeek model" },
+  { id: "openrouter/auto", label: "Auto (OpenRouter)", description: "Auto-select best available" },
 ];
 
 const ModelSettingsModal = ({ onClose }: ModelSettingsModalProps) => {
@@ -154,7 +173,7 @@ const ModelSettingsModal = ({ onClose }: ModelSettingsModalProps) => {
         <div className="mt-3 p-3 bg-secondary/20 rounded-lg border border-border/50">
           <p className="text-[10px] text-muted-foreground leading-relaxed">
             💡 ဒီ setting က OpenRouter API Key သုံးတဲ့အခါပဲ အသက်ဝင်ပါတယ်။ 
-            Gemini Key သို့မဟုတ် Lovable AI သုံးရင် ဒီ setting မသက်ဆိုင်ပါ။
+            Gemini Key သုံးရင် ဒီ setting မသက်ဆိုင်ပါ။
           </p>
         </div>
       </div>
