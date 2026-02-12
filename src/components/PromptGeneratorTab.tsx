@@ -287,7 +287,7 @@ const PromptGeneratorTab = () => {
         <button
           onClick={generatePromptOnly}
           disabled={isDisabled}
-          className="fancy-button w-full"
+          className="fancy-button fancy-sm w-full"
         >
           <span className="dots_border" />
           {isLoading && activeMode === "generate" ? (
@@ -302,7 +302,7 @@ const PromptGeneratorTab = () => {
         <button
           onClick={generateAndExecute}
           disabled={isDisabled}
-          className="fancy-button w-full"
+          className="fancy-button fancy-sm w-full"
         >
           <span className="dots_border" />
           {(isLoading || isExecuting) && activeMode === "execute" ? (
