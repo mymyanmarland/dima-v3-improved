@@ -1,15 +1,14 @@
 import { useAuth } from "@/hooks/useAuth";
-import { useTheme } from "@/hooks/useTheme";
-import { Key, Shield, LogOut, Lock, Sun, Moon, Settings } from "lucide-react";
+import { Key, Shield, LogOut, Lock, Settings } from "lucide-react";
 import { useState } from "react";
 import ApiKeyModal from "./ApiKeyModal";
 import ChangePasswordModal from "./ChangePasswordModal";
 import ModelSettingsModal from "./ModelSettingsModal";
 import GlossyTitle from "./GlossyTitle";
+import ThemeSwitch from "./ThemeSwitch";
 
 const AppHeader = () => {
   const { user, profile, isAdmin, signOut } = useAuth();
-  const { theme, toggleTheme } = useTheme();
   const [showKeyModal, setShowKeyModal] = useState(false);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [showModelModal, setShowModelModal] = useState(false);
@@ -21,18 +20,7 @@ const AppHeader = () => {
           <GlossyTitle />
 
           <div className="flex items-center gap-2">
-            {/* Theme Toggle */}
-            <button
-              onClick={toggleTheme}
-              className="flex items-center justify-center w-10 h-10 rounded-xl btn-glass"
-              title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
-            >
-              {theme === "dark" ? (
-                <Sun className="w-5 h-5 text-accent" />
-              ) : (
-                <Moon className="w-5 h-5 text-primary" />
-              )}
-            </button>
+            <ThemeSwitch />
 
             {user && (
               <>
