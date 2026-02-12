@@ -9,6 +9,7 @@ import ImageToPromptTab from "../components/ImageToPromptTab";
 import VideoPromptTab from "../components/VideoPromptTab";
 import HowToUseTab from "../components/HowToUseTab";
 import ChatBotTab from "../components/ChatBotTab";
+import ReadyMadePromptTab from "../components/ReadyMadePromptTab";
 import StarryBackground from "../components/StarryBackground";
 
 const Index = () => {
@@ -22,6 +23,8 @@ const Index = () => {
         return <PromptGeneratorTab />;
       case "coding-prompt":
         return <CodingPromptTab />;
+      case "ready-made":
+        return <ReadyMadePromptTab />;
       case "video-prompt":
         return <VideoPromptTab />;
       case "image-prompt":
