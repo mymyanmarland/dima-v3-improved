@@ -99,11 +99,9 @@ const PromptGeneratorTab = () => {
     setActiveMode("execute");
 
     try {
-      // Step 1: Generate the prompt
       const prompt = await callGeneratePrompt();
       setGeneratedPrompt(prompt);
 
-      // Step 2: Execute the prompt
       setIsLoading(false);
       setIsExecuting(true);
 
@@ -154,7 +152,6 @@ const PromptGeneratorTab = () => {
       return "Unknown error";
     };
 
-    // Retry on 429 (free models busy) with exponential backoff
     const maxAttempts = 3;
     for (let attempt = 1; attempt <= maxAttempts; attempt++) {
       const { data, error } = await supabase.functions.invoke("generate-prompt", {
@@ -174,13 +171,12 @@ const PromptGeneratorTab = () => {
       const msg = extractMessage(data?.error ?? anyErr?.context?.body ?? anyErr?.message);
 
       if (status === 429 && attempt < maxAttempts) {
-        const delayMs = 900 * Math.pow(2, attempt - 1); // 900ms, 1800ms
+        const delayMs = 900 * Math.pow(2, attempt - 1);
         toast.message(`Free models busy… retrying (${attempt}/${maxAttempts})`, { duration: 1200 });
         await sleep(delayMs);
         continue;
       }
 
-      // Fail with clean message (avoid throwing Supabase's "Edge function returned ..." wrapper)
       throw new Error(msg);
     }
 
@@ -203,7 +199,7 @@ const PromptGeneratorTab = () => {
   return (
     <div className="space-y-5">
       {/* Topic */}
-      <div className="glass glow-border rounded-xl p-4">
+      <div className="glass-card rounded-2xl p-5">
         <label className="text-sm font-medium text-foreground mb-3 block">
           အကြောင်းအရာရေးပါ
         </label>
@@ -212,12 +208,12 @@ const PromptGeneratorTab = () => {
           onChange={(e) => setTopic(e.target.value)}
           placeholder="How to create Gemini API Key စတဲ့အရာ Design ကစခု ဖန်တီးပေးပါ..."
           rows={3}
-          className="w-full bg-secondary/50 border border-border rounded-lg px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all resize-none"
+          className="w-full glass-input rounded-xl px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none resize-none"
         />
       </div>
 
       {/* Category */}
-      <div className="glass glow-border rounded-xl p-4">
+      <div className="glass-card rounded-2xl p-5">
         <label className="text-sm font-medium text-foreground mb-3 block">
           ကိရိယာများ (Tools)
         </label>
@@ -225,7 +221,7 @@ const PromptGeneratorTab = () => {
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          className="w-full bg-secondary/50 border border-border rounded-lg px-4 py-2.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all appearance-none cursor-pointer"
+          className="w-full glass-input rounded-xl px-4 py-2.5 text-sm text-foreground focus:outline-none appearance-none cursor-pointer"
         >
           <option value="" disabled>-- အမျိုးအစားရွေးပါ --</option>
           {CATEGORIES.map((cat) => (
@@ -237,7 +233,7 @@ const PromptGeneratorTab = () => {
       </div>
 
       {/* Tone */}
-      <div className="glass glow-border rounded-xl p-4">
+      <div className="glass-card rounded-2xl p-5">
         <label className="text-sm font-medium text-foreground mb-3 block">
           စတိုင် (Style)
         </label>
@@ -246,10 +242,10 @@ const PromptGeneratorTab = () => {
             <button
               key={t}
               onClick={() => setTone(t)}
-              className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all border ${
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all border ${
                 tone === t
-                  ? "bg-primary/15 text-primary border-primary/40 glow-primary"
-                  : "bg-secondary/30 text-muted-foreground border-border hover:border-primary/20 hover:text-foreground"
+                  ? "bg-primary/15 text-primary border-primary/30 glow-primary"
+                  : "glass-subtle text-muted-foreground hover:text-foreground hover:border-primary/20"
               }`}
             >
               {t}
@@ -259,7 +255,7 @@ const PromptGeneratorTab = () => {
       </div>
 
       {/* Context */}
-      <div className="glass glow-border rounded-xl p-4">
+      <div className="glass-card rounded-2xl p-5">
         <label className="text-sm font-medium text-foreground mb-3 block">
           Additional Context <span className="text-muted-foreground">(optional)</span>
         </label>
@@ -268,12 +264,12 @@ const PromptGeneratorTab = () => {
           onChange={(e) => setContext(e.target.value)}
           placeholder="ထပ်ဖြည့်ချင်တဲ့ details တွေ ထည့်ပါ..."
           rows={2}
-          className="w-full bg-secondary/50 border border-border rounded-lg px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all resize-none"
+          className="w-full glass-input rounded-xl px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none resize-none"
         />
       </div>
 
       {/* Button descriptions */}
-      <div className="glass rounded-xl p-3 border border-border/30">
+      <div className="glass-subtle rounded-2xl p-3">
         <div className="grid grid-cols-2 gap-3 text-[10px] text-muted-foreground">
           <div className="flex items-start gap-1.5">
             <span className="text-primary font-bold">①</span>
@@ -291,20 +287,20 @@ const PromptGeneratorTab = () => {
         <button
           onClick={generatePromptOnly}
           disabled={isDisabled}
-          className="py-3 bg-primary text-primary-foreground rounded-xl font-semibold text-sm hover:opacity-90 transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          className="py-3 bg-primary/20 text-primary border border-primary/30 rounded-2xl font-semibold text-sm hover:bg-primary/30 transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 backdrop-blur-sm"
         >
           {isLoading && activeMode === "generate" ? (
-            <div className="w-4 h-4 rounded-full border-2 border-primary-foreground border-t-transparent animate-spin" />
+            <div className="w-4 h-4 rounded-full border-2 border-primary border-t-transparent animate-spin" />
           ) : null}
           Prompt Generate မယ်
         </button>
         <button
           onClick={generateAndExecute}
           disabled={isDisabled}
-          className="py-3 bg-accent text-accent-foreground rounded-xl font-semibold text-sm hover:opacity-90 transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 glow-accent"
+          className="py-3 btn-gradient text-primary-foreground rounded-2xl font-semibold text-sm disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
         >
           {(isLoading || isExecuting) && activeMode === "execute" ? (
-            <div className="w-4 h-4 rounded-full border-2 border-accent-foreground border-t-transparent animate-spin" />
+            <div className="w-4 h-4 rounded-full border-2 border-primary-foreground border-t-transparent animate-spin" />
           ) : (
             <Sparkles className="w-4 h-4" />
           )}
