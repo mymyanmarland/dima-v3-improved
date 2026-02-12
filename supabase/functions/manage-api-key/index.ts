@@ -86,7 +86,7 @@ async function authenticateUser(authHeader: string): Promise<{ id: string } | nu
     global: { headers: { Authorization: authHeader } },
   });
 
-  const { data: { user }, error } = await client.auth.getUser(token);
+  const { data: { user }, error } = await client.auth.getUser();
   if (error || !user?.id) {
     console.error("getUser failed:", error?.message);
     return null;
