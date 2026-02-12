@@ -1,4 +1,5 @@
 import { useState } from "react";
+import GlowTextarea from "./GlowTextarea";
 import { Code2, Terminal, Layers, Cpu, Braces, GitBranch } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -200,12 +201,11 @@ IMPORTANT RULES:
           <Code2 className="w-5 h-5 inline mr-2" />
           ဘာလုပ်ချင်တာလဲ?
         </label>
-        <textarea
+        <GlowTextarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="ဥပမာ - User authentication system with JWT, refresh tokens, role-based access control..."
           rows={3}
-          className="w-full glass-input rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none resize-none"
         />
       </div>
 
@@ -293,12 +293,11 @@ IMPORTANT RULES:
           <Terminal className="w-5 h-5 inline mr-2" />
           Additional Context <span className="text-muted-foreground text-sm">(optional)</span>
         </label>
-        <textarea
+        <GlowTextarea
           value={additionalContext}
           onChange={(e) => setAdditionalContext(e.target.value)}
           placeholder="ဥပမာ - Using PostgreSQL, Docker deployment, must support 10k concurrent users, REST API with OpenAPI spec..."
           rows={2}
-          className="w-full glass-input rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none resize-none"
         />
         <p className="text-xs text-muted-foreground mt-2">
           💡 Tech stack, constraints, requirements စသည် ထပ်ထည့်ပေးနိုင်ပါတယ်

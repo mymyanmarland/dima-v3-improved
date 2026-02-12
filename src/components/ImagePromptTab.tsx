@@ -1,4 +1,5 @@
 import { useState } from "react";
+import GlowTextarea from "./GlowTextarea";
 import { Wand2 } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -108,12 +109,11 @@ Format it as one continuous prompt, not a list. Do not include explanations.`,
         <label className="text-sm font-medium text-foreground mb-3 block">
           🖼️ ဘာပုံမျိုး ဖန်တီးချင်ပါသလဲ
         </label>
-        <textarea
+        <GlowTextarea
           value={subject}
           onChange={(e) => setSubject(e.target.value)}
           placeholder="ဥပမာ - A dragon flying over a medieval castle, A girl in cyberpunk city..."
           rows={3}
-          className="w-full glass-input rounded-xl px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none resize-none"
         />
       </div>
 
@@ -162,12 +162,11 @@ Format it as one continuous prompt, not a list. Do not include explanations.`,
         <label className="text-sm font-medium text-foreground mb-3 block">
           📝 ထပ်ဖြည့်ချင်တဲ့ details <span className="text-muted-foreground">(optional)</span>
         </label>
-        <textarea
+        <GlowTextarea
           value={additionalDetails}
           onChange={(e) => setAdditionalDetails(e.target.value)}
           placeholder="Color palette, mood, texture, background details..."
           rows={2}
-          className="w-full glass-input rounded-xl px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none resize-none"
         />
       </div>
 
@@ -176,12 +175,11 @@ Format it as one continuous prompt, not a list. Do not include explanations.`,
         <label className="text-sm font-medium text-foreground mb-3 block">
           🚫 ပါမစေချင်တာ (Negative Prompt) <span className="text-muted-foreground">(optional)</span>
         </label>
-        <textarea
+        <GlowTextarea
           value={negativePrompt}
           onChange={(e) => setNegativePrompt(e.target.value)}
           placeholder="blurry, low quality, watermark, text..."
           rows={2}
-          className="w-full glass-input rounded-xl px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none resize-none"
         />
       </div>
 
