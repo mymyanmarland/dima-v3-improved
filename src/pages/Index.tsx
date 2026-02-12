@@ -4,8 +4,6 @@ import TabNav from "../components/TabNav";
 import PromptGeneratorTab from "../components/PromptGeneratorTab";
 import CodingPromptTab from "../components/CodingPromptTab";
 import ImagePromptTab from "../components/ImagePromptTab";
-import ImageGeneratorTab from "../components/ImageGeneratorTab";
-import AdPosterTab from "../components/AdPosterTab";
 import ImageToPromptTab from "../components/ImageToPromptTab";
 import VideoPromptTab from "../components/VideoPromptTab";
 import HowToUseTab from "../components/HowToUseTab";
@@ -26,10 +24,6 @@ const Index = () => {
         return <VideoPromptTab />;
       case "image-prompt":
         return <ImagePromptTab />;
-      case "image":
-        return <ImageGeneratorTab />;
-      case "ad-poster":
-        return <AdPosterTab />;
       case "image-to-prompt":
         return <ImageToPromptTab />;
       default:
