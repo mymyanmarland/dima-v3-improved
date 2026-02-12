@@ -12,6 +12,7 @@ const TABS = [
   { id: "image-prompt", label: "Image Prompt", emoji: "🎨" },
   { id: "image-to-prompt", label: "Image to Prompt", emoji: "🔄" },
   { id: "chatbot", label: "AI Chat", emoji: "🤖" },
+  { id: "api-test", label: "API Test", emoji: "🧪" },
 ];
 
 const TabNav = ({ activeTab, onTabChange }: TabNavProps) => {
