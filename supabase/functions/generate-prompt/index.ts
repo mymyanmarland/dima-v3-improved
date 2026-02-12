@@ -55,11 +55,13 @@ interface UserApiConfig {
 interface UserApiResult {
   configs: UserApiConfig[];
   openrouterModel: string;
+  geminiModel: string;
 }
 
 async function getUserApiConfig(authHeader: string | null): Promise<UserApiResult> {
   const configs: UserApiConfig[] = [];
   let openrouterModel = "openai/gpt-4o-mini"; // default
+  let geminiModel = "gemini-2.0-flash"; // default
 
   if (authHeader) {
     try {
@@ -74,12 +76,15 @@ async function getUserApiConfig(authHeader: string | null): Promise<UserApiResul
         // Get user's preferred OpenRouter model
         const { data: settings } = await adminClient
           .from("user_settings")
-          .select("openrouter_model")
+          .select("openrouter_model, gemini_model")
           .eq("user_id", user.id)
           .maybeSingle();
 
         if (settings?.openrouter_model) {
           openrouterModel = settings.openrouter_model;
+        }
+        if (settings?.gemini_model) {
+          geminiModel = settings.gemini_model;
         }
 
         const { data: orKey } = await adminClient
@@ -113,7 +118,7 @@ async function getUserApiConfig(authHeader: string | null): Promise<UserApiResul
     throw new Error("OpenRouter API Key မထည့်ရသေးပါ။ Settings မှာ API Key ထည့်ပါ။");
   }
 
-  return { configs, openrouterModel };
+  return { configs, openrouterModel, geminiModel };
 }
 
 // Error codes that trigger fallback (auth errors + payment required + rate limit + not found)
@@ -208,7 +213,7 @@ serve(async (req) => {
     }
 
     const authHeader = req.headers.get("Authorization");
-    const { configs, openrouterModel } = await getUserApiConfig(authHeader);
+    const { configs, openrouterModel, geminiModel } = await getUserApiConfig(authHeader);
 
     const systemPrompt = `You are an expert AI prompt engineer. Your job is to generate highly effective, detailed, and well-structured prompts that will produce the best possible outputs from AI models.
 
@@ -239,7 +244,7 @@ Return ONLY the generated prompt text, nothing else. Do not include any explanat
             ...(config.source === "openrouter" ? { "HTTP-Referer": "https://kmn-prompt-generator.lovable.app" } : {}),
           },
           body: JSON.stringify({
-            model: config.source === "openrouter" ? modelToUse : "gemini-2.0-flash",
+            model: config.source === "openrouter" ? modelToUse : geminiModel,
             messages: [
               { role: "system", content: systemPrompt },
               { role: "user", content: `Generate an optimized prompt for: ${topic}` },

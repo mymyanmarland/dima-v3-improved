@@ -8,6 +8,15 @@ interface ModelSettingsModalProps {
   onClose: () => void;
 }
 
+const GEMINI_MODELS = [
+  { id: "gemini-2.5-pro", label: "Gemini 2.5 Pro", description: "Google's most capable model" },
+  { id: "gemini-2.5-flash", label: "Gemini 2.5 Flash", description: "Fast & efficient reasoning" },
+  { id: "gemini-2.0-flash", label: "Gemini 2.0 Flash", description: "Previous gen fast model" },
+  { id: "gemini-2.0-flash-lite", label: "Gemini 2.0 Flash Lite", description: "Lightweight & fast" },
+  { id: "gemini-1.5-pro", label: "Gemini 1.5 Pro", description: "Long context, reliable" },
+  { id: "gemini-1.5-flash", label: "Gemini 1.5 Flash", description: "Fast previous gen" },
+];
+
 const OPENROUTER_MODELS = [
   // --- Premium Models ---
   { id: "openai/gpt-4.1", label: "GPT-4.1", description: "OpenAI's latest flagship model" },
@@ -39,11 +48,16 @@ const OPENROUTER_MODELS = [
   { id: "openrouter/auto", label: "Auto (OpenRouter)", description: "Auto-select best available" },
 ];
 
+type TabType = "openrouter" | "gemini";
+
 const ModelSettingsModal = ({ onClose }: ModelSettingsModalProps) => {
   const { user } = useAuth();
-  const [selectedModel, setSelectedModel] = useState("openai/gpt-4o-mini");
+  const [activeTab, setActiveTab] = useState<TabType>("openrouter");
+  const [selectedOpenrouterModel, setSelectedOpenrouterModel] = useState("openai/gpt-4o-mini");
+  const [selectedGeminiModel, setSelectedGeminiModel] = useState("gemini-2.0-flash");
   const [loading, setLoading] = useState(false);
-  const [initialModel, setInitialModel] = useState("openai/gpt-4o-mini");
+  const [initialOpenrouterModel, setInitialOpenrouterModel] = useState("openai/gpt-4o-mini");
+  const [initialGeminiModel, setInitialGeminiModel] = useState("gemini-2.0-flash");
 
   useEffect(() => {
     if (user) {
@@ -55,15 +69,19 @@ const ModelSettingsModal = ({ onClose }: ModelSettingsModalProps) => {
     try {
       const { data, error } = await supabase
         .from("user_settings")
-        .select("openrouter_model")
+        .select("openrouter_model, gemini_model")
         .eq("user_id", user!.id)
         .maybeSingle();
 
       if (error) throw error;
 
       if (data?.openrouter_model) {
-        setSelectedModel(data.openrouter_model);
-        setInitialModel(data.openrouter_model);
+        setSelectedOpenrouterModel(data.openrouter_model);
+        setInitialOpenrouterModel(data.openrouter_model);
+      }
+      if (data?.gemini_model) {
+        setSelectedGeminiModel(data.gemini_model);
+        setInitialGeminiModel(data.gemini_model);
       }
     } catch (err) {
       console.error("Failed to load settings:", err);
@@ -75,7 +93,10 @@ const ModelSettingsModal = ({ onClose }: ModelSettingsModalProps) => {
     setLoading(true);
 
     try {
-      // Check if settings exist
+      const updateData = activeTab === "openrouter"
+        ? { openrouter_model: selectedOpenrouterModel }
+        : { gemini_model: selectedGeminiModel };
+
       const { data: existing } = await supabase
         .from("user_settings")
         .select("id")
@@ -83,23 +104,23 @@ const ModelSettingsModal = ({ onClose }: ModelSettingsModalProps) => {
         .maybeSingle();
 
       if (existing) {
-        // Update
         const { error } = await supabase
           .from("user_settings")
-          .update({ openrouter_model: selectedModel })
+          .update(updateData)
           .eq("user_id", user.id);
-
         if (error) throw error;
       } else {
-        // Insert
         const { error } = await supabase
           .from("user_settings")
-          .insert({ user_id: user.id, openrouter_model: selectedModel });
-
+          .insert({ user_id: user.id, ...updateData });
         if (error) throw error;
       }
 
-      setInitialModel(selectedModel);
+      if (activeTab === "openrouter") {
+        setInitialOpenrouterModel(selectedOpenrouterModel);
+      } else {
+        setInitialGeminiModel(selectedGeminiModel);
+      }
       toast.success("Model setting saved ✅");
     } catch (err) {
       console.error("Failed to save settings:", err);
@@ -109,7 +130,13 @@ const ModelSettingsModal = ({ onClose }: ModelSettingsModalProps) => {
     }
   };
 
-  const hasChanges = selectedModel !== initialModel;
+  const hasChanges = activeTab === "openrouter"
+    ? selectedOpenrouterModel !== initialOpenrouterModel
+    : selectedGeminiModel !== initialGeminiModel;
+
+  const currentModels = activeTab === "openrouter" ? OPENROUTER_MODELS : GEMINI_MODELS;
+  const selectedModel = activeTab === "openrouter" ? selectedOpenrouterModel : selectedGeminiModel;
+  const setSelectedModel = activeTab === "openrouter" ? setSelectedOpenrouterModel : setSelectedGeminiModel;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm px-4">
@@ -123,15 +150,41 @@ const ModelSettingsModal = ({ onClose }: ModelSettingsModalProps) => {
 
         <div className="flex items-center gap-2 mb-4">
           <Settings className="w-5 h-5 text-primary" />
-          <h3 className="text-base font-semibold text-foreground">OpenRouter Model</h3>
+          <h3 className="text-base font-semibold text-foreground">Model Settings</h3>
+        </div>
+
+        {/* Tab Switcher */}
+        <div className="flex gap-1 mb-4 p-1 bg-secondary/30 rounded-lg border border-border/50">
+          <button
+            onClick={() => setActiveTab("openrouter")}
+            className={`flex-1 py-2 px-3 rounded-md text-xs font-medium transition-all ${
+              activeTab === "openrouter"
+                ? "bg-primary text-primary-foreground shadow-sm"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            OpenRouter
+          </button>
+          <button
+            onClick={() => setActiveTab("gemini")}
+            className={`flex-1 py-2 px-3 rounded-md text-xs font-medium transition-all ${
+              activeTab === "gemini"
+                ? "bg-primary text-primary-foreground shadow-sm"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            Gemini
+          </button>
         </div>
 
         <p className="text-xs text-muted-foreground mb-4">
-          OpenRouter API Key ထည့်သုံးတဲ့အခါ ဘယ် AI model သုံးမည်ကို ရွေးချယ်ပါ။
+          {activeTab === "openrouter"
+            ? "OpenRouter API Key သုံးတဲ့အခါ ဘယ် AI model သုံးမည်ကို ရွေးချယ်ပါ။"
+            : "Gemini API Key သုံးတဲ့အခါ ဘယ် model သုံးမည်ကို ရွေးချယ်ပါ။"}
         </p>
 
         <div className="flex-1 overflow-y-auto space-y-2 pr-1">
-          {OPENROUTER_MODELS.map((model) => (
+          {currentModels.map((model) => (
             <button
               key={model.id}
               onClick={() => setSelectedModel(model.id)}
@@ -172,8 +225,9 @@ const ModelSettingsModal = ({ onClose }: ModelSettingsModalProps) => {
 
         <div className="mt-3 p-3 bg-secondary/20 rounded-lg border border-border/50">
           <p className="text-[10px] text-muted-foreground leading-relaxed">
-            💡 ဒီ setting က OpenRouter API Key သုံးတဲ့အခါပဲ အသက်ဝင်ပါတယ်။ 
-            Gemini Key သုံးရင် ဒီ setting မသက်ဆိုင်ပါ။
+            {activeTab === "openrouter"
+              ? "💡 ဒီ setting က OpenRouter API Key သုံးတဲ့အခါပဲ အသက်ဝင်ပါတယ်။"
+              : "💡 ဒီ setting က Gemini API Key သုံးတဲ့အခါပဲ အသက်ဝင်ပါတယ်။ Image generation အတွက်လည်း ဒီ model ကိုပဲ သုံးပါမယ်။"}
           </p>
         </div>
       </div>

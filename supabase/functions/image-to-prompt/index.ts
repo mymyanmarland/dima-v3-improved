@@ -46,8 +46,14 @@ interface UserApiConfig {
   source: "openrouter" | "gemini";
 }
 
-async function getUserApiConfig(authHeader: string | null): Promise<UserApiConfig[]> {
+interface UserApiResult {
+  configs: UserApiConfig[];
+  geminiModel: string;
+}
+
+async function getUserApiConfig(authHeader: string | null): Promise<UserApiResult> {
   const configs: UserApiConfig[] = [];
+  let geminiModel = "gemini-2.0-flash";
 
   if (authHeader) {
     try {
@@ -59,6 +65,17 @@ async function getUserApiConfig(authHeader: string | null): Promise<UserApiConfi
       const { data: { user } } = await adminClient.auth.getUser(token);
 
       if (user) {
+        // Get user's preferred Gemini model
+        const { data: settings } = await adminClient
+          .from("user_settings")
+          .select("gemini_model")
+          .eq("user_id", user.id)
+          .maybeSingle();
+
+        if (settings?.gemini_model) {
+          geminiModel = settings.gemini_model;
+        }
+
         const { data: orKey } = await adminClient
           .from("user_api_keys").select("api_key")
           .eq("user_id", user.id).eq("provider", "openrouter").maybeSingle();
@@ -87,7 +104,7 @@ async function getUserApiConfig(authHeader: string | null): Promise<UserApiConfi
   }
 
   if (configs.length === 0) throw new Error("OpenRouter API Key မထည့်ရသေးပါ။ Settings မှာ API Key ထည့်ပါ။");
-  return configs;
+  return { configs, geminiModel };
 }
 
 // Error codes that trigger fallback (auth errors + payment required + rate limit + not found)
@@ -167,7 +184,7 @@ serve(async (req) => {
     }
 
     const authHeader = req.headers.get("Authorization");
-    const configs = await getUserApiConfig(authHeader);
+    const { configs, geminiModel } = await getUserApiConfig(authHeader);
 
     console.log("Analyzing image to generate prompt...");
 
@@ -181,7 +198,7 @@ serve(async (req) => {
           ...(config.source === "openrouter" ? { "HTTP-Referer": "https://kmn-prompt-generator.lovable.app" } : {}),
         },
         body: JSON.stringify({
-          model: config.source === "openrouter" ? modelToUse : "gemini-2.0-flash",
+          model: config.source === "openrouter" ? modelToUse : geminiModel,
           messages: [
             {
               role: "system",

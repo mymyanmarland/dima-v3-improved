@@ -39,8 +39,14 @@ interface ImageApiConfig {
   source: "gemini" | "openrouter";
 }
 
-async function getImageApiConfig(authHeader: string | null): Promise<ImageApiConfig[]> {
+interface ImageApiResult {
+  configs: ImageApiConfig[];
+  geminiModel: string;
+}
+
+async function getImageApiConfig(authHeader: string | null): Promise<ImageApiResult> {
   const configs: ImageApiConfig[] = [];
+  let geminiModel = "gemini-2.0-flash-exp-image-generation";
 
   if (authHeader) {
     try {
@@ -51,6 +57,17 @@ async function getImageApiConfig(authHeader: string | null): Promise<ImageApiCon
       const { data: { user } } = await adminClient.auth.getUser(token);
 
       if (user) {
+        // Get user's preferred Gemini model for image gen
+        const { data: settings } = await adminClient
+          .from("user_settings")
+          .select("gemini_model")
+          .eq("user_id", user.id)
+          .maybeSingle();
+
+        if (settings?.gemini_model) {
+          geminiModel = settings.gemini_model;
+        }
+
         // Gemini API supports image generation natively
         const { data: geminiKey } = await adminClient
           .from("user_api_keys").select("api_key")
@@ -88,7 +105,7 @@ async function getImageApiConfig(authHeader: string | null): Promise<ImageApiCon
     throw new Error("Image generation အတွက် Gemini API Key လိုအပ်ပါတယ်။ Settings မှာ Gemini API Key ထည့်ပါ။");
   }
 
-  return configs;
+  return { configs, geminiModel };
 }
 
 serve(async (req) => {
@@ -105,7 +122,7 @@ serve(async (req) => {
     }
 
     const authHeader = req.headers.get("Authorization");
-    const configs = await getImageApiConfig(authHeader);
+    const { configs, geminiModel } = await getImageApiConfig(authHeader);
 
     let lastError: string | null = null;
 
@@ -114,7 +131,7 @@ serve(async (req) => {
 
       try {
         const body: Record<string, unknown> = {
-          model: config.source === "gemini" ? "gemini-2.0-flash-exp-image-generation" : "google/gemini-2.5-flash",
+          model: config.source === "gemini" ? geminiModel : "google/gemini-2.5-flash",
           messages: [{ role: "user", content: prompt.trim() }],
         };
 

@@ -52,11 +52,13 @@ interface UserApiConfig {
 interface UserApiResult {
   configs: UserApiConfig[];
   openrouterModel: string;
+  geminiModel: string;
 }
 
 async function getUserApiConfig(authHeader: string | null): Promise<UserApiResult> {
   const configs: UserApiConfig[] = [];
-  let openrouterModel = "openai/gpt-4o-mini"; // default
+  let openrouterModel = "openai/gpt-4o-mini";
+  let geminiModel = "gemini-2.0-flash";
 
   if (authHeader) {
     try {
@@ -71,12 +73,15 @@ async function getUserApiConfig(authHeader: string | null): Promise<UserApiResul
         // Get user's preferred OpenRouter model
         const { data: settings } = await adminClient
           .from("user_settings")
-          .select("openrouter_model")
+          .select("openrouter_model, gemini_model")
           .eq("user_id", user.id)
           .maybeSingle();
 
         if (settings?.openrouter_model) {
           openrouterModel = settings.openrouter_model;
+        }
+        if (settings?.gemini_model) {
+          geminiModel = settings.gemini_model;
         }
 
         const { data: orKey } = await adminClient
@@ -107,7 +112,7 @@ async function getUserApiConfig(authHeader: string | null): Promise<UserApiResul
   }
 
   if (configs.length === 0) throw new Error("OpenRouter API Key မထည့်ရသေးပါ။ Settings မှာ API Key ထည့်ပါ။");
-  return { configs, openrouterModel };
+  return { configs, openrouterModel, geminiModel };
 }
 
 // Error codes that trigger fallback (auth errors + payment required + rate limit + not found)
@@ -198,7 +203,7 @@ serve(async (req) => {
     }
 
     const authHeader = req.headers.get("Authorization");
-    const { configs, openrouterModel } = await getUserApiConfig(authHeader);
+    const { configs, openrouterModel, geminiModel } = await getUserApiConfig(authHeader);
 
     console.log(`Executing prompt (${prompt.length} chars), primaryModel: "${openrouterModel}"`);
 
@@ -215,7 +220,7 @@ serve(async (req) => {
             ...(config.source === "openrouter" ? { "HTTP-Referer": "https://kmn-prompt-generator.lovable.app" } : {}),
           },
           body: JSON.stringify({
-            model: config.source === "openrouter" ? modelToUse : "gemini-2.0-flash",
+            model: config.source === "openrouter" ? modelToUse : geminiModel,
             messages: [
               { role: "system", content: "You are a helpful AI assistant. Follow the user's prompt carefully and provide a comprehensive, high-quality response. Format your output clearly with proper structure." },
               { role: "user", content: prompt },
