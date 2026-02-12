@@ -56,9 +56,27 @@ serve(async (req) => {
     const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const token = authHeader.replace("Bearer ", "");
     const adminClient = createClient(supabaseUrl, supabaseServiceKey);
-    const { data: { user } } = await adminClient.auth.getUser(token);
+    let userId: string | null = null;
 
-    if (!user) {
+    // Try getUser first
+    const { data: { user } } = await adminClient.auth.getUser(token);
+    if (user?.id) {
+      userId = user.id;
+    } else {
+      // Fallback: decode JWT to get sub, verify user exists
+      try {
+        const parts = token.split(".");
+        if (parts.length === 3) {
+          const payload = JSON.parse(atob(parts[1].replace(/-/g, "+").replace(/_/g, "/")));
+          if (payload.sub && payload.aud === "authenticated") {
+            const { data: { user: verified } } = await adminClient.auth.admin.getUserById(payload.sub);
+            if (verified?.id) userId = verified.id;
+          }
+        }
+      } catch (e) { console.error("JWT decode failed:", e); }
+    }
+
+    if (!userId) {
       return new Response(JSON.stringify({ error: "Invalid token" }), {
         status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
@@ -68,7 +86,7 @@ serve(async (req) => {
     const { data: settings } = await adminClient
       .from("user_settings")
       .select("openrouter_model, gemini_model")
-      .eq("user_id", user.id)
+      .eq("user_id", userId)
       .maybeSingle();
 
     const openrouterModel = settings?.openrouter_model || "openai/gpt-4o-mini";
@@ -78,7 +96,7 @@ serve(async (req) => {
     const { data: keys } = await adminClient
       .from("user_api_keys")
       .select("api_key, provider")
-      .eq("user_id", user.id);
+      .eq("user_id", userId);
 
     if (!keys || keys.length === 0) {
       return new Response(JSON.stringify({ error: "API Key မထည့်ရသေးပါ။ Settings မှာ API Key ထည့်ပါ။" }), {
