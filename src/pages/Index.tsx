@@ -8,6 +8,7 @@ import ImagePromptTab from "../components/ImagePromptTab";
 import ImageToPromptTab from "../components/ImageToPromptTab";
 import VideoPromptTab from "../components/VideoPromptTab";
 import HowToUseTab from "../components/HowToUseTab";
+import ChatBotTab from "../components/ChatBotTab";
 import StarryBackground from "../components/StarryBackground";
 
 const Index = () => {
@@ -27,6 +28,8 @@ const Index = () => {
         return <ImagePromptTab />;
       case "image-to-prompt":
         return <ImageToPromptTab />;
+      case "chatbot":
+        return <ChatBotTab />;
       default:
         return <PromptGeneratorTab />;
     }

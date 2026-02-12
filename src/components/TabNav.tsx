@@ -10,6 +10,7 @@ const TABS = [
   { id: "video-prompt", label: "Video Prompt", emoji: "🎬" },
   { id: "image-prompt", label: "Image Prompt", emoji: "🎨" },
   { id: "image-to-prompt", label: "Image to Prompt", emoji: "🔄" },
+  { id: "chatbot", label: "AI Chat", emoji: "🤖" },
 ];
 
 const TabNav = ({ activeTab, onTabChange }: TabNavProps) => {
