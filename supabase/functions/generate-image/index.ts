@@ -114,7 +114,7 @@ serve(async (req) => {
 
       try {
         const body: Record<string, unknown> = {
-          model: config.source === "gemini" ? "gemini-2.0-flash-exp-image-generation" : "google/gemini-2.0-flash-exp-image-generation",
+          model: config.source === "gemini" ? "gemini-2.0-flash-exp-image-generation" : "google/gemini-2.5-flash",
           messages: [{ role: "user", content: prompt.trim() }],
         };
 
