@@ -1,10 +1,11 @@
 import { useAuth } from "@/hooks/useAuth";
 import { useTheme } from "@/hooks/useTheme";
-import { Sparkles, Key, Shield, LogOut, Lock, Sun, Moon, Settings } from "lucide-react";
+import { Key, Shield, LogOut, Lock, Sun, Moon, Settings } from "lucide-react";
 import { useState } from "react";
 import ApiKeyModal from "./ApiKeyModal";
 import ChangePasswordModal from "./ChangePasswordModal";
 import ModelSettingsModal from "./ModelSettingsModal";
+import GlossyTitle from "./GlossyTitle";
 
 const AppHeader = () => {
   const { user, profile, isAdmin, signOut } = useAuth();
@@ -17,17 +18,7 @@ const AppHeader = () => {
     <>
       <header className="w-full py-4 px-4 md:px-6 bg-background sticky top-0 z-50" style={{ boxShadow: '-4px -4px 10px hsl(var(--neu-shadow-light)), 4px 4px 10px hsl(var(--neu-shadow-dark))' }}>
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-2xl btn-glass flex items-center justify-center">
-              <Sparkles className="w-6 h-6 text-primary" />
-            </div>
-            <div>
-              <h1 className="text-xl font-bold tracking-tight text-foreground">
-                AI <span className="text-gradient">Prompt Book</span>
-              </h1>
-              <p className="text-xs text-muted-foreground">Advanced AI Generation Suite</p>
-            </div>
-          </div>
+          <GlossyTitle />
 
           <div className="flex items-center gap-2">
             {/* Theme Toggle */}
