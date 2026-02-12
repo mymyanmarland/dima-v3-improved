@@ -287,24 +287,34 @@ const PromptGeneratorTab = () => {
         <button
           onClick={generatePromptOnly}
           disabled={isDisabled}
-          className="py-3 bg-primary/20 text-primary border border-primary/30 rounded-2xl font-semibold text-sm hover:bg-primary/30 transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 backdrop-blur-sm"
+          className="fancy-button w-full"
         >
+          <span className="dots_border" />
           {isLoading && activeMode === "generate" ? (
-            <div className="w-4 h-4 rounded-full border-2 border-primary border-t-transparent animate-spin" />
-          ) : null}
-          Prompt Generate မယ်
+            <div className="w-4 h-4 rounded-full border-2 border-white border-t-transparent animate-spin relative z-10" />
+          ) : (
+            <svg className="sparkle" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path className="path" d="M12 3v18M3 12h18" strokeWidth="2" strokeLinecap="round" />
+            </svg>
+          )}
+          <span className="text_button">Prompt Generate မယ်</span>
         </button>
         <button
           onClick={generateAndExecute}
           disabled={isDisabled}
-          className="py-3 btn-gradient text-primary-foreground rounded-2xl font-semibold text-sm disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          className="fancy-button w-full"
         >
+          <span className="dots_border" />
           {(isLoading || isExecuting) && activeMode === "execute" ? (
-            <div className="w-4 h-4 rounded-full border-2 border-primary-foreground border-t-transparent animate-spin" />
+            <div className="w-4 h-4 rounded-full border-2 border-white border-t-transparent animate-spin relative z-10" />
           ) : (
-            <Sparkles className="w-4 h-4" />
+            <svg className="sparkle" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path className="path" d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8L12 2z" strokeWidth="1.5" />
+              <path className="path" d="M5 5l1.5 4.5L11 11l-4.5 1.5L5 17l-1.5-4.5L-1 11l4.5-1.5L5 5z" strokeWidth="1" />
+              <path className="path" d="M19 3l1 3 3 1-3 1-1 3-1-3-3-1 3-1 1-3z" strokeWidth="1" />
+            </svg>
           )}
-          {isExecuting ? "Execute လုပ်နေတယ်..." : "Generate + Execute"}
+          <span className="text_button">{isExecuting ? "Execute လုပ်နေတယ်..." : "Generate + Execute"}</span>
         </button>
       </div>
 
