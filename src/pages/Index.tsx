@@ -10,6 +10,7 @@ import VideoPromptTab from "../components/VideoPromptTab";
 import HowToUseTab from "../components/HowToUseTab";
 import ChatBotTab from "../components/ChatBotTab";
 import ReadyMadePromptTab from "../components/ReadyMadePromptTab";
+import ApiTestTab from "../components/ApiTestTab";
 import StarryBackground from "../components/StarryBackground";
 
 const Index = () => {
@@ -33,6 +34,8 @@ const Index = () => {
         return <ImageToPromptTab />;
       case "chatbot":
         return <ChatBotTab />;
+      case "api-test":
+        return <ApiTestTab />;
       default:
         return <PromptGeneratorTab />;
     }
