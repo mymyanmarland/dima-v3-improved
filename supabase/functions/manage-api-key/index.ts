@@ -76,55 +76,23 @@ function jsonResponse(body: unknown, status = 200) {
   });
 }
 
-// Authenticate user using multiple approaches for reliability
+// Authenticate user
 async function authenticateUser(authHeader: string): Promise<{ id: string } | null> {
   const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
   const supabaseAnonKey = Deno.env.get("SUPABASE_ANON_KEY")!;
-  const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
   const token = authHeader.replace("Bearer ", "");
 
-  // Approach 1: Use service role client with explicit token
-  try {
-    const adminClient = createClient(supabaseUrl, supabaseServiceKey);
-    const { data, error } = await adminClient.auth.getUser(token);
-    if (!error && data?.user?.id) {
-      return { id: data.user.id };
-    }
-    console.warn("Service role getUser failed:", error?.message);
-  } catch (e) {
-    console.warn("Service role getUser exception:", e);
+  const client = createClient(supabaseUrl, supabaseAnonKey, {
+    global: { headers: { Authorization: authHeader } },
+  });
+
+  const { data: { user }, error } = await client.auth.getUser(token);
+  if (error || !user?.id) {
+    console.error("getUser failed:", error?.message);
+    return null;
   }
 
-  // Approach 2: Direct API call to auth endpoint
-  try {
-    const authResponse = await fetch(`${supabaseUrl}/auth/v1/user`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        apikey: supabaseAnonKey,
-      },
-    });
-    if (authResponse.ok) {
-      const user = await authResponse.json();
-      if (user?.id) return { id: user.id };
-    }
-    console.warn("Direct auth API failed:", authResponse.status);
-  } catch (e) {
-    console.warn("Direct auth API exception:", e);
-  }
-
-  // Approach 3: Use anon client with auth header
-  try {
-    const userClient = createClient(supabaseUrl, supabaseAnonKey, {
-      global: { headers: { Authorization: authHeader } },
-    });
-    const { data: { user } } = await userClient.auth.getUser();
-    if (user?.id) return { id: user.id };
-    console.warn("Anon client getUser failed");
-  } catch (e) {
-    console.warn("Anon client getUser exception:", e);
-  }
-
-  return null;
+  return { id: user.id };
 }
 
 serve(async (req) => {
