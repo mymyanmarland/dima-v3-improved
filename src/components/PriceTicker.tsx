@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 interface PriceData {
   symbol: string;
@@ -24,12 +25,9 @@ const PriceTicker = () => {
   useEffect(() => {
     const fetchPrices = async () => {
       try {
-        const response = await fetch(
-          "https://api.binance.com/api/v3/ticker/24hr?symbols=" +
-            encodeURIComponent(JSON.stringify(BINANCE_SYMBOLS.map((s) => s.symbol)))
-        );
-        if (!response.ok) throw new Error("Binance API failed");
-        const data = await response.json();
+        const { data, error } = await supabase.functions.invoke("crypto-prices");
+        if (error) throw error;
+        if (!data || data.error) throw new Error(data?.error || "No data");
 
         const updated: PriceData[] = BINANCE_SYMBOLS.map((sym) => {
           const ticker = data.find((d: any) => d.symbol === sym.symbol);
