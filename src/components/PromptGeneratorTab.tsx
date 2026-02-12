@@ -265,7 +265,7 @@ const PromptGeneratorTab = () => {
 
       {/* Button descriptions */}
       <div className="glass-subtle rounded-2xl p-3">
-        <div className="grid grid-cols-2 gap-3 text-[10px] text-muted-foreground">
+        <div className="grid grid-cols-2 gap-3 text-xs text-foreground/80">
           <div className="flex items-start gap-1.5">
             <span className="text-primary font-bold">①</span>
             <span>Prompt ကိုပဲ generate လုပ်ပြီး ပြပေးမယ် — copy ယူပြီး ကိုယ်တိုင်သုံးနိုင်ပါတယ်</span>
