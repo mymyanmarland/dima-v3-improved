@@ -15,7 +15,7 @@ const AppHeader = () => {
 
   return (
     <>
-      <header className="w-full py-4 px-4 md:px-6 bg-background sticky top-0 z-50" style={{ boxShadow: '-4px -4px 10px hsl(var(--neu-shadow-light)), 4px 4px 10px hsl(var(--neu-shadow-dark))' }}>
+      <header className="w-full py-4 px-4 md:px-6 bg-background/60 backdrop-blur-xl border-b border-white/5 sticky top-0 z-50">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <GlossyTitle />
 
