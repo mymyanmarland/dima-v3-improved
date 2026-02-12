@@ -242,11 +242,7 @@ const PromptGeneratorTab = () => {
             <button
               key={t}
               onClick={() => setTone(t)}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all border ${
-                tone === t
-                  ? "bg-primary/15 text-primary border-primary/30 glow-primary"
-                  : "glass-subtle text-muted-foreground hover:text-foreground hover:border-primary/20"
-              }`}
+              className={`glossy-chip ${tone === t ? "glossy-chip--active" : ""}`}
             >
               {t}
             </button>

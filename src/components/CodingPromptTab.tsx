@@ -220,11 +220,7 @@ IMPORTANT RULES:
             <button
               key={lang.id}
               onClick={() => toggleLanguage(lang.id)}
-              className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all border ${
-                selectedLanguages.includes(lang.id)
-                  ? "bg-primary/15 text-primary border-primary/30 glow-primary"
-                  : "glass-subtle text-muted-foreground hover:text-foreground hover:border-primary/20"
-              }`}
+              className={`glossy-chip ${selectedLanguages.includes(lang.id) ? "glossy-chip--active" : ""}`}
             >
               {lang.label}
             </button>
@@ -243,11 +239,7 @@ IMPORTANT RULES:
             <button
               key={uc.id}
               onClick={() => setUseCase(uc.id)}
-              className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all border text-left ${
-                useCase === uc.id
-                  ? "bg-primary/15 text-primary border-primary/30 glow-primary"
-                  : "glass-subtle text-muted-foreground hover:text-foreground hover:border-primary/20"
-              }`}
+              className={`glossy-chip glossy-chip--lg ${useCase === uc.id ? "glossy-chip--active" : ""}`}
             >
               <div>{uc.label}</div>
               <div className="text-xs opacity-70 mt-0.5">{uc.desc}</div>
@@ -268,11 +260,7 @@ IMPORTANT RULES:
               <button
                 key={cl.id}
                 onClick={() => setComplexity(cl.id)}
-                className={`px-4 py-2 rounded-xl text-sm font-medium transition-all border ${
-                  complexity === cl.id
-                    ? "bg-primary/15 text-primary border-primary/30 glow-primary"
-                    : "glass-subtle text-muted-foreground hover:text-foreground hover:border-primary/20"
-                }`}
+                className={`glossy-chip ${complexity === cl.id ? "glossy-chip--active" : ""}`}
               >
                 {cl.label}
               </button>
@@ -290,11 +278,7 @@ IMPORTANT RULES:
               <button
                 key={ps.id}
                 onClick={() => setPromptStyle(ps.id)}
-                className={`px-4 py-2 rounded-xl text-sm font-medium transition-all border ${
-                  promptStyle === ps.id
-                    ? "bg-primary/15 text-primary border-primary/30 glow-primary"
-                    : "glass-subtle text-muted-foreground hover:text-foreground hover:border-primary/20"
-                }`}
+                className={`glossy-chip ${promptStyle === ps.id ? "glossy-chip--active" : ""}`}
               >
                 {ps.label}
               </button>

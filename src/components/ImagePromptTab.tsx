@@ -99,11 +99,7 @@ Format it as one continuous prompt, not a list. Do not include explanations.`,
   };
 
   const chipClass = (active: boolean) =>
-    `px-3 py-1.5 rounded-xl text-xs font-medium transition-all border ${
-      active
-        ? "bg-primary/15 text-primary border-primary/30 glow-primary"
-        : "glass-subtle text-muted-foreground hover:text-foreground hover:border-primary/20"
-    }`;
+    `glossy-chip ${active ? "glossy-chip--active" : ""}`;
 
   return (
     <div className="space-y-5">
