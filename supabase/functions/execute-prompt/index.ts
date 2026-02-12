@@ -67,14 +67,30 @@ async function getUserApiConfig(authHeader: string | null): Promise<UserApiResul
 
       const token = authHeader.replace("Bearer ", "");
       const adminClient = createClient(supabaseUrl, supabaseServiceKey);
+      
+      let userId: string | null = null;
       const { data: { user } } = await adminClient.auth.getUser(token);
+      if (user?.id) {
+        userId = user.id;
+      } else {
+        try {
+          const parts = token.split(".");
+          if (parts.length === 3) {
+            const payload = JSON.parse(atob(parts[1].replace(/-/g, "+").replace(/_/g, "/")));
+            if (payload.sub && payload.aud === "authenticated") {
+              const { data: { user: verified } } = await adminClient.auth.admin.getUserById(payload.sub);
+              if (verified?.id) userId = verified.id;
+            }
+          }
+        } catch (e) { console.error("JWT decode failed:", e); }
+      }
 
-      if (user) {
+      if (userId) {
         // Get user's preferred OpenRouter model
         const { data: settings } = await adminClient
           .from("user_settings")
           .select("openrouter_model, gemini_model")
-          .eq("user_id", user.id)
+          .eq("user_id", userId)
           .maybeSingle();
 
         if (settings?.openrouter_model) {
@@ -86,7 +102,7 @@ async function getUserApiConfig(authHeader: string | null): Promise<UserApiResul
 
         const { data: orKey } = await adminClient
           .from("user_api_keys").select("api_key")
-          .eq("user_id", user.id).eq("provider", "openrouter").maybeSingle();
+          .eq("user_id", userId).eq("provider", "openrouter").maybeSingle();
 
         if (orKey?.api_key) {
           const decrypted = await decrypt(orKey.api_key);
@@ -95,7 +111,7 @@ async function getUserApiConfig(authHeader: string | null): Promise<UserApiResul
 
         const { data: geminiKey } = await adminClient
           .from("user_api_keys").select("api_key")
-          .eq("user_id", user.id).eq("provider", "gemini").maybeSingle();
+          .eq("user_id", userId).eq("provider", "gemini").maybeSingle();
 
         if (geminiKey?.api_key) {
           const decrypted = await decrypt(geminiKey.api_key);
