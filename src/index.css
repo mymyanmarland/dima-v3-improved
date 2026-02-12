@@ -310,6 +310,135 @@ select::-ms-expand {
   display: none;
 }
 
+/* ===== GLOSSY TAB ===== */
+.glossy-tab {
+  --tab-bg: hsl(var(--neu-bg));
+  outline: none;
+  cursor: pointer;
+  border: 0;
+  border-radius: 100px;
+  background-color: var(--tab-bg);
+  transition: all 0.2s ease;
+  box-shadow:
+    -3px -3px 7px hsl(var(--neu-shadow-light)),
+    3px 3px 7px hsl(var(--neu-shadow-dark));
+}
+
+.glossy-tab--active {
+  background-color: hsl(220 15% 8%);
+  box-shadow:
+    inset 0 0.2rem 0.6rem rgba(255, 255, 255, 0.2),
+    inset 0 -0.06rem 0.2rem rgba(0, 0, 0, 0.6),
+    inset 0 -0.25rem 0.6rem rgba(255, 255, 255, 0.35),
+    0 1.5rem 1.5rem rgba(0, 0, 0, 0.2),
+    0 0.5rem 0.5rem -0.3rem rgba(0, 0, 0, 0.6);
+}
+
+.light .glossy-tab--active {
+  background-color: hsl(220 20% 82%);
+  box-shadow:
+    inset 0 0.2rem 0.6rem rgba(255, 255, 255, 0.6),
+    inset 0 -0.06rem 0.2rem rgba(0, 0, 0, 0.15),
+    inset 0 -0.25rem 0.6rem rgba(255, 255, 255, 0.8),
+    0 1rem 1.5rem rgba(0, 0, 0, 0.08),
+    0 0.5rem 0.5rem -0.3rem rgba(0, 0, 0, 0.12);
+}
+
+.glossy-tab__wrap {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: hsl(var(--muted-foreground));
+  padding: 0.625rem 1.25rem;
+  border-radius: inherit;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  mask-image: linear-gradient(to bottom, white 50%, rgba(255,255,255,0.7));
+}
+
+.glossy-tab--active .glossy-tab__wrap {
+  color: hsl(var(--primary));
+}
+
+.glossy-tab__wrap::before,
+.glossy-tab__wrap::after {
+  content: "";
+  position: absolute;
+  transition: all 0.3s ease;
+}
+
+.glossy-tab--active .glossy-tab__wrap::before {
+  left: -15%;
+  right: -15%;
+  bottom: 25%;
+  top: -100%;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.light .glossy-tab--active .glossy-tab__wrap::before {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.glossy-tab--active .glossy-tab__wrap::after {
+  left: 6%;
+  right: 6%;
+  top: 8%;
+  bottom: 45%;
+  border-radius: 14px 14px 0 0;
+  box-shadow: inset 0 6px 5px -6px rgba(255, 255, 255, 0.6);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(0, 0, 0, 0) 50%
+  );
+}
+
+.light .glossy-tab--active .glossy-tab__wrap::after {
+  box-shadow: inset 0 6px 5px -6px rgba(255, 255, 255, 0.9);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(0, 0, 0, 0) 50%
+  );
+}
+
+.glossy-tab:hover:not(.glossy-tab--active) {
+  box-shadow:
+    inset -2px -2px 5px hsl(var(--neu-inset-light) / 0.2),
+    inset 2px 2px 5px hsl(var(--neu-inset-dark) / 0.3);
+}
+
+.glossy-tab--active:hover {
+  box-shadow:
+    inset 0 0.2rem 0.4rem rgba(255, 255, 255, 0.3),
+    inset 0 -0.06rem 0.2rem rgba(0, 0, 0, 0.6),
+    inset 0 -0.25rem 0.6rem rgba(255, 255, 255, 0.5),
+    0 1.5rem 1.5rem rgba(0, 0, 0, 0.2),
+    0 0.5rem 0.5rem -0.3rem rgba(0, 0, 0, 0.6);
+}
+
+.glossy-tab--active:hover .glossy-tab__wrap::before {
+  transform: translateY(-5%);
+}
+
+.glossy-tab--active:hover .glossy-tab__wrap::after {
+  opacity: 0.4;
+  transform: translateY(5%);
+}
+
+.glossy-tab--active:active {
+  transform: translateY(2px);
+}
+
+.glossy-tab__text {
+  position: relative;
+  z-index: 1;
+}
+
 /* ===== FANCY BUTTON ===== */
 .fancy-button {
   --border_radius: 9999px;

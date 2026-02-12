@@ -15,25 +15,25 @@ const TABS = [
 const TabNav = ({ activeTab, onTabChange }: TabNavProps) => {
   return (
     <div className="w-full">
-      <div className="flex flex-wrap gap-2 p-3 glass-card rounded-2xl">
-        {TABS.map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => onTabChange(tab.id)}
-            className={`px-5 py-2.5 rounded-xl text-sm font-medium transition-all whitespace-nowrap ${
-              activeTab === tab.id
-                ? "text-primary"
-                : "text-muted-foreground hover:text-foreground"
-            }`}
-            style={activeTab === tab.id ? {
-              boxShadow: 'inset -3px -3px 7px hsl(var(--neu-inset-light) / 0.25), inset 3px 3px 7px hsl(var(--neu-inset-dark) / 0.5), 0 0 8px hsl(var(--primary) / 0.15)'
-            } : {
-              boxShadow: '-3px -3px 7px hsl(var(--neu-shadow-light)), 3px 3px 7px hsl(var(--neu-shadow-dark))'
-            }}
-          >
-            {tab.emoji} {tab.label}
-          </button>
-        ))}
+      <div className="flex flex-wrap gap-3 p-3 glass-card rounded-2xl">
+        {TABS.map((tab) => {
+          const isActive = activeTab === tab.id;
+          return (
+            <button
+              key={tab.id}
+              onClick={() => onTabChange(tab.id)}
+              className={`glossy-tab relative overflow-hidden transition-all duration-200 whitespace-nowrap ${
+                isActive ? "glossy-tab--active" : ""
+              }`}
+            >
+              <span className="glossy-tab__wrap">
+                <span className="glossy-tab__text">
+                  {tab.emoji} {tab.label}
+                </span>
+              </span>
+            </button>
+          );
+        })}
       </div>
     </div>
   );
