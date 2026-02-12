@@ -15,10 +15,10 @@ const AppHeader = () => {
 
   return (
     <>
-      <header className="w-full py-5 px-4 md:px-6 border-b border-border/50">
+      <header className="w-full py-4 px-4 md:px-6 glass-strong border-b-0 sticky top-0 z-50">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-xl bg-primary/10 glow-border flex items-center justify-center">
+            <div className="w-11 h-11 rounded-2xl glass-card flex items-center justify-center border border-primary/20">
               <Sparkles className="w-6 h-6 text-primary" />
             </div>
             <div>
@@ -33,7 +33,7 @@ const AppHeader = () => {
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="flex items-center justify-center w-10 h-10 rounded-xl bg-secondary/50 border border-border hover:bg-secondary transition-all"
+              className="flex items-center justify-center w-10 h-10 rounded-xl btn-glass"
               title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
             >
               {theme === "dark" ? (
@@ -46,50 +46,50 @@ const AppHeader = () => {
             {user && (
               <>
                 <span className="text-sm text-muted-foreground hidden md:block">
-                  <span className="inline-block w-2.5 h-2.5 rounded-full bg-primary mr-1.5" />
+                  <span className="inline-block w-2 h-2 rounded-full bg-primary mr-1.5 animate-pulse" />
                   {user.email}
                 </span>
                 
                 <button
                   onClick={() => setShowKeyModal(true)}
-                  className="flex items-center gap-1.5 px-3.5 py-2 bg-primary/10 text-primary border border-primary/30 rounded-xl text-sm font-medium hover:bg-primary/20 transition-all"
+                  className="flex items-center gap-1.5 px-3.5 py-2 btn-glass rounded-xl text-sm font-medium text-primary"
                 >
                   <Key className="w-4 h-4" />
-                  Key
+                  <span className="hidden sm:inline">Key</span>
                 </button>
 
                 <button
                   onClick={() => setShowModelModal(true)}
-                  className="flex items-center gap-1.5 px-3.5 py-2 bg-secondary/50 text-foreground border border-border rounded-xl text-sm font-medium hover:bg-secondary transition-all"
+                  className="flex items-center gap-1.5 px-3.5 py-2 btn-glass rounded-xl text-sm font-medium text-foreground"
                 >
                   <Settings className="w-4 h-4" />
-                  Model
+                  <span className="hidden sm:inline">Model</span>
                 </button>
 
                 <button
                   onClick={() => setShowPasswordModal(true)}
-                  className="flex items-center gap-1.5 px-3.5 py-2 bg-primary/10 text-primary border border-primary/30 rounded-xl text-sm font-medium hover:bg-primary/20 transition-all"
+                  className="flex items-center gap-1.5 px-3.5 py-2 btn-glass rounded-xl text-sm font-medium text-primary"
                 >
                   <Lock className="w-4 h-4" />
-                  Password
+                  <span className="hidden sm:inline">Password</span>
                 </button>
 
                 {isAdmin && (
                   <a
                     href="/admin"
-                    className="flex items-center gap-1.5 px-3.5 py-2 bg-accent/10 text-accent border border-accent/30 rounded-xl text-sm font-medium hover:bg-accent/20 transition-all"
+                    className="flex items-center gap-1.5 px-3.5 py-2 btn-glass rounded-xl text-sm font-medium text-accent"
                   >
                     <Shield className="w-4 h-4" />
-                    Admin
+                    <span className="hidden sm:inline">Admin</span>
                   </a>
                 )}
 
                 <button
                   onClick={signOut}
-                  className="flex items-center gap-1.5 px-3.5 py-2 bg-destructive/10 text-destructive border border-destructive/30 rounded-xl text-sm font-medium hover:bg-destructive/20 transition-all"
+                  className="flex items-center gap-1.5 px-3.5 py-2 btn-glass rounded-xl text-sm font-medium text-destructive"
                 >
                   <LogOut className="w-4 h-4" />
-                  Logout
+                  <span className="hidden sm:inline">Logout</span>
                 </button>
               </>
             )}

@@ -39,9 +39,9 @@ const PromptOutput = ({ prompt, isLoading, imageUrl, isImageMode, executedResult
 
   if (isLoading) {
     return (
-      <div className="glass glow-border rounded-xl p-6 min-h-[200px] flex items-center justify-center">
-        <div className="flex flex-col items-center gap-3">
-          <div className="w-10 h-10 rounded-full border-2 border-primary border-t-transparent animate-spin" />
+      <div className="glass-card rounded-2xl p-8 min-h-[200px] flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-12 h-12 rounded-full border-2 border-primary border-t-transparent animate-spin" />
           <p className="text-base text-muted-foreground animate-pulse">
             {isImageMode ? "Generating image... 🎨" : "Prompt generate လုပ်နေပါတယ်..."}
           </p>
@@ -52,9 +52,11 @@ const PromptOutput = ({ prompt, isLoading, imageUrl, isImageMode, executedResult
 
   if (!prompt && !imageUrl && !isExecuting) {
     return (
-      <div className="glass glow-border rounded-xl p-6 min-h-[200px] flex items-center justify-center">
-        <div className="flex flex-col items-center gap-3 text-muted-foreground">
-          <Wand2 className="w-10 h-10 animate-float" />
+      <div className="glass-card rounded-2xl p-8 min-h-[200px] flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4 text-muted-foreground">
+          <div className="w-16 h-16 rounded-2xl glass flex items-center justify-center">
+            <Wand2 className="w-8 h-8 animate-float" />
+          </div>
           <p className="text-base">
             {isImageMode ? "Generated image ဒီမှာ ပေါ်ပါမယ် 🎨" : "Generated prompt များ ဒီမှာ ပေါ်ပါမယ်"}
           </p>
@@ -66,26 +68,26 @@ const PromptOutput = ({ prompt, isLoading, imageUrl, isImageMode, executedResult
   // Image output
   if (imageUrl) {
     return (
-      <div className="glass glow-border rounded-xl p-6 relative group">
-        <div className="flex items-center justify-between mb-3">
+      <div className="glass-card rounded-2xl p-6 relative group">
+        <div className="flex items-center justify-between mb-4">
           <h3 className="text-base font-semibold text-primary">Generated Image 🎨</h3>
           <button
             onClick={handleDownload}
-            className="flex items-center gap-1.5 px-3.5 py-2 bg-primary/10 text-primary border border-primary/30 rounded-xl text-sm font-medium hover:bg-primary/20 transition-all"
+            className="flex items-center gap-1.5 px-3.5 py-2 btn-glass rounded-xl text-sm font-medium text-primary"
           >
             <Download className="w-4 h-4" />
             Download
           </button>
         </div>
-        <div className="bg-secondary/30 rounded-lg p-2 border border-border/50 overflow-hidden">
+        <div className="glass-subtle rounded-xl p-2 overflow-hidden">
           <img
             src={imageUrl}
             alt="AI Generated"
-            className="w-full rounded-lg object-contain max-h-[512px]"
+            className="w-full rounded-xl object-contain max-h-[512px]"
           />
         </div>
         {prompt && (
-          <div className="mt-3 bg-secondary/30 rounded-lg p-3 border border-border/50">
+          <div className="mt-3 glass-subtle rounded-xl p-3">
             <p className="text-xs text-muted-foreground">{prompt}</p>
           </div>
         )}
@@ -100,7 +102,7 @@ const PromptOutput = ({ prompt, isLoading, imageUrl, isImageMode, executedResult
     <div className="space-y-4">
       {/* Generated Prompt */}
       {prompt && (
-        <div className="glass glow-border rounded-xl p-6 relative group">
+        <div className="glass-card rounded-2xl p-6 relative group">
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-base font-semibold text-primary">
               {hasExecutedResult ? "📝 Generated Prompt" : "Generated Prompt"}
@@ -108,7 +110,7 @@ const PromptOutput = ({ prompt, isLoading, imageUrl, isImageMode, executedResult
             <div className="flex items-center gap-2">
               <button
                 onClick={() => handleCopy(prompt, "prompt")}
-                className="flex items-center gap-1.5 px-3.5 py-2 bg-primary/10 text-primary border border-primary/30 rounded-xl text-sm font-medium hover:bg-primary/20 transition-all"
+                className="flex items-center gap-1.5 px-3.5 py-2 btn-glass rounded-xl text-sm font-medium text-primary"
               >
                 {copiedPrompt ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                 {copiedPrompt ? "Copied!" : "Copy"}
@@ -124,7 +126,7 @@ const PromptOutput = ({ prompt, isLoading, imageUrl, isImageMode, executedResult
             </div>
           </div>
           {showPrompt && (
-            <div className="bg-secondary/30 rounded-lg p-4 border border-border/50">
+            <div className="glass-subtle rounded-xl p-4">
               <p className="text-sm text-foreground leading-relaxed whitespace-pre-wrap">{prompt}</p>
             </div>
           )}
@@ -133,9 +135,9 @@ const PromptOutput = ({ prompt, isLoading, imageUrl, isImageMode, executedResult
 
       {/* Executing spinner */}
       {isExecuting && (
-        <div className="glass rounded-xl p-6 min-h-[200px] flex items-center justify-center border border-accent/30">
-          <div className="flex flex-col items-center gap-3">
-            <div className="w-10 h-10 rounded-full border-2 border-accent border-t-transparent animate-spin" />
+        <div className="glass-card rounded-2xl p-8 min-h-[200px] flex items-center justify-center border-accent/20">
+          <div className="flex flex-col items-center gap-4">
+            <div className="w-12 h-12 rounded-full border-2 border-accent border-t-transparent animate-spin" />
             <p className="text-base text-muted-foreground animate-pulse">
               Prompt ကို execute လုပ်နေပါတယ်... 🚀
             </p>
@@ -145,18 +147,18 @@ const PromptOutput = ({ prompt, isLoading, imageUrl, isImageMode, executedResult
 
       {/* Executed Result */}
       {executedResult && (
-        <div className="glass rounded-xl p-6 relative group border border-accent/30">
+        <div className="glass-card rounded-2xl p-6 relative group border-accent/20">
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-base font-semibold text-accent">🚀 Executed Result</h3>
             <button
               onClick={() => handleCopy(executedResult, "result")}
-              className="flex items-center gap-1.5 px-3.5 py-2 bg-accent/10 text-accent border border-accent/30 rounded-xl text-sm font-medium hover:bg-accent/20 transition-all"
+              className="flex items-center gap-1.5 px-3.5 py-2 btn-glass rounded-xl text-sm font-medium text-accent"
             >
               {copiedResult ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
               {copiedResult ? "Copied!" : "Copy"}
             </button>
           </div>
-          <div className="bg-secondary/30 rounded-lg p-4 border border-border/50">
+          <div className="glass-subtle rounded-xl p-4">
             <p className="text-sm text-foreground leading-relaxed whitespace-pre-wrap">{executedResult}</p>
           </div>
         </div>

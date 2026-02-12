@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Video, Sparkles, Wand2 } from "lucide-react";
+import { Video } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
@@ -132,20 +132,27 @@ Do NOT include any explanations, just the prompt.`,
     }
   };
 
+  const chipClass = (active: boolean) =>
+    `px-4 py-2 rounded-xl text-sm font-medium transition-all border ${
+      active
+        ? "bg-primary/15 text-primary border-primary/30 glow-primary"
+        : "glass-subtle text-muted-foreground hover:text-foreground hover:border-primary/20"
+    }`;
+
   return (
     <div className="space-y-6">
       {/* Header badge */}
       <div className="flex items-center gap-2 px-1">
-        <span className="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-gradient-subtle border border-primary/20 text-primary">
+        <span className="px-3.5 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-primary/20 text-primary">
           Veo 3.1 Optimized
         </span>
-        <span className="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-accent/10 border border-accent/20 text-accent">
+        <span className="px-3.5 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-accent/20 text-accent">
           🇲🇲 Myanmar Language
         </span>
       </div>
 
       {/* Video Description */}
-      <div className="glass glow-border rounded-xl p-5">
+      <div className="glass-card rounded-2xl p-5">
         <label className="text-base font-medium text-foreground mb-3 block">
           🎬 Video ဖော်ပြချက်
         </label>
@@ -154,15 +161,13 @@ Do NOT include any explanations, just the prompt.`,
           onChange={(e) => setDescription(e.target.value)}
           placeholder="ဥပမာ - မြန်မာဘာသာနဲ့ AI အကြောင်း ရှင်းပြနေတဲ့ လူငယ်တစ်ယောက်၊ ရန်ကုန်မြို့ လမ်းပေါ်မှာ..."
           rows={3}
-          className="w-full bg-secondary/50 border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all resize-none"
+          className="w-full glass-input rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none resize-none"
         />
       </div>
 
       {/* Video Type */}
-      <div className="glass glow-border rounded-xl p-5">
-        <label className="text-base font-medium text-foreground mb-3 block">
-          📹 Video အမျိုးအစား
-        </label>
+      <div className="glass-card rounded-2xl p-5">
+        <label className="text-base font-medium text-foreground mb-3 block">📹 Video အမျိုးအစား</label>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
           {VIDEO_TYPES.map((type) => (
             <button
@@ -170,8 +175,8 @@ Do NOT include any explanations, just the prompt.`,
               onClick={() => setVideoType(type.id)}
               className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all border text-left ${
                 videoType === type.id
-                  ? "bg-primary/15 text-primary border-primary/40 glow-primary"
-                  : "bg-secondary/30 text-muted-foreground border-border hover:border-primary/20 hover:text-foreground"
+                  ? "bg-primary/15 text-primary border-primary/30 glow-primary"
+                  : "glass-subtle text-muted-foreground hover:text-foreground hover:border-primary/20"
               }`}
             >
               <div>{type.label}</div>
@@ -182,96 +187,48 @@ Do NOT include any explanations, just the prompt.`,
       </div>
 
       {/* Visual Style */}
-      <div className="glass glow-border rounded-xl p-5">
-        <label className="text-base font-medium text-foreground mb-3 block">
-          🎨 Visual Style
-        </label>
+      <div className="glass-card rounded-2xl p-5">
+        <label className="text-base font-medium text-foreground mb-3 block">🎨 Visual Style</label>
         <div className="flex flex-wrap gap-2">
           {VISUAL_STYLES.map((s) => (
-            <button
-              key={s}
-              onClick={() => setVisualStyle(s)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all border ${
-                visualStyle === s
-                  ? "bg-primary/15 text-primary border-primary/40 glow-primary"
-                  : "bg-secondary/30 text-muted-foreground border-border hover:border-primary/20 hover:text-foreground"
-              }`}
-            >
-              {s}
-            </button>
+            <button key={s} onClick={() => setVisualStyle(s)} className={chipClass(visualStyle === s)}>{s}</button>
           ))}
         </div>
       </div>
 
       {/* Camera Movement */}
-      <div className="glass glow-border rounded-xl p-5">
-        <label className="text-base font-medium text-foreground mb-3 block">
-          📷 Camera Movement
-        </label>
+      <div className="glass-card rounded-2xl p-5">
+        <label className="text-base font-medium text-foreground mb-3 block">📷 Camera Movement</label>
         <div className="flex flex-wrap gap-2">
           {CAMERA_MOVEMENTS.map((c) => (
-            <button
-              key={c}
-              onClick={() => setCameraMovement(c)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all border ${
-                cameraMovement === c
-                  ? "bg-primary/15 text-primary border-primary/40 glow-primary"
-                  : "bg-secondary/30 text-muted-foreground border-border hover:border-primary/20 hover:text-foreground"
-              }`}
-            >
-              {c}
-            </button>
+            <button key={c} onClick={() => setCameraMovement(c)} className={chipClass(cameraMovement === c)}>{c}</button>
           ))}
         </div>
       </div>
 
       {/* Duration & Aspect Ratio */}
       <div className="grid grid-cols-2 gap-3">
-        <div className="glass glow-border rounded-xl p-5">
-          <label className="text-base font-medium text-foreground mb-3 block">
-            ⏱️ Duration
-          </label>
+        <div className="glass-card rounded-2xl p-5">
+          <label className="text-base font-medium text-foreground mb-3 block">⏱️ Duration</label>
           <div className="flex flex-wrap gap-2">
             {DURATIONS.map((d) => (
-              <button
-                key={d.id}
-                onClick={() => setDuration(d.id)}
-                className={`px-4 py-2 rounded-xl text-sm font-medium transition-all border ${
-                  duration === d.id
-                    ? "bg-primary/15 text-primary border-primary/40 glow-primary"
-                    : "bg-secondary/30 text-muted-foreground border-border hover:border-primary/20 hover:text-foreground"
-                }`}
-              >
-                {d.label}
-              </button>
+              <button key={d.id} onClick={() => setDuration(d.id)} className={chipClass(duration === d.id)}>{d.label}</button>
             ))}
           </div>
         </div>
 
-        <div className="glass glow-border rounded-xl p-5">
-          <label className="text-base font-medium text-foreground mb-3 block">
-            📐 Aspect Ratio
-          </label>
+        <div className="glass-card rounded-2xl p-5">
+          <label className="text-base font-medium text-foreground mb-3 block">📐 Aspect Ratio</label>
           <div className="flex flex-wrap gap-2">
             {ASPECT_RATIOS.map((ar) => (
-              <button
-                key={ar.id}
-                onClick={() => setAspectRatio(ar.id)}
-                className={`px-4 py-2 rounded-xl text-sm font-medium transition-all border ${
-                  aspectRatio === ar.id
-                    ? "bg-primary/15 text-primary border-primary/40 glow-primary"
-                    : "bg-secondary/30 text-muted-foreground border-border hover:border-primary/20 hover:text-foreground"
-                }`}
-              >
-                {ar.label}
-              </button>
+              <button key={ar.id} onClick={() => setAspectRatio(ar.id)} className={chipClass(aspectRatio === ar.id)}>{ar.label}</button>
             ))}
           </div>
         </div>
       </div>
 
       {/* Myanmar Dialogue */}
-      <div className="glass glow-border rounded-xl p-5">
+      <div className="glass-card rounded-2xl p-5">
         <label className="text-base font-medium text-foreground mb-3 block">
           🇲🇲 မြန်မာစကားပြော / Dialogue <span className="text-muted-foreground text-sm">(optional)</span>
         </label>
@@ -280,7 +237,7 @@ Do NOT include any explanations, just the prompt.`,
           onChange={(e) => setMyanmarDialogue(e.target.value)}
           placeholder="ဥပမာ - &quot;မင်္ဂလာပါ၊ ဒီနေ့ ကျွန်တော် AI အကြောင်း ပြောပြပေးမှာပါ...&quot;"
           rows={3}
-          className="w-full bg-secondary/50 border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all resize-none"
+          className="w-full glass-input rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none resize-none"
         />
         <p className="text-xs text-muted-foreground mt-2">
           💡 Video ထဲမှာ ပါစေချင်တဲ့ မြန်မာစကားပြော/စကားလုံးတွေ ထည့်ပေးပါ
@@ -288,7 +245,7 @@ Do NOT include any explanations, just the prompt.`,
       </div>
 
       {/* Mood */}
-      <div className="glass glow-border rounded-xl p-5">
+      <div className="glass-card rounded-2xl p-5">
         <label className="text-base font-medium text-foreground mb-3 block">
           🎭 Mood / Atmosphere <span className="text-muted-foreground text-sm">(optional)</span>
         </label>
@@ -296,7 +253,7 @@ Do NOT include any explanations, just the prompt.`,
           value={mood}
           onChange={(e) => setMood(e.target.value)}
           placeholder="ဥပမာ - Warm and friendly, Professional, Energetic, Dramatic..."
-          className="w-full bg-secondary/50 border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all"
+          className="w-full glass-input rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
         />
       </div>
 
@@ -304,7 +261,7 @@ Do NOT include any explanations, just the prompt.`,
       <button
         onClick={generateVideoPrompt}
         disabled={isLoading || !description.trim()}
-        className="w-full py-4 btn-gradient text-primary-foreground rounded-xl font-semibold text-base disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        className="w-full py-4 btn-gradient text-primary-foreground rounded-2xl font-semibold text-base disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
       >
         {isLoading ? (
           <div className="w-5 h-5 rounded-full border-2 border-primary-foreground border-t-transparent animate-spin" />

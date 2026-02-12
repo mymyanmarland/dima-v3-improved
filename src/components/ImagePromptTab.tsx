@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Sparkles, Wand2 } from "lucide-react";
+import { Wand2 } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
@@ -98,10 +98,17 @@ Format it as one continuous prompt, not a list. Do not include explanations.`,
     }
   };
 
+  const chipClass = (active: boolean) =>
+    `px-3 py-1.5 rounded-xl text-xs font-medium transition-all border ${
+      active
+        ? "bg-primary/15 text-primary border-primary/30 glow-primary"
+        : "glass-subtle text-muted-foreground hover:text-foreground hover:border-primary/20"
+    }`;
+
   return (
     <div className="space-y-5">
       {/* Subject */}
-      <div className="glass glow-border rounded-xl p-4">
+      <div className="glass-card rounded-2xl p-5">
         <label className="text-sm font-medium text-foreground mb-3 block">
           🖼️ ဘာပုံမျိုး ဖန်တီးချင်ပါသလဲ
         </label>
@@ -110,100 +117,52 @@ Format it as one continuous prompt, not a list. Do not include explanations.`,
           onChange={(e) => setSubject(e.target.value)}
           placeholder="ဥပမာ - A dragon flying over a medieval castle, A girl in cyberpunk city..."
           rows={3}
-          className="w-full bg-secondary/50 border border-border rounded-lg px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all resize-none"
+          className="w-full glass-input rounded-xl px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none resize-none"
         />
       </div>
 
       {/* Art Style */}
-      <div className="glass glow-border rounded-xl p-4">
-        <label className="text-sm font-medium text-foreground mb-3 block">
-          🎨 Art Style
-        </label>
+      <div className="glass-card rounded-2xl p-5">
+        <label className="text-sm font-medium text-foreground mb-3 block">🎨 Art Style</label>
         <div className="flex flex-wrap gap-2">
           {IMAGE_STYLES.map((s) => (
-            <button
-              key={s}
-              onClick={() => setStyle(s)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all border ${
-                style === s
-                  ? "bg-primary/15 text-primary border-primary/40 glow-primary"
-                  : "bg-secondary/30 text-muted-foreground border-border hover:border-primary/20 hover:text-foreground"
-              }`}
-            >
-              {s}
-            </button>
+            <button key={s} onClick={() => setStyle(s)} className={chipClass(style === s)}>{s}</button>
           ))}
         </div>
       </div>
 
       {/* Lighting */}
-      <div className="glass glow-border rounded-xl p-4">
-        <label className="text-sm font-medium text-foreground mb-3 block">
-          💡 Lighting
-        </label>
+      <div className="glass-card rounded-2xl p-5">
+        <label className="text-sm font-medium text-foreground mb-3 block">💡 Lighting</label>
         <div className="flex flex-wrap gap-2">
           {LIGHTING_OPTIONS.map((l) => (
-            <button
-              key={l}
-              onClick={() => setLighting(l)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all border ${
-                lighting === l
-                  ? "bg-primary/15 text-primary border-primary/40 glow-primary"
-                  : "bg-secondary/30 text-muted-foreground border-border hover:border-primary/20 hover:text-foreground"
-              }`}
-            >
-              {l}
-            </button>
+            <button key={l} onClick={() => setLighting(l)} className={chipClass(lighting === l)}>{l}</button>
           ))}
         </div>
       </div>
 
       {/* Camera Angle */}
-      <div className="glass glow-border rounded-xl p-4">
-        <label className="text-sm font-medium text-foreground mb-3 block">
-          📷 Camera Angle
-        </label>
+      <div className="glass-card rounded-2xl p-5">
+        <label className="text-sm font-medium text-foreground mb-3 block">📷 Camera Angle</label>
         <div className="flex flex-wrap gap-2">
           {CAMERA_ANGLES.map((c) => (
-            <button
-              key={c}
-              onClick={() => setCameraAngle(c)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all border ${
-                cameraAngle === c
-                  ? "bg-primary/15 text-primary border-primary/40 glow-primary"
-                  : "bg-secondary/30 text-muted-foreground border-border hover:border-primary/20 hover:text-foreground"
-              }`}
-            >
-              {c}
-            </button>
+            <button key={c} onClick={() => setCameraAngle(c)} className={chipClass(cameraAngle === c)}>{c}</button>
           ))}
         </div>
       </div>
 
       {/* Aspect Ratio */}
-      <div className="glass glow-border rounded-xl p-4">
-        <label className="text-sm font-medium text-foreground mb-3 block">
-          📐 Aspect Ratio
-        </label>
+      <div className="glass-card rounded-2xl p-5">
+        <label className="text-sm font-medium text-foreground mb-3 block">📐 Aspect Ratio</label>
         <div className="flex flex-wrap gap-2">
           {ASPECT_RATIOS.map((ar) => (
-            <button
-              key={ar.id}
-              onClick={() => setAspectRatio(ar.id)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all border ${
-                aspectRatio === ar.id
-                  ? "bg-primary/15 text-primary border-primary/40 glow-primary"
-                  : "bg-secondary/30 text-muted-foreground border-border hover:border-primary/20 hover:text-foreground"
-              }`}
-            >
-              {ar.label}
-            </button>
+            <button key={ar.id} onClick={() => setAspectRatio(ar.id)} className={chipClass(aspectRatio === ar.id)}>{ar.label}</button>
           ))}
         </div>
       </div>
 
       {/* Additional Details */}
-      <div className="glass glow-border rounded-xl p-4">
+      <div className="glass-card rounded-2xl p-5">
         <label className="text-sm font-medium text-foreground mb-3 block">
           📝 ထပ်ဖြည့်ချင်တဲ့ details <span className="text-muted-foreground">(optional)</span>
         </label>
@@ -212,12 +171,12 @@ Format it as one continuous prompt, not a list. Do not include explanations.`,
           onChange={(e) => setAdditionalDetails(e.target.value)}
           placeholder="Color palette, mood, texture, background details..."
           rows={2}
-          className="w-full bg-secondary/50 border border-border rounded-lg px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all resize-none"
+          className="w-full glass-input rounded-xl px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none resize-none"
         />
       </div>
 
       {/* Negative Prompt */}
-      <div className="glass glow-border rounded-xl p-4">
+      <div className="glass-card rounded-2xl p-5">
         <label className="text-sm font-medium text-foreground mb-3 block">
           🚫 ပါမစေချင်တာ (Negative Prompt) <span className="text-muted-foreground">(optional)</span>
         </label>
@@ -226,7 +185,7 @@ Format it as one continuous prompt, not a list. Do not include explanations.`,
           onChange={(e) => setNegativePrompt(e.target.value)}
           placeholder="blurry, low quality, watermark, text..."
           rows={2}
-          className="w-full bg-secondary/50 border border-border rounded-lg px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all resize-none"
+          className="w-full glass-input rounded-xl px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none resize-none"
         />
       </div>
 
@@ -234,7 +193,7 @@ Format it as one continuous prompt, not a list. Do not include explanations.`,
       <button
         onClick={generateImagePrompt}
         disabled={isLoading || !subject.trim()}
-        className="w-full py-3 bg-primary text-primary-foreground rounded-xl font-semibold text-sm hover:opacity-90 transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 glow-primary"
+        className="w-full py-3.5 btn-gradient text-primary-foreground rounded-2xl font-semibold text-sm disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
       >
         {isLoading ? (
           <div className="w-4 h-4 rounded-full border-2 border-primary-foreground border-t-transparent animate-spin" />

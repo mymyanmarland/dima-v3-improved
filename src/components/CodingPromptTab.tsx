@@ -186,16 +186,16 @@ IMPORTANT RULES:
     <div className="space-y-6">
       {/* Header badge */}
       <div className="flex items-center gap-2 px-1">
-        <span className="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-gradient-subtle border border-primary/20 text-primary">
+        <span className="px-3.5 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-primary/20 text-primary">
           Advanced Coding
         </span>
-        <span className="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-accent/10 border border-accent/20 text-accent">
+        <span className="px-3.5 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-accent/20 text-accent">
           💻 Production-Ready Prompts
         </span>
       </div>
 
       {/* Description */}
-      <div className="glass glow-border rounded-xl p-5">
+      <div className="glass-card rounded-2xl p-5">
         <label className="text-base font-medium text-foreground mb-3 block">
           <Code2 className="w-5 h-5 inline mr-2" />
           ဘာလုပ်ချင်တာလဲ?
@@ -205,12 +205,12 @@ IMPORTANT RULES:
           onChange={(e) => setDescription(e.target.value)}
           placeholder="ဥပမာ - User authentication system with JWT, refresh tokens, role-based access control..."
           rows={3}
-          className="w-full bg-secondary/50 border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all resize-none"
+          className="w-full glass-input rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none resize-none"
         />
       </div>
 
       {/* Languages */}
-      <div className="glass glow-border rounded-xl p-5">
+      <div className="glass-card rounded-2xl p-5">
         <label className="text-base font-medium text-foreground mb-3 block">
           <Braces className="w-5 h-5 inline mr-2" />
           Language / Framework <span className="text-muted-foreground text-xs">(တစ်ခုထက်မက ရွေးလို့ရ)</span>
@@ -222,8 +222,8 @@ IMPORTANT RULES:
               onClick={() => toggleLanguage(lang.id)}
               className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all border ${
                 selectedLanguages.includes(lang.id)
-                  ? "bg-primary/15 text-primary border-primary/40 glow-primary"
-                  : "bg-secondary/30 text-muted-foreground border-border hover:border-primary/20 hover:text-foreground"
+                  ? "bg-primary/15 text-primary border-primary/30 glow-primary"
+                  : "glass-subtle text-muted-foreground hover:text-foreground hover:border-primary/20"
               }`}
             >
               {lang.label}
@@ -233,7 +233,7 @@ IMPORTANT RULES:
       </div>
 
       {/* Use Case */}
-      <div className="glass glow-border rounded-xl p-5">
+      <div className="glass-card rounded-2xl p-5">
         <label className="text-base font-medium text-foreground mb-3 block">
           <Layers className="w-5 h-5 inline mr-2" />
           Use Case
@@ -245,8 +245,8 @@ IMPORTANT RULES:
               onClick={() => setUseCase(uc.id)}
               className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all border text-left ${
                 useCase === uc.id
-                  ? "bg-primary/15 text-primary border-primary/40 glow-primary"
-                  : "bg-secondary/30 text-muted-foreground border-border hover:border-primary/20 hover:text-foreground"
+                  ? "bg-primary/15 text-primary border-primary/30 glow-primary"
+                  : "glass-subtle text-muted-foreground hover:text-foreground hover:border-primary/20"
               }`}
             >
               <div>{uc.label}</div>
@@ -258,7 +258,7 @@ IMPORTANT RULES:
 
       {/* Complexity & Prompt Style */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <div className="glass glow-border rounded-xl p-5">
+        <div className="glass-card rounded-2xl p-5">
           <label className="text-base font-medium text-foreground mb-3 block">
             <Cpu className="w-5 h-5 inline mr-2" />
             Complexity Level
@@ -270,8 +270,8 @@ IMPORTANT RULES:
                 onClick={() => setComplexity(cl.id)}
                 className={`px-4 py-2 rounded-xl text-sm font-medium transition-all border ${
                   complexity === cl.id
-                    ? "bg-primary/15 text-primary border-primary/40 glow-primary"
-                    : "bg-secondary/30 text-muted-foreground border-border hover:border-primary/20 hover:text-foreground"
+                    ? "bg-primary/15 text-primary border-primary/30 glow-primary"
+                    : "glass-subtle text-muted-foreground hover:text-foreground hover:border-primary/20"
                 }`}
               >
                 {cl.label}
@@ -280,7 +280,7 @@ IMPORTANT RULES:
           </div>
         </div>
 
-        <div className="glass glow-border rounded-xl p-5">
+        <div className="glass-card rounded-2xl p-5">
           <label className="text-base font-medium text-foreground mb-3 block">
             <GitBranch className="w-5 h-5 inline mr-2" />
             Output Style
@@ -292,8 +292,8 @@ IMPORTANT RULES:
                 onClick={() => setPromptStyle(ps.id)}
                 className={`px-4 py-2 rounded-xl text-sm font-medium transition-all border ${
                   promptStyle === ps.id
-                    ? "bg-primary/15 text-primary border-primary/40 glow-primary"
-                    : "bg-secondary/30 text-muted-foreground border-border hover:border-primary/20 hover:text-foreground"
+                    ? "bg-primary/15 text-primary border-primary/30 glow-primary"
+                    : "glass-subtle text-muted-foreground hover:text-foreground hover:border-primary/20"
                 }`}
               >
                 {ps.label}
@@ -304,7 +304,7 @@ IMPORTANT RULES:
       </div>
 
       {/* Additional Context */}
-      <div className="glass glow-border rounded-xl p-5">
+      <div className="glass-card rounded-2xl p-5">
         <label className="text-base font-medium text-foreground mb-3 block">
           <Terminal className="w-5 h-5 inline mr-2" />
           Additional Context <span className="text-muted-foreground text-sm">(optional)</span>
@@ -314,7 +314,7 @@ IMPORTANT RULES:
           onChange={(e) => setAdditionalContext(e.target.value)}
           placeholder="ဥပမာ - Using PostgreSQL, Docker deployment, must support 10k concurrent users, REST API with OpenAPI spec..."
           rows={2}
-          className="w-full bg-secondary/50 border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all resize-none"
+          className="w-full glass-input rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none resize-none"
         />
         <p className="text-xs text-muted-foreground mt-2">
           💡 Tech stack, constraints, requirements စသည် ထပ်ထည့်ပေးနိုင်ပါတယ်
@@ -325,7 +325,7 @@ IMPORTANT RULES:
       <button
         onClick={generateCodingPrompt}
         disabled={isLoading || !description.trim()}
-        className="w-full py-4 btn-gradient text-primary-foreground rounded-xl font-semibold text-base disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        className="w-full py-4 btn-gradient text-primary-foreground rounded-2xl font-semibold text-base disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
       >
         {isLoading ? (
           <div className="w-5 h-5 rounded-full border-2 border-primary-foreground border-t-transparent animate-spin" />

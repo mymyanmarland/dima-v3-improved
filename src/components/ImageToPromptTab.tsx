@@ -70,11 +70,11 @@ const ImageToPromptTab = () => {
   return (
     <div className="space-y-5">
       {/* Upload */}
-      <div className="glass glow-border rounded-xl p-4">
+      <div className="glass-card rounded-2xl p-5">
         <label className="text-sm font-medium text-foreground mb-3 block">
           ပုံတင်ပါ
         </label>
-        <div className="border-2 border-dashed border-border rounded-lg p-8 text-center hover:border-primary/30 transition-all cursor-pointer relative">
+        <div className="border-2 border-dashed border-border/50 rounded-2xl p-8 text-center hover:border-primary/30 transition-all cursor-pointer relative glass-subtle">
           <input
             type="file"
             accept="image/*"
@@ -82,10 +82,12 @@ const ImageToPromptTab = () => {
             className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
           />
           {imagePreview ? (
-            <img src={imagePreview} alt="Preview" className="max-h-48 mx-auto rounded-lg object-contain" />
+            <img src={imagePreview} alt="Preview" className="max-h-48 mx-auto rounded-xl object-contain" />
           ) : (
             <div className="flex flex-col items-center gap-3 text-muted-foreground">
-              <Upload className="w-8 h-8" />
+              <div className="w-14 h-14 rounded-2xl glass flex items-center justify-center">
+                <Upload className="w-7 h-7" />
+              </div>
               <p className="text-sm">Click သို့မဟုတ် drag & drop</p>
               <p className="text-xs">PNG, JPG, WEBP (Max 5MB)</p>
             </div>
@@ -97,7 +99,7 @@ const ImageToPromptTab = () => {
       <button
         onClick={generate}
         disabled={isLoading || !imageUrl}
-        className="w-full py-3.5 bg-accent text-accent-foreground rounded-xl font-semibold text-sm hover:opacity-90 transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 glow-accent"
+        className="w-full py-3.5 btn-gradient text-primary-foreground rounded-2xl font-semibold text-sm disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
       >
         <Sparkles className="w-4 h-4" />
         {isLoading ? "Analyzing..." : "Generate Prompt from Image 🔄"}
