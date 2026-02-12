@@ -133,11 +133,7 @@ Do NOT include any explanations, just the prompt.`,
   };
 
   const chipClass = (active: boolean) =>
-    `px-4 py-2 rounded-xl text-sm font-medium transition-all border ${
-      active
-        ? "bg-primary/15 text-primary border-primary/30 glow-primary"
-        : "glass-subtle text-muted-foreground hover:text-foreground hover:border-primary/20"
-    }`;
+    `glossy-chip ${active ? "glossy-chip--active" : ""}`;
 
   return (
     <div className="space-y-6">
@@ -173,11 +169,7 @@ Do NOT include any explanations, just the prompt.`,
             <button
               key={type.id}
               onClick={() => setVideoType(type.id)}
-              className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all border text-left ${
-                videoType === type.id
-                  ? "bg-primary/15 text-primary border-primary/30 glow-primary"
-                  : "glass-subtle text-muted-foreground hover:text-foreground hover:border-primary/20"
-              }`}
+              className={`glossy-chip glossy-chip--lg ${videoType === type.id ? "glossy-chip--active" : ""}`}
             >
               <div>{type.label}</div>
               <div className="text-xs opacity-70 mt-0.5">{type.desc}</div>
