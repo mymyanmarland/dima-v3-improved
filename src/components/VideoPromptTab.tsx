@@ -1,4 +1,5 @@
 import { useState } from "react";
+import GlowTextarea from "./GlowTextarea";
 import { Video } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -152,12 +153,11 @@ Do NOT include any explanations, just the prompt.`,
         <label className="text-base font-medium text-foreground mb-3 block">
           🎬 Video ဖော်ပြချက်
         </label>
-        <textarea
+        <GlowTextarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="ဥပမာ - မြန်မာဘာသာနဲ့ AI အကြောင်း ရှင်းပြနေတဲ့ လူငယ်တစ်ယောက်၊ ရန်ကုန်မြို့ လမ်းပေါ်မှာ..."
           rows={3}
-          className="w-full glass-input rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none resize-none"
         />
       </div>
 
@@ -224,12 +224,11 @@ Do NOT include any explanations, just the prompt.`,
         <label className="text-base font-medium text-foreground mb-3 block">
           🇲🇲 မြန်မာစကားပြော / Dialogue <span className="text-muted-foreground text-sm">(optional)</span>
         </label>
-        <textarea
+        <GlowTextarea
           value={myanmarDialogue}
           onChange={(e) => setMyanmarDialogue(e.target.value)}
           placeholder="ဥပမာ - &quot;မင်္ဂလာပါ၊ ဒီနေ့ ကျွန်တော် AI အကြောင်း ပြောပြပေးမှာပါ...&quot;"
           rows={3}
-          className="w-full glass-input rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none resize-none"
         />
         <p className="text-xs text-muted-foreground mt-2">
           💡 Video ထဲမှာ ပါစေချင်တဲ့ မြန်မာစကားပြော/စကားလုံးတွေ ထည့်ပေးပါ

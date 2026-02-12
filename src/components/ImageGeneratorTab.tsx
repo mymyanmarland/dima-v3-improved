@@ -1,4 +1,5 @@
 import { useState } from "react";
+import GlowTextarea from "./GlowTextarea";
 import { ImageIcon } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -69,12 +70,11 @@ const ImageGeneratorTab = () => {
         <label className="text-sm font-medium text-foreground mb-3 block">
           အကြောင်းအရာရေးပါ
         </label>
-        <textarea
+        <GlowTextarea
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
           placeholder="A beautiful sunset over mountains with purple sky, digital art..."
           rows={3}
-          className="w-full bg-secondary/50 border border-border rounded-lg px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all resize-none"
         />
       </div>
 

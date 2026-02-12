@@ -1,4 +1,5 @@
 import { useState } from "react";
+import GlowTextarea from "./GlowTextarea";
 import { Sparkles } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -203,12 +204,11 @@ const PromptGeneratorTab = () => {
         <label className="text-sm font-medium text-foreground mb-3 block">
           အကြောင်းအရာရေးပါ
         </label>
-        <textarea
+        <GlowTextarea
           value={topic}
           onChange={(e) => setTopic(e.target.value)}
           placeholder="How to create Gemini API Key စတဲ့အရာ Design ကစခု ဖန်တီးပေးပါ..."
           rows={3}
-          className="w-full glass-input rounded-xl px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none resize-none"
         />
       </div>
 
@@ -255,12 +255,11 @@ const PromptGeneratorTab = () => {
         <label className="text-sm font-medium text-foreground mb-3 block">
           Additional Context <span className="text-muted-foreground">(optional)</span>
         </label>
-        <textarea
+        <GlowTextarea
           value={context}
           onChange={(e) => setContext(e.target.value)}
           placeholder="ထပ်ဖြည့်ချင်တဲ့ details တွေ ထည့်ပါ..."
           rows={2}
-          className="w-full glass-input rounded-xl px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none resize-none"
         />
       </div>
 
