@@ -15,10 +15,10 @@ const AppHeader = () => {
 
   return (
     <>
-      <header className="w-full py-4 px-4 md:px-6 glass-strong border-b-0 sticky top-0 z-50">
+      <header className="w-full py-4 px-4 md:px-6 bg-background sticky top-0 z-50" style={{ boxShadow: '-4px -4px 10px hsl(var(--neu-shadow-light)), 4px 4px 10px hsl(var(--neu-shadow-dark))' }}>
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-2xl glass-card flex items-center justify-center border border-primary/20">
+            <div className="w-11 h-11 rounded-2xl btn-glass flex items-center justify-center">
               <Sparkles className="w-6 h-6 text-primary" />
             </div>
             <div>
