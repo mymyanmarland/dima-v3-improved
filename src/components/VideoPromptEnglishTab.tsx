@@ -98,6 +98,29 @@ const SOUND_DESIGN = [
   "Rock/Guitar", "Jazz", "Hip-Hop Beat", "Classical Piano",
 ];
 
+const RANDOM_IDEAS = [
+  "A lone astronaut discovers a garden growing on Mars, with bioluminescent flowers blooming under a crimson sky",
+  "A street musician plays violin in the rain while city lights reflect off wet cobblestone streets at night",
+  "A time-lapse of an abandoned building being reclaimed by nature over centuries, vines and trees growing through concrete",
+  "A futuristic city at sunset where flying cars weave between towering glass skyscrapers covered in vertical gardens",
+  "A deep sea exploration revealing an underwater cave filled with glowing jellyfish and ancient coral formations",
+  "A samurai walking through a field of cherry blossoms in slow motion, petals swirling in the wind",
+  "A child opening a mysterious book that projects holographic worlds into the room around them",
+  "A phoenix rising from volcanic ashes during a thunderstorm, wings trailing fire and lightning",
+  "A cozy coffee shop on a rainy evening, steam rising from cups, jazz playing, rain on windows",
+  "Two robots learning to dance together in an empty ballroom with dramatic spotlighting",
+  "A dragon flying over snow-capped mountains at golden hour, casting enormous shadows on valleys below",
+  "A surreal dreamscape where gravity shifts and people walk on walls and ceilings of a grand library",
+  "A vintage train traveling through the Swiss Alps in autumn, passing through tunnels and over stone bridges",
+  "A wolf howling on a cliff edge under the Northern Lights with snow gently falling",
+  "A bustling night market in Asia with colorful lanterns, sizzling street food, and crowds of people",
+  "A ballet dancer performing on the surface of a still lake at dawn, water rippling with each movement",
+  "A massive whale breaching out of the ocean in ultra slow motion with the sun directly behind it",
+  "A cyberpunk detective walking through neon-lit alleyways in a dystopian megacity during a blackout",
+  "A painter's canvas coming to life as painted birds fly off and painted rivers begin to flow",
+  "An ancient temple emerging from jungle fog at sunrise with monkeys playing in the ruins",
+];
+
 const VideoPromptEnglishTab = () => {
   const { user } = useAuth();
   const [description, setDescription] = useState("");
@@ -115,6 +138,24 @@ const VideoPromptEnglishTab = () => {
   const [sceneDetails, setSceneDetails] = useState("");
   const [generatedPrompt, setGeneratedPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const fillRandomIdea = () => {
+    const random = RANDOM_IDEAS[Math.floor(Math.random() * RANDOM_IDEAS.length)];
+    setDescription(random);
+    // Also randomize settings
+    const randItem = <T,>(arr: T[]) => arr[Math.floor(Math.random() * arr.length)];
+    setVideoType(randItem(VIDEO_TYPES).id);
+    setVisualStyle(randItem(VISUAL_STYLES));
+    setCameraMovement(randItem(CAMERA_MOVEMENTS));
+    setDuration(randItem(DURATIONS).id);
+    setAspectRatio(randItem(ASPECT_RATIOS).id);
+    setSelectedMood(randItem(MOODS));
+    setLighting(randItem(LIGHTING_STYLES));
+    setColorGrade(randItem(COLOR_GRADES));
+    setTransition(randItem(TRANSITION_STYLES));
+    setSound(randItem(SOUND_DESIGN));
+    toast.success("Random video idea loaded! 🎲");
+  };
 
   const generateVideoPrompt = async () => {
     if (!description.trim()) {
@@ -198,13 +239,19 @@ Do NOT include any explanations, just the prompt.`,
   return (
     <div className="space-y-6">
       {/* Header badge */}
-      <div className="flex items-center gap-2 px-1">
+      <div className="flex items-center gap-2 px-1 flex-wrap">
         <span className="px-3.5 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-primary/20 text-primary">
           Veo 3.1 Optimized
         </span>
         <span className="px-3.5 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-accent/20 text-accent">
           🌐 English Version
         </span>
+        <button
+          onClick={fillRandomIdea}
+          className="ml-auto px-4 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-primary/30 text-primary hover:bg-primary/10 transition-colors"
+        >
+          🎲 Random Idea
+        </button>
       </div>
 
       {/* Video Description */}
