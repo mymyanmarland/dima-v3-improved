@@ -62,6 +62,39 @@ const PromptGeneratorTab = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isExecuting, setIsExecuting] = useState(false);
   const [activeMode, setActiveMode] = useState<"generate" | "execute" | null>(null);
+  const [isRandomizing, setIsRandomizing] = useState(false);
+
+  const fillRandomIdea = async () => {
+    setIsRandomizing(true);
+    const randItem = <T,>(arr: T[]) => arr[Math.floor(Math.random() * arr.length)];
+    setCategory(randItem(CATEGORIES).id);
+    setTone(randItem(TONES));
+
+    try {
+      const { data, error } = await supabase.functions.invoke("generate-prompt", {
+        body: {
+          topic: "Generate a unique, creative topic idea for AI prompt generation",
+          category: "random-general-idea",
+          categoryDescription: "Random General Idea Generator",
+          tone: "Creative",
+          context: `Generate a single, short (1-2 sentences) creative topic idea that someone could use to generate an AI prompt. It can be about any subject - coding, writing, business, education, art, etc. Return ONLY the topic text, nothing else. No quotes, no explanations.`,
+        },
+      });
+      if (error) throw new Error(error.message);
+      if (data?.prompt) {
+        setTopic(data.prompt.replace(/^["']|["']$/g, "").trim());
+        toast.success("AI generated a random idea! ✨");
+      } else {
+        setTopic("How to build a personal productivity system using AI tools");
+        toast.success("Random idea loaded! 🎲");
+      }
+    } catch {
+      setTopic("How to build a personal productivity system using AI tools");
+      toast.success("Random idea loaded! 🎲");
+    } finally {
+      setIsRandomizing(false);
+    }
+  };
 
   const selectedCategory = CATEGORIES.find((c) => c.id === category);
 
@@ -202,6 +235,25 @@ const PromptGeneratorTab = () => {
 
   return (
     <div className="space-y-5">
+      {/* Header with Random Idea */}
+      <div className="flex items-center gap-2 px-1 flex-wrap">
+        <span className="px-3.5 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-primary/20 text-primary">
+          ✨ General Prompt
+        </span>
+        <button
+          onClick={fillRandomIdea}
+          disabled={isRandomizing}
+          className="ml-auto px-4 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-primary/30 text-primary hover:bg-primary/10 transition-colors disabled:opacity-50"
+        >
+          {isRandomizing ? (
+            <span className="flex items-center gap-1.5">
+              <span className="w-3 h-3 rounded-full border-2 border-primary border-t-transparent animate-spin" />
+              Generating...
+            </span>
+          ) : "🎲 Random Idea (AI)"}
+        </button>
+      </div>
+
       {/* Topic */}
       <div className="glass-card rounded-2xl p-5">
         <label className="text-sm font-medium text-foreground mb-3 block">
