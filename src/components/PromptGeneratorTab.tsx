@@ -3,6 +3,7 @@ import GlowTextarea from "./GlowTextarea";
 import { Sparkles } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { playSuccessSound } from "@/utils/notificationSound";
 import { useAuth } from "@/hooks/useAuth";
 import PromptOutput from "./PromptOutput";
 
@@ -78,6 +79,7 @@ const PromptGeneratorTab = () => {
     try {
       const prompt = await callGeneratePrompt();
       setGeneratedPrompt(prompt);
+      playSuccessSound();
       toast.success("Prompt generate ပြီးပါပြီ! ✨");
       logUsage("prompt");
     } catch (error) {
@@ -115,6 +117,7 @@ const PromptGeneratorTab = () => {
 
       if (data?.result) {
         setExecutedResult(data.result);
+        playSuccessSound();
         toast.success("Prompt execute ပြီးပါပြီ! 🚀");
         logUsage("prompt_execute");
       } else {

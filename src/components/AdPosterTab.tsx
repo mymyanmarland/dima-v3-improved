@@ -3,6 +3,7 @@ import GlowTextarea from "./GlowTextarea";
 import { Sparkles } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { playSuccessSound } from "@/utils/notificationSound";
 import { useAuth } from "@/hooks/useAuth";
 import PromptOutput from "./PromptOutput";
 import SizeSelector from "./SizeSelector";
@@ -40,6 +41,7 @@ const AdPosterTab = () => {
       if (data?.imageUrl) {
         setGeneratedImage(data.imageUrl);
         setGeneratedText(data.text || "");
+        playSuccessSound();
         toast.success("Ad Poster generated! 📢");
 
         if (user) {

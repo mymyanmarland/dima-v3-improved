@@ -3,6 +3,7 @@ import GlowTextarea from "./GlowTextarea";
 import { Video } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { playSuccessSound } from "@/utils/notificationSound";
 import { useAuth } from "@/hooks/useAuth";
 import PromptOutput from "./PromptOutput";
 
@@ -112,6 +113,7 @@ Do NOT include any explanations, just the prompt.`,
 
       if (data?.prompt) {
         setGeneratedPrompt(data.prompt);
+        playSuccessSound();
         toast.success("Video Prompt generate ပြီးပါပြီ! 🎬✨");
 
         if (user) {

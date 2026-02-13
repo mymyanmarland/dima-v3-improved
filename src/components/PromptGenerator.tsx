@@ -3,6 +3,7 @@ import GlowTextarea from "./GlowTextarea";
 import { Sparkles, ChevronDown, ImageIcon } from "lucide-react";
 import PromptOutput from "./PromptOutput";
 import { toast } from "sonner";
+import { playSuccessSound } from "@/utils/notificationSound";
 import { supabase } from "@/integrations/supabase/client";
 
 const CATEGORIES = [
@@ -71,6 +72,7 @@ const PromptGenerator = () => {
         if (data?.imageUrl) {
           setGeneratedImage(data.imageUrl);
           setGeneratedPrompt(data.text || "");
+          playSuccessSound();
           toast.success("Image generated successfully! 🎨");
         } else {
           throw new Error("Image generate မရပါ");
@@ -97,6 +99,7 @@ const PromptGenerator = () => {
 
         if (data?.prompt) {
           setGeneratedPrompt(data.prompt);
+          playSuccessSound();
           toast.success("Prompt generated successfully! ✨");
         } else {
           throw new Error("Response ထဲမှာ prompt မပါပါ");
