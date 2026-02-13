@@ -3,6 +3,7 @@ import { Upload, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import { playSuccessSound } from "@/utils/notificationSound";
 import PromptOutput from "./PromptOutput";
 
 const ImageToPromptTab = () => {
@@ -49,6 +50,7 @@ const ImageToPromptTab = () => {
 
       if (data?.prompt) {
         setGeneratedPrompt(data.prompt);
+        playSuccessSound();
         toast.success("Prompt generated from image! 🔄");
 
         if (user) {

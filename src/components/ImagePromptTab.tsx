@@ -3,6 +3,7 @@ import GlowTextarea from "./GlowTextarea";
 import { Wand2 } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { playSuccessSound } from "@/utils/notificationSound";
 import { useAuth } from "@/hooks/useAuth";
 import PromptOutput from "./PromptOutput";
 
@@ -78,6 +79,7 @@ Format it as one continuous prompt, not a list. Do not include explanations.`,
 
       if (data?.prompt) {
         setGeneratedPrompt(data.prompt);
+        playSuccessSound();
         toast.success("Image Prompt generated! 🎨✨");
 
         if (user) {
