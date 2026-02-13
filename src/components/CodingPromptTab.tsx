@@ -67,6 +67,41 @@ const CodingPromptTab = () => {
   const [additionalContext, setAdditionalContext] = useState("");
   const [generatedPrompt, setGeneratedPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isRandomizing, setIsRandomizing] = useState(false);
+
+  const fillRandomIdea = async () => {
+    setIsRandomizing(true);
+    const randItem = <T,>(arr: T[]) => arr[Math.floor(Math.random() * arr.length)];
+    setSelectedLanguages([randItem(LANGUAGES).id]);
+    setUseCase(randItem(USE_CASES).id);
+    setComplexity(randItem(COMPLEXITY_LEVELS).id);
+    setPromptStyle(randItem(PROMPT_STYLES).id);
+
+    try {
+      const { data, error } = await supabase.functions.invoke("generate-prompt", {
+        body: {
+          topic: "Generate a unique, creative coding project idea",
+          category: "random-coding-idea",
+          categoryDescription: "Random Coding Idea Generator",
+          tone: "Technical",
+          context: `Generate a single, short (1-2 sentences) creative coding project or feature idea. It should be practical, interesting, and suitable for a developer to build. Return ONLY the project description text, nothing else. No quotes, no explanations, no numbering.`,
+        },
+      });
+      if (error) throw new Error(error.message);
+      if (data?.prompt) {
+        setDescription(data.prompt.replace(/^["']|["']$/g, "").trim());
+        toast.success("AI generated a random coding idea! 💻✨");
+      } else {
+        setDescription("Build a real-time collaborative markdown editor with WebSocket support");
+        toast.success("Random coding idea loaded! 🎲");
+      }
+    } catch {
+      setDescription("Build a real-time collaborative markdown editor with WebSocket support");
+      toast.success("Random coding idea loaded! 🎲");
+    } finally {
+      setIsRandomizing(false);
+    }
+  };
 
   const toggleLanguage = (langId: string) => {
     setSelectedLanguages((prev) =>
@@ -188,13 +223,25 @@ IMPORTANT RULES:
   return (
     <div className="space-y-6">
       {/* Header badge */}
-      <div className="flex items-center gap-2 px-1">
+      <div className="flex items-center gap-2 px-1 flex-wrap">
         <span className="px-3.5 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-primary/20 text-primary">
           Advanced Coding
         </span>
         <span className="px-3.5 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-accent/20 text-accent">
           💻 Production-Ready Prompts
         </span>
+        <button
+          onClick={fillRandomIdea}
+          disabled={isRandomizing}
+          className="ml-auto px-4 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-primary/30 text-primary hover:bg-primary/10 transition-colors disabled:opacity-50"
+        >
+          {isRandomizing ? (
+            <span className="flex items-center gap-1.5">
+              <span className="w-3 h-3 rounded-full border-2 border-primary border-t-transparent animate-spin" />
+              Generating...
+            </span>
+          ) : "🎲 Random Idea (AI)"}
+        </button>
       </div>
 
       {/* Description */}

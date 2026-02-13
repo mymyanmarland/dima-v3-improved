@@ -43,6 +43,41 @@ const ImagePromptTab = () => {
   const [negativePrompt, setNegativePrompt] = useState("");
   const [generatedPrompt, setGeneratedPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isRandomizing, setIsRandomizing] = useState(false);
+
+  const fillRandomIdea = async () => {
+    setIsRandomizing(true);
+    const randItem = <T,>(arr: T[]) => arr[Math.floor(Math.random() * arr.length)];
+    setStyle(randItem(IMAGE_STYLES));
+    setLighting(randItem(LIGHTING_OPTIONS));
+    setCameraAngle(randItem(CAMERA_ANGLES));
+    setAspectRatio(randItem(ASPECT_RATIOS).id);
+
+    try {
+      const { data, error } = await supabase.functions.invoke("generate-prompt", {
+        body: {
+          topic: "Generate a unique, creative image concept idea",
+          category: "random-image-idea",
+          categoryDescription: "Random Image Idea Generator",
+          tone: "Creative",
+          context: `Generate a single, short (1-2 sentences) creative image description idea for AI image generators like Midjourney or DALL-E. The idea should be visually striking, unique, and inspiring. Return ONLY the image description text, nothing else. No quotes, no explanations.`,
+        },
+      });
+      if (error) throw new Error(error.message);
+      if (data?.prompt) {
+        setSubject(data.prompt.replace(/^["']|["']$/g, "").trim());
+        toast.success("AI generated a random image idea! 🎨✨");
+      } else {
+        setSubject("A mystical forest with glowing mushrooms and fireflies at twilight");
+        toast.success("Random image idea loaded! 🎲");
+      }
+    } catch {
+      setSubject("A mystical forest with glowing mushrooms and fireflies at twilight");
+      toast.success("Random image idea loaded! 🎲");
+    } finally {
+      setIsRandomizing(false);
+    }
+  };
 
   const generateImagePrompt = async () => {
     if (!subject.trim()) {
@@ -106,6 +141,25 @@ Format it as one continuous prompt, not a list. Do not include explanations.`,
 
   return (
     <div className="space-y-5">
+      {/* Header with Random Idea button */}
+      <div className="flex items-center gap-2 px-1 flex-wrap">
+        <span className="px-3.5 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-primary/20 text-primary">
+          🖼️ Image Prompt
+        </span>
+        <button
+          onClick={fillRandomIdea}
+          disabled={isRandomizing}
+          className="ml-auto px-4 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-primary/30 text-primary hover:bg-primary/10 transition-colors disabled:opacity-50"
+        >
+          {isRandomizing ? (
+            <span className="flex items-center gap-1.5">
+              <span className="w-3 h-3 rounded-full border-2 border-primary border-t-transparent animate-spin" />
+              Generating...
+            </span>
+          ) : "🎲 Random Idea (AI)"}
+        </button>
+      </div>
+
       {/* Subject */}
       <div className="glass-card rounded-2xl p-5">
         <label className="text-sm font-medium text-foreground mb-3 block">
