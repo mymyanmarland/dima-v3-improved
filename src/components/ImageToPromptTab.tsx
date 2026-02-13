@@ -97,14 +97,8 @@ const ImageToPromptTab = () => {
 
       {/* Generate */}
       <button onClick={generate} disabled={isLoading || !imageUrl} className="gen-btn">
-        <div className="gen-bg" />
-        <div className="gen-wrap">
-          <div className="gen-outline"><div /></div>
-          <div className="gen-content">
-            {isLoading ? <div className="gen-loader" /> : <div className="gen-icon"><div className="gen-arrow" /></div>}
-            <span className="gen-text">{isLoading ? "Analyzing..." : "Generate Prompt from Image 🔄"}</span>
-          </div>
-        </div>
+        {isLoading && <div className="w-4 h-4 rounded-full border-2 border-white border-t-transparent animate-spin" />}
+        <span>{isLoading ? "Analyzing..." : "Generate Prompt from Image 🔄"}</span>
       </button>
 
       {/* Output */}
