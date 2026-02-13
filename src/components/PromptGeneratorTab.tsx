@@ -279,30 +279,24 @@ const PromptGeneratorTab = () => {
 
       {/* Buttons */}
       <div className="grid grid-cols-2 gap-3">
-        <button
-          onClick={generatePromptOnly}
-          disabled={isDisabled}
-          className="frutiger-button frutiger-sm"
-        >
-          <div className="frutiger-inner">
-            <div className="frutiger-top-white" />
-            {isLoading && activeMode === "generate" ? (
-              <div className="w-4 h-4 rounded-full border-2 border-white border-t-transparent animate-spin relative z-10" />
-            ) : null}
-            <span className="frutiger-text">Prompt Generate မယ်</span>
+        <button onClick={generatePromptOnly} disabled={isDisabled} className="gen-btn gen-sm">
+          <div className="gen-bg" />
+          <div className="gen-wrap">
+            <div className="gen-outline"><div /></div>
+            <div className="gen-content">
+              {isLoading && activeMode === "generate" ? <div className="gen-loader" /> : <div className="gen-icon"><div className="gen-arrow" /></div>}
+              <span className="gen-text">Prompt Generate မယ်</span>
+            </div>
           </div>
         </button>
-        <button
-          onClick={generateAndExecute}
-          disabled={isDisabled}
-          className="frutiger-button frutiger-sm"
-        >
-          <div className="frutiger-inner">
-            <div className="frutiger-top-white" />
-            {(isLoading || isExecuting) && activeMode === "execute" ? (
-              <div className="w-4 h-4 rounded-full border-2 border-white border-t-transparent animate-spin relative z-10" />
-            ) : null}
-            <span className="frutiger-text">{isExecuting ? "Execute လုပ်နေတယ်..." : "Generate + Execute"}</span>
+        <button onClick={generateAndExecute} disabled={isDisabled} className="gen-btn gen-sm">
+          <div className="gen-bg" />
+          <div className="gen-wrap">
+            <div className="gen-outline"><div /></div>
+            <div className="gen-content">
+              {(isLoading || isExecuting) && activeMode === "execute" ? <div className="gen-loader" /> : <div className="gen-icon"><div className="gen-arrow" /></div>}
+              <span className="gen-text">{isExecuting ? "Execute လုပ်နေတယ်..." : "Generate + Execute"}</span>
+            </div>
           </div>
         </button>
       </div>
