@@ -7,6 +7,7 @@ import CodingPromptTab from "../components/CodingPromptTab";
 import ImagePromptTab from "../components/ImagePromptTab";
 import ImageToPromptTab from "../components/ImageToPromptTab";
 import VideoPromptTab from "../components/VideoPromptTab";
+import VideoPromptEnglishTab from "../components/VideoPromptEnglishTab";
 import HowToUseTab from "../components/HowToUseTab";
 import ChatBotTab from "../components/ChatBotTab";
 import ReadyMadePromptTab from "../components/ReadyMadePromptTab";
@@ -31,6 +32,8 @@ const Index = () => {
         return <TextDesignPromptTab />;
       case "video-prompt":
         return <VideoPromptTab />;
+      case "video-prompt-en":
+        return <VideoPromptEnglishTab />;
       case "image-prompt":
         return <ImagePromptTab />;
       case "image-to-prompt":
