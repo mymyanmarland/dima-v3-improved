@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Copy, Check, Wand2, Download, ChevronDown, ChevronUp } from "lucide-react";
+import BlobLoader from "./BlobLoader";
 
 interface PromptOutputProps {
   prompt: string;
@@ -40,12 +41,7 @@ const PromptOutput = ({ prompt, isLoading, imageUrl, isImageMode, executedResult
   if (isLoading) {
     return (
       <div className="glass-card rounded-2xl p-8 min-h-[200px] flex items-center justify-center">
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 rounded-full border-2 border-primary border-t-transparent animate-spin" />
-          <p className="text-base text-muted-foreground animate-pulse">
-            {isImageMode ? "Generating image... 🎨" : "Prompt generate လုပ်နေပါတယ်..."}
-          </p>
-        </div>
+        <BlobLoader text={isImageMode ? "GENERATING IMAGE..." : "GENERATING..."} />
       </div>
     );
   }
@@ -136,12 +132,7 @@ const PromptOutput = ({ prompt, isLoading, imageUrl, isImageMode, executedResult
       {/* Executing spinner */}
       {isExecuting && (
         <div className="glass-card rounded-2xl p-8 min-h-[200px] flex items-center justify-center border-accent/20">
-          <div className="flex flex-col items-center gap-4">
-            <div className="w-12 h-12 rounded-full border-2 border-accent border-t-transparent animate-spin" />
-            <p className="text-base text-muted-foreground animate-pulse">
-              Prompt ကို execute လုပ်နေပါတယ်... 🚀
-            </p>
-          </div>
+          <BlobLoader text="EXECUTING..." />
         </div>
       )}
 
