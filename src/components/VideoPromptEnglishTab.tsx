@@ -19,6 +19,18 @@ const VIDEO_TYPES = [
   { id: "documentary", label: "🎞️ Documentary" },
   { id: "animation", label: "✨ Animation" },
   { id: "short-film", label: "🎭 Short Film" },
+  { id: "timelapse", label: "⏳ Timelapse" },
+  { id: "hyperlapse", label: "🏃 Hyperlapse" },
+  { id: "interview", label: "🎙️ Interview" },
+  { id: "montage", label: "🎞️ Montage" },
+  { id: "lyric-video", label: "🎶 Lyric Video" },
+  { id: "trailer", label: "🎥 Trailer" },
+  { id: "commercial", label: "💼 Commercial" },
+  { id: "nature", label: "🌿 Nature/Wildlife" },
+  { id: "sports", label: "⚽ Sports Highlight" },
+  { id: "horror", label: "👻 Horror" },
+  { id: "sci-fi", label: "🚀 Sci-Fi" },
+  { id: "fashion", label: "👗 Fashion Film" },
 ];
 
 const VISUAL_STYLES = [
@@ -26,6 +38,10 @@ const VISUAL_STYLES = [
   "Documentary", "Vintage Film", "Motion Graphics", "Slow Motion",
   "Noir", "Cyberpunk", "Watercolor", "Stop Motion",
   "Retro VHS", "Neon Glow", "Minimalist", "Fantasy",
+  "Steampunk", "Vaporwave", "Glitch Art", "Claymation",
+  "Pixel Art", "Isometric", "Surrealist", "Art Deco",
+  "Gothic", "Dreamlike", "Sketch/Hand-Drawn", "Oil Painting",
+  "Low Poly 3D", "Hyper-Realistic CGI", "Comic Book", "Ukiyo-e",
 ];
 
 const CAMERA_MOVEMENTS = [
