@@ -1,14 +1,31 @@
 const BlobLoader = ({ text = "LOADING" }: { text?: string }) => {
   return (
-    <div className="blob-loader-container">
-      <div className="blob-hand">
-        <div className="blob-body" />
-        <div className="blob-finger blob-finger-1" />
-        <div className="blob-finger blob-finger-2" />
-        <div className="blob-finger blob-finger-3" />
-        <div className="blob-shadow" />
+    <div className="hourglass-loader-container">
+      <div className="hourglass-wrapper">
+        {/* Background blob */}
+        <div className="hourglass-blob" />
+        
+        {/* Hourglass */}
+        <div className="hourglass">
+          {/* Top cap */}
+          <div className="hourglass-cap hourglass-cap-top" />
+          {/* Glass body */}
+          <div className="hourglass-glass">
+            {/* Top sand */}
+            <div className="hourglass-sand-top" />
+            {/* Sand stream */}
+            <div className="hourglass-stream" />
+            {/* Bottom sand */}
+            <div className="hourglass-sand-bottom" />
+          </div>
+          {/* Bottom cap */}
+          <div className="hourglass-cap hourglass-cap-bottom" />
+        </div>
+
+        {/* Shadow */}
+        <div className="hourglass-shadow" />
       </div>
-      <span className="blob-text">{text}</span>
+      <span className="hourglass-text">{text}</span>
     </div>
   );
 };
