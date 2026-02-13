@@ -243,19 +243,21 @@ Rules:
             <button
               key={project.id}
               onClick={() => handleSelectProject(project)}
-              className="glass-card rounded-xl p-4 text-left hover:shadow-lg transition-all group"
+              className="glossy-project-btn group"
             >
-              <div className="flex items-start gap-3">
-                <span className="text-2xl">{project.emoji}</span>
-                <div className="min-w-0">
-                  <h4 className="font-semibold text-sm text-foreground group-hover:text-primary transition-colors truncate">
-                    {project.title}
-                  </h4>
-                  <span className="text-xs text-muted-foreground capitalize">
-                    {CATEGORIES.find((c) => c.id === project.category)?.label}
-                  </span>
+              <div className="glossy-project-btn-wrap">
+                <div className="flex items-start gap-3">
+                  <span className="text-2xl drop-shadow-lg">{project.emoji}</span>
+                  <div className="min-w-0">
+                    <h4 className="font-semibold text-sm text-white/90 group-hover:text-white transition-colors truncate">
+                      {project.title}
+                    </h4>
+                    <span className="text-xs text-white/50 capitalize">
+                      {CATEGORIES.find((c) => c.id === project.category)?.label}
+                    </span>
+                  </div>
+                  <ChevronDown className="w-4 h-4 text-white/40 ml-auto shrink-0 -rotate-90 group-hover:text-white/70 transition-colors" />
                 </div>
-                <ChevronDown className="w-4 h-4 text-muted-foreground ml-auto shrink-0 -rotate-90 group-hover:text-primary transition-colors" />
               </div>
             </button>
           ))}
