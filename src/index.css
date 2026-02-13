@@ -1483,3 +1483,77 @@ select::-ms-expand {
   border-color: hsl(var(--primary) / 0.12);
 }
 .light .chat-bubble-assistant { background: hsl(var(--background) / 0.8); }
+
+/* Glossy 3D Project Button */
+.glossy-project-btn {
+  outline: none;
+  cursor: pointer;
+  border: 0;
+  position: relative;
+  border-radius: 20px;
+  background-color: #080808;
+  transition: all 0.2s ease;
+  text-align: left;
+  box-shadow:
+    inset 0 0.2rem 0.6rem rgba(255, 255, 255, 0.3),
+    inset 0 -0.1rem 0.2rem rgba(0, 0, 0, 0.7),
+    inset 0 -0.3rem 0.6rem rgba(255, 255, 255, 0.5),
+    0 1.5rem 2rem rgba(0, 0, 0, 0.3),
+    0 0.5rem 0.8rem -0.4rem rgba(0, 0, 0, 0.8);
+}
+.glossy-project-btn:hover {
+  box-shadow:
+    inset 0 0.2rem 0.4rem rgba(255, 255, 255, 0.4),
+    inset 0 -0.1rem 0.2rem rgba(0, 0, 0, 0.7),
+    inset 0 -0.3rem 0.6rem rgba(255, 255, 255, 0.7),
+    0 1.5rem 2rem rgba(0, 0, 0, 0.3),
+    0 0.5rem 0.8rem -0.4rem rgba(0, 0, 0, 0.8);
+}
+.glossy-project-btn:active {
+  transform: translateY(3px);
+  box-shadow:
+    inset 0 0.2rem 0.4rem rgba(255, 255, 255, 0.5),
+    inset 0 -0.1rem 0.2rem rgba(0, 0, 0, 0.8),
+    inset 0 -0.3rem 0.6rem rgba(255, 255, 255, 0.4),
+    0 1.5rem 2rem rgba(0, 0, 0, 0.3),
+    0 0.5rem 0.8rem -0.4rem rgba(0, 0, 0, 0.8);
+}
+.glossy-project-btn-wrap {
+  padding: 16px 20px;
+  border-radius: inherit;
+  position: relative;
+  overflow: hidden;
+}
+.glossy-project-btn-wrap::before,
+.glossy-project-btn-wrap::after {
+  content: "";
+  position: absolute;
+  transition: all 0.3s ease;
+}
+.glossy-project-btn-wrap::before {
+  left: -15%;
+  right: -15%;
+  bottom: 25%;
+  top: -100%;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.10);
+}
+.glossy-project-btn-wrap::after {
+  left: 6%;
+  right: 6%;
+  top: 10%;
+  bottom: 40%;
+  border-radius: 14px 14px 0 0;
+  box-shadow: inset 0 8px 6px -8px rgba(255, 255, 255, 0.8);
+  background: linear-gradient(180deg, rgba(255,255,255,0.25) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0) 100%);
+}
+.glossy-project-btn:hover .glossy-project-btn-wrap::before {
+  transform: translateY(-5%);
+}
+.glossy-project-btn:hover .glossy-project-btn-wrap::after {
+  opacity: 0.4;
+  transform: translateY(5%);
+}
+.light .glossy-project-btn {
+  background-color: #1a1a2e;
+}
