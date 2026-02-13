@@ -1549,105 +1549,189 @@ select::-ms-expand {
   font-size: 0.75rem;
 }
 
-/* ===== BLOB LOADER ===== */
-.blob-loader-container {
+/* ===== HOURGLASS LOADER ===== */
+.hourglass-loader-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 18px;
   padding: 20px;
 }
-.blob-hand {
+.hourglass-wrapper {
   position: relative;
-  width: 80px;
-  height: 80px;
-  animation: blob-bounce 1.2s ease-in-out infinite;
+  width: 100px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.blob-body {
+
+/* Background blob */
+.hourglass-blob {
   position: absolute;
-  bottom: 0;
+  width: 90px;
+  height: 90px;
+  background: hsl(var(--primary) / 0.15);
+  border-radius: 60% 40% 50% 50% / 50% 60% 40% 50%;
+  animation: hg-blob-morph 4s ease-in-out infinite;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  width: 52px;
-  height: 44px;
-  background: hsl(var(--primary));
-  border-radius: 50% 50% 45% 45%;
-  animation: blob-squish 1.2s ease-in-out infinite;
+  transform: translate(-50%, -50%);
 }
-.blob-finger {
+
+/* Hourglass */
+.hourglass {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: hg-flip 3s ease-in-out infinite;
+}
+
+/* Caps */
+.hourglass-cap {
+  width: 48px;
+  height: 8px;
+  background: hsl(var(--foreground) / 0.75);
+  border-radius: 4px;
+  position: relative;
+  z-index: 3;
+}
+.hourglass-cap::after {
+  content: "";
   position: absolute;
-  background: hsl(var(--primary));
-  border-radius: 50% 50% 40% 40%;
-  animation: blob-finger-wave 1.2s ease-in-out infinite;
-}
-.blob-finger-1 {
-  width: 18px;
-  height: 30px;
-  left: 12px;
-  top: 8px;
-  transform-origin: bottom center;
-  animation-delay: 0s;
-}
-.blob-finger-2 {
-  width: 18px;
-  height: 36px;
-  left: 31px;
   top: 2px;
-  transform-origin: bottom center;
-  animation-delay: 0.1s;
+  left: 4px;
+  right: 4px;
+  height: 2px;
+  background: hsl(var(--foreground) / 0.15);
+  border-radius: 2px;
 }
-.blob-finger-3 {
-  width: 18px;
-  height: 30px;
-  right: 12px;
-  top: 8px;
-  transform-origin: bottom center;
-  animation-delay: 0.2s;
+
+/* Glass body */
+.hourglass-glass {
+  width: 40px;
+  height: 60px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.blob-shadow {
+.hourglass-glass::before,
+.hourglass-glass::after {
+  content: "";
   position: absolute;
-  bottom: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 50px;
-  height: 10px;
-  background: radial-gradient(ellipse, hsl(var(--primary) / 0.25) 0%, transparent 70%);
-  border-radius: 50%;
-  animation: blob-shadow 1.2s ease-in-out infinite;
+  width: 40px;
+  height: 30px;
+  border: 3px solid hsl(var(--primary) / 0.5);
+  background: hsl(var(--primary) / 0.08);
 }
-.blob-text {
-  font-size: 0.8rem;
+.hourglass-glass::before {
+  top: 0;
+  border-radius: 50% 50% 4px 4px;
+  border-top: none;
+}
+.hourglass-glass::after {
+  bottom: 0;
+  border-radius: 4px 4px 50% 50%;
+  border-bottom: none;
+}
+
+/* Sand top */
+.hourglass-sand-top {
+  position: absolute;
+  top: 8px;
+  width: 28px;
+  height: 18px;
+  background: hsl(25 80% 65%);
+  border-radius: 0 0 50% 50%;
+  animation: hg-sand-top 3s ease-in-out infinite;
+  z-index: 1;
+}
+
+/* Sand stream */
+.hourglass-stream {
+  position: absolute;
+  top: 26px;
+  width: 3px;
+  height: 10px;
+  background: hsl(25 80% 65%);
+  border-radius: 2px;
+  z-index: 1;
+  animation: hg-stream 3s ease-in-out infinite;
+}
+
+/* Sand bottom */
+.hourglass-sand-bottom {
+  position: absolute;
+  bottom: 6px;
+  width: 8px;
+  height: 8px;
+  background: hsl(25 80% 65%);
+  border-radius: 50% 50% 45% 45%;
+  animation: hg-sand-bottom 3s ease-in-out infinite;
+  z-index: 1;
+}
+
+/* Shadow */
+.hourglass-shadow {
+  position: absolute;
+  bottom: -4px;
+  width: 50px;
+  height: 8px;
+  background: radial-gradient(ellipse, hsl(var(--primary) / 0.2) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: hg-shadow 3s ease-in-out infinite;
+}
+
+/* Text */
+.hourglass-text {
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 3px;
   color: hsl(var(--muted-foreground));
-  animation: blob-text-pulse 1.2s ease-in-out infinite;
+  animation: hg-text-pulse 1.5s ease-in-out infinite;
 }
 
-@keyframes blob-bounce {
-  0%, 100% { transform: translateY(0); }
-  30% { transform: translateY(-20px); }
-  50% { transform: translateY(0); }
-  65% { transform: translateY(-8px); }
-  80% { transform: translateY(0); }
+@keyframes hg-blob-morph {
+  0%, 100% { border-radius: 60% 40% 50% 50% / 50% 60% 40% 50%; transform: translate(-50%, -50%) rotate(0deg); }
+  33% { border-radius: 40% 60% 45% 55% / 55% 45% 60% 40%; transform: translate(-50%, -50%) rotate(120deg); }
+  66% { border-radius: 55% 45% 60% 40% / 40% 55% 45% 60%; transform: translate(-50%, -50%) rotate(240deg); }
 }
-@keyframes blob-squish {
-  0%, 100% { transform: translateX(-50%) scaleX(1) scaleY(1); }
-  50% { transform: translateX(-50%) scaleX(1.1) scaleY(0.9); }
-  55% { transform: translateX(-50%) scaleX(0.9) scaleY(1.05); }
+@keyframes hg-flip {
+  0%, 45% { transform: rotate(0deg); }
+  50%, 95% { transform: rotate(180deg); }
+  100% { transform: rotate(360deg); }
 }
-@keyframes blob-finger-wave {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(-8deg); }
-  50% { transform: rotate(5deg); }
-  75% { transform: rotate(-3deg); }
+@keyframes hg-sand-top {
+  0% { height: 18px; width: 28px; }
+  45% { height: 2px; width: 6px; }
+  50% { height: 2px; width: 6px; }
+  95% { height: 18px; width: 28px; }
+  100% { height: 18px; width: 28px; }
 }
-@keyframes blob-shadow {
-  0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.6; }
-  30% { transform: translateX(-50%) scale(0.6); opacity: 0.3; }
-  50% { transform: translateX(-50%) scale(1.1); opacity: 0.7; }
+@keyframes hg-stream {
+  0%, 5% { opacity: 1; height: 10px; }
+  42%, 50% { opacity: 0; height: 4px; }
+  55% { opacity: 1; height: 10px; }
+  92%, 100% { opacity: 0; height: 4px; }
 }
-@keyframes blob-text-pulse {
-  0%, 100% { opacity: 0.5; }
+@keyframes hg-sand-bottom {
+  0% { width: 8px; height: 8px; }
+  45% { width: 28px; height: 18px; }
+  50% { width: 28px; height: 18px; }
+  95% { width: 8px; height: 8px; }
+  100% { width: 8px; height: 8px; }
+}
+@keyframes hg-shadow {
+  0%, 45% { transform: scale(1); opacity: 0.5; }
+  50%, 95% { transform: scale(0.7); opacity: 0.3; }
+  100% { transform: scale(1); opacity: 0.5; }
+}
+@keyframes hg-text-pulse {
+  0%, 100% { opacity: 0.4; }
   50% { opacity: 1; }
 }
 
