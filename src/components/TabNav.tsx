@@ -8,6 +8,7 @@ const TABS = [
   { id: "prompt", label: "General Prompt", emoji: "✨" },
   { id: "coding-prompt", label: "Coding Prompt", emoji: "💻" },
   { id: "ready-made", label: "Ready-Made Coding Prompt", emoji: "📦" },
+  { id: "text-design", label: "Text Design Prompt", emoji: "🔤" },
   { id: "video-prompt", label: "Video Prompt", emoji: "🎬" },
   { id: "image-prompt", label: "Image Prompt", emoji: "🎨" },
   { id: "image-to-prompt", label: "Image to Prompt", emoji: "🔄" },
