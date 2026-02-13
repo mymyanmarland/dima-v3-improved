@@ -138,11 +138,10 @@ const VideoPromptEnglishTab = () => {
   const [sceneDetails, setSceneDetails] = useState("");
   const [generatedPrompt, setGeneratedPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isRandomizing, setIsRandomizing] = useState(false);
 
-  const fillRandomIdea = () => {
-    const random = RANDOM_IDEAS[Math.floor(Math.random() * RANDOM_IDEAS.length)];
-    setDescription(random);
-    // Also randomize settings
+  const fillRandomIdea = async () => {
+    setIsRandomizing(true);
     const randItem = <T,>(arr: T[]) => arr[Math.floor(Math.random() * arr.length)];
     setVideoType(randItem(VIDEO_TYPES).id);
     setVisualStyle(randItem(VISUAL_STYLES));
@@ -154,7 +153,33 @@ const VideoPromptEnglishTab = () => {
     setColorGrade(randItem(COLOR_GRADES));
     setTransition(randItem(TRANSITION_STYLES));
     setSound(randItem(SOUND_DESIGN));
-    toast.success("Random video idea loaded! 🎲");
+
+    try {
+      const { data, error } = await supabase.functions.invoke("generate-prompt", {
+        body: {
+          topic: "Generate a unique, creative, cinematic video concept idea",
+          category: "random-video-idea",
+          categoryDescription: "Random Video Idea Generator",
+          tone: "Creative",
+          context: `Generate a single, short (2-3 sentences) creative video description idea for video generation AI like Veo 3.1.
+The idea should be visually striking, unique, and inspiring. Return ONLY the video description text, nothing else. No quotes, no explanations, no numbering.`,
+        },
+      });
+
+      if (error) throw new Error(error.message);
+      if (data?.prompt) {
+        setDescription(data.prompt.replace(/^["']|["']$/g, "").trim());
+        toast.success("AI generated a random video idea! 🎲✨");
+      } else {
+        setDescription(RANDOM_IDEAS[Math.floor(Math.random() * RANDOM_IDEAS.length)]);
+        toast.success("Random video idea loaded! 🎲");
+      }
+    } catch {
+      setDescription(RANDOM_IDEAS[Math.floor(Math.random() * RANDOM_IDEAS.length)]);
+      toast.success("Random video idea loaded! 🎲");
+    } finally {
+      setIsRandomizing(false);
+    }
   };
 
   const generateVideoPrompt = async () => {
@@ -248,9 +273,15 @@ Do NOT include any explanations, just the prompt.`,
         </span>
         <button
           onClick={fillRandomIdea}
-          className="ml-auto px-4 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-primary/30 text-primary hover:bg-primary/10 transition-colors"
+          disabled={isRandomizing}
+          className="ml-auto px-4 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-primary/30 text-primary hover:bg-primary/10 transition-colors disabled:opacity-50"
         >
-          🎲 Random Idea
+          {isRandomizing ? (
+            <span className="flex items-center gap-1.5">
+              <span className="w-3 h-3 rounded-full border-2 border-primary border-t-transparent animate-spin" />
+              Generating...
+            </span>
+          ) : "🎲 Random Idea (AI)"}
         </button>
       </div>
 
