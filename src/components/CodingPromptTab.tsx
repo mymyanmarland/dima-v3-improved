@@ -305,17 +305,14 @@ IMPORTANT RULES:
       </div>
 
       {/* Generate Button */}
-      <button
-        onClick={generateCodingPrompt}
-        disabled={isLoading || !description.trim()}
-        className="frutiger-button"
-      >
-        <div className="frutiger-inner">
-          <div className="frutiger-top-white" />
-          {isLoading ? (
-            <div className="w-5 h-5 rounded-full border-2 border-white border-t-transparent animate-spin relative z-10" />
-          ) : null}
-          <span className="frutiger-text">Coding Prompt Generate လုပ်မယ်</span>
+      <button onClick={generateCodingPrompt} disabled={isLoading || !description.trim()} className="gen-btn">
+        <div className="gen-bg" />
+        <div className="gen-wrap">
+          <div className="gen-outline"><div /></div>
+          <div className="gen-content">
+            {isLoading ? <div className="gen-loader" /> : <div className="gen-icon"><div className="gen-arrow" /></div>}
+            <span className="gen-text">Coding Prompt Generate လုပ်မယ်</span>
+          </div>
         </div>
       </button>
 
