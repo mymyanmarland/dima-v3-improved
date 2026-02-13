@@ -4,6 +4,7 @@ interface TabNavProps {
 }
 
 const TABS = [
+  { id: "about", label: "အကြောင်း", emoji: "ℹ️" },
   { id: "how-to-use", label: "အသုံးပြုနည်း", emoji: "📖" },
   { id: "prompt", label: "General Prompt", emoji: "✨" },
   { id: "coding-prompt", label: "Coding Prompt", emoji: "💻" },

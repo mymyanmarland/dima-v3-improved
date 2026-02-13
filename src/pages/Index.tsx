@@ -9,6 +9,7 @@ import ImageToPromptTab from "../components/ImageToPromptTab";
 import VideoPromptTab from "../components/VideoPromptTab";
 import VideoPromptEnglishTab from "../components/VideoPromptEnglishTab";
 import HowToUseTab from "../components/HowToUseTab";
+import AboutTab from "../components/AboutTab";
 import ChatBotTab from "../components/ChatBotTab";
 import ReadyMadePromptTab from "../components/ReadyMadePromptTab";
 import ApiTestTab from "../components/ApiTestTab";
@@ -21,6 +22,8 @@ const Index = () => {
 
   const renderTab = () => {
     switch (activeTab) {
+      case "about":
+        return <AboutTab />;
       case "how-to-use":
         return <HowToUseTab />;
       case "prompt":
