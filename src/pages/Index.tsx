@@ -13,6 +13,7 @@ import ChatBotTab from "../components/ChatBotTab";
 import ReadyMadePromptTab from "../components/ReadyMadePromptTab";
 import ApiTestTab from "../components/ApiTestTab";
 import TextDesignPromptTab from "../components/TextDesignPromptTab";
+import ActivityLogTab from "../components/ActivityLogTab";
 import StarryBackground from "../components/StarryBackground";
 
 const Index = () => {
@@ -40,6 +41,8 @@ const Index = () => {
         return <ImageToPromptTab />;
       case "chatbot":
         return <ChatBotTab />;
+      case "activity-log":
+        return <ActivityLogTab />;
       case "api-test":
         return <ApiTestTab />;
       default:
