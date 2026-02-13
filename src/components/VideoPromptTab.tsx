@@ -252,19 +252,15 @@ Do NOT include any explanations, just the prompt.`,
       <button
         onClick={generateVideoPrompt}
         disabled={isLoading || !description.trim()}
-        className="fancy-button w-full"
+        className="frutiger-button"
       >
-        <span className="dots_border" />
-        {isLoading ? (
-          <div className="w-5 h-5 rounded-full border-2 border-white border-t-transparent animate-spin relative z-10" />
-        ) : (
-          <svg className="sparkle" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path className="path" d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8L12 2z" strokeWidth="1.5" />
-            <path className="path" d="M5 5l1.5 4.5L11 11l-4.5 1.5L5 17l-1.5-4.5L-1 11l4.5-1.5L5 5z" strokeWidth="1" />
-            <path className="path" d="M19 3l1 3 3 1-3 1-1 3-1-3-3-1 3-1 1-3z" strokeWidth="1" />
-          </svg>
-        )}
-        <span className="text_button">Video Prompt Generate လုပ်မယ်</span>
+        <div className="frutiger-inner">
+          <div className="frutiger-top-white" />
+          {isLoading ? (
+            <div className="w-5 h-5 rounded-full border-2 border-white border-t-transparent animate-spin relative z-10" />
+          ) : null}
+          <span className="frutiger-text">Video Prompt Generate လုပ်မယ်</span>
+        </div>
       </button>
 
       {/* Output */}
