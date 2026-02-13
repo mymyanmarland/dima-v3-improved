@@ -111,17 +111,27 @@ Rules:
       {/* Categories */}
       <div className="flex flex-wrap gap-3">
         {CATEGORIES.map((cat) => (
-          <button
-            key={cat.id}
-            onClick={() => { setSelectedCategory(cat.id); setSelectedProject(null); setRefinedPrompt(""); }}
-            className={`glossy-project-btn ${selectedCategory === cat.id ? "ring-2 ring-primary ring-offset-2 ring-offset-background" : ""}`}
-          >
-            <div className="glossy-project-btn-wrap">
-              <span className="text-xs font-medium text-white/80">
-                {cat.emoji} {cat.label}
-              </span>
-            </div>
-          </button>
+          selectedCategory === cat.id ? (
+            <button
+              key={cat.id}
+              onClick={() => { setSelectedCategory(cat.id); setSelectedProject(null); setRefinedPrompt(""); }}
+              className="glossy-project-btn ring-2 ring-primary/50 ring-offset-1 ring-offset-background"
+            >
+              <div className="glossy-project-btn-wrap">
+                <span className="text-xs font-medium text-white/90">
+                  {cat.emoji} {cat.label}
+                </span>
+              </div>
+            </button>
+          ) : (
+            <button
+              key={cat.id}
+              onClick={() => { setSelectedCategory(cat.id); setSelectedProject(null); setRefinedPrompt(""); }}
+              className="px-3 py-1.5 rounded-xl text-xs font-medium transition-all bg-muted text-muted-foreground hover:bg-muted/80"
+            >
+              {cat.emoji} {cat.label}
+            </button>
+          )
         ))}
       </div>
 
