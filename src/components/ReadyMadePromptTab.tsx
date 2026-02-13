@@ -109,18 +109,18 @@ Rules:
       </div>
 
       {/* Categories */}
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-3">
         {CATEGORIES.map((cat) => (
           <button
             key={cat.id}
             onClick={() => { setSelectedCategory(cat.id); setSelectedProject(null); setRefinedPrompt(""); }}
-            className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all ${
-              selectedCategory === cat.id
-                ? "bg-primary text-primary-foreground shadow-md"
-                : "bg-muted text-muted-foreground hover:bg-muted/80"
-            }`}
+            className={`glossy-project-btn ${selectedCategory === cat.id ? "ring-2 ring-primary ring-offset-2 ring-offset-background" : ""}`}
           >
-            {cat.emoji} {cat.label}
+            <div className="glossy-project-btn-wrap">
+              <span className="text-xs font-medium text-white/80">
+                {cat.emoji} {cat.label}
+              </span>
+            </div>
           </button>
         ))}
       </div>
@@ -243,21 +243,19 @@ Rules:
             <button
               key={project.id}
               onClick={() => handleSelectProject(project)}
-              className="glossy-project-btn group"
+              className="glass-card rounded-xl p-4 text-left hover:shadow-lg transition-all group"
             >
-              <div className="glossy-project-btn-wrap">
-                <div className="flex items-start gap-3">
-                  <span className="text-2xl drop-shadow-lg">{project.emoji}</span>
-                  <div className="min-w-0">
-                    <h4 className="font-semibold text-sm text-white/90 group-hover:text-white transition-colors truncate">
-                      {project.title}
-                    </h4>
-                    <span className="text-xs text-white/50 capitalize">
-                      {CATEGORIES.find((c) => c.id === project.category)?.label}
-                    </span>
-                  </div>
-                  <ChevronDown className="w-4 h-4 text-white/40 ml-auto shrink-0 -rotate-90 group-hover:text-white/70 transition-colors" />
+              <div className="flex items-start gap-3">
+                <span className="text-2xl">{project.emoji}</span>
+                <div className="min-w-0">
+                  <h4 className="font-semibold text-sm text-foreground group-hover:text-primary transition-colors truncate">
+                    {project.title}
+                  </h4>
+                  <span className="text-xs text-muted-foreground capitalize">
+                    {CATEGORIES.find((c) => c.id === project.category)?.label}
+                  </span>
                 </div>
+                <ChevronDown className="w-4 h-4 text-muted-foreground ml-auto shrink-0 -rotate-90 group-hover:text-primary transition-colors" />
               </div>
             </button>
           ))}
