@@ -2382,4 +2382,2218 @@ export const READY_MADE_PROJECTS: ReadyMadeProject[] = [
 - Severity levels for issues (critical, warning, info)
 - Developer-focused dark theme responsive design`
   },
+
+  // ===== NEW 100 PROMPTS (101-200) =====
+
+  // === E-Commerce (7) ===
+  {
+    id: 101,
+    title: "Luxury Watch Marketplace",
+    category: "ecommerce",
+    emoji: "⌚",
+    prompt: `Build a luxury watch marketplace for authenticated pre-owned timepieces:
+
+**Features:**
+- Watch listings with 360° image viewer, certificate of authenticity upload
+- Price comparison with market trends and historical prices
+- Authentication verification workflow with expert review
+- Escrow payment system for high-value transactions
+- Seller reputation scoring with transaction history
+- Watch condition grading system (mint, excellent, good, fair)
+- Brand filtering (Rolex, Omega, Patek Philippe, Audemars Piguet, etc.)
+- Watchlist alerts for price drops
+- Insurance integration for shipped items
+- Expert appraisal request feature
+- Admin panel with fraud detection dashboard
+- Responsive design with high-resolution image zoom`
+  },
+  {
+    id: 102,
+    title: "Pet Supplies Subscription",
+    category: "ecommerce",
+    emoji: "🐾",
+    prompt: `Build a pet supplies subscription and e-commerce platform:
+
+**Features:**
+- Pet profile creation (species, breed, age, dietary needs, allergies)
+- Personalized product recommendations based on pet profile
+- Auto-replenishment subscriptions for food, treats, and supplies
+- Vet-approved product badges and nutritional info
+- Photo sharing community for pet owners
+- Loyalty rewards program with pet milestones
+- Same-day delivery scheduling
+- Product bundles and seasonal boxes
+- Vet consultation booking integration
+- Admin dashboard with subscription analytics and churn prediction
+- Mobile-responsive with cute pet-themed UI`
+  },
+  {
+    id: 103,
+    title: "Vintage Vinyl Record Shop",
+    category: "ecommerce",
+    emoji: "🎵",
+    prompt: `Build an online vintage vinyl record marketplace:
+
+**Features:**
+- Record listings with Discogs-style grading (M, NM, VG+, VG, G)
+- Audio preview clips for listed records
+- Want-list management with availability notifications
+- Genre deep-dive browsing (Jazz, Rock, Soul, Classical, Hip-Hop)
+- Seller storefront with collection showcase
+- Price guide integration with market value estimates
+- Collection tracker and value calculator
+- Trade/swap matching system between collectors
+- Shipping calculator with fragile item handling
+- Advanced search by artist, label, year, pressing country
+- Admin moderation with counterfeit detection flags
+- Retro-themed responsive design`
+  },
+  {
+    id: 104,
+    title: "Custom Furniture Builder",
+    category: "ecommerce",
+    emoji: "🪑",
+    prompt: `Build a custom furniture design and ordering platform:
+
+**Features:**
+- 3D furniture configurator (choose wood type, dimensions, finish, fabric)
+- Real-time price calculation based on customizations
+- AR preview to visualize furniture in room (upload room photo)
+- Material sample request system
+- Artisan maker profiles with portfolio
+- Production timeline tracking from order to delivery
+- Customer review gallery with photos of delivered items
+- Interior design consultation booking
+- Room planning tool with furniture placement
+- Sustainable materials certification badges
+- Admin panel with production queue and material inventory
+- Elegant responsive design with product visualizations`
+  },
+  {
+    id: 105,
+    title: "Farm-to-Table Marketplace",
+    category: "ecommerce",
+    emoji: "🌾",
+    prompt: `Build a farm-to-table local produce marketplace:
+
+**Features:**
+- Farmer profiles with farm location, certifications, farming practices
+- Seasonal produce availability calendar
+- Community Supported Agriculture (CSA) box subscriptions
+- Farm visit and event booking
+- Real-time harvest updates from farmers
+- Delivery route optimization for local delivery
+- Recipe suggestions based on available seasonal produce
+- Carbon footprint calculator per order
+- Bulk ordering for restaurants with wholesale pricing
+- Customer reviews and farm ratings
+- Admin dashboard with farmer verification and quality control
+- Fresh, organic-themed responsive design`
+  },
+  {
+    id: 106,
+    title: "Sneaker Resale Platform",
+    category: "ecommerce",
+    emoji: "👟",
+    prompt: `Build a sneaker authentication and resale marketplace:
+
+**Features:**
+- AI-powered authenticity verification with photo upload
+- Real-time market price tracking per model/size
+- Bid/ask trading system like StockX
+- Sneaker portfolio value tracker
+- Release calendar with drop notifications
+- Size conversion chart (US, UK, EU, JP)
+- Seller payout management with instant cash-out
+- Condition grading with detailed photo requirements
+- Trending sneaker charts and price history graphs
+- Push notification for price movements on watched items
+- Admin panel with authentication queue and dispute resolution
+- Streetwear-inspired dark theme responsive design`
+  },
+  {
+    id: 107,
+    title: "Art Commission Platform",
+    category: "ecommerce",
+    emoji: "🖼️",
+    prompt: `Build an art commission marketplace connecting artists with clients:
+
+**Features:**
+- Artist portfolio with style showcase and commission pricing tiers
+- Commission request form with reference images, style preferences
+- Milestone-based payment system (sketch approval → lineart → final)
+- Real-time progress sharing with revision rounds
+- Artist availability calendar and queue management
+- Client review and rating system
+- Style matching AI that suggests artists based on description
+- Digital download delivery with licensing terms
+- Print-on-demand integration for physical prints
+- Dispute resolution system
+- Admin panel with artist verification and quality curation
+- Gallery-inspired responsive design`
+  },
+
+  // === Social Media (7) ===
+  {
+    id: 108,
+    title: "Language Exchange Social Network",
+    category: "social",
+    emoji: "🌐",
+    prompt: `Build a language exchange social platform:
+
+**Features:**
+- User profiles with native language, learning languages, proficiency levels
+- Smart matching algorithm pairing native speakers with learners
+- Video/voice call integration for conversation practice
+- Text chat with built-in translation and grammar correction
+- Flashcard sharing between partners
+- Progress tracking with CEFR level milestones
+- Cultural exchange forum with discussion threads
+- Language challenge events and group sessions
+- Speaking time balance tracker (fair exchange)
+- Pronunciation feedback with speech recognition
+- Admin panel with user verification and report management
+- Multi-lingual responsive UI`
+  },
+  {
+    id: 109,
+    title: "Neighborhood Community App",
+    category: "social",
+    emoji: "🏘️",
+    prompt: `Build a neighborhood community social platform:
+
+**Features:**
+- Geo-fenced community groups based on residential area
+- Bulletin board for local announcements and events
+- Buy/sell/trade board for neighbors
+- Lost & found pet alerts with photo and location
+- Service provider recommendations (plumber, electrician, babysitter)
+- Community polls and voting on local issues
+- Emergency alerts and safety notifications
+- Carpool coordination for school and commute
+- Gardening/composting sharing programs
+- Noise and issue reporting with resolution tracking
+- Admin tools for community moderation and verification
+- Map-centric responsive design`
+  },
+  {
+    id: 110,
+    title: "Creative Writing Community",
+    category: "social",
+    emoji: "✍️",
+    prompt: `Build a creative writing social platform:
+
+**Features:**
+- Story publishing with chapters, genres, and tags
+- Rich text editor with formatting and inline images
+- Reading lists and bookshelf organization
+- Comment system with inline annotations on paragraphs
+- Writing challenges with community voting
+- Collaborative writing rooms (real-time co-authoring)
+- Writer analytics (reads, engagement, follower growth)
+- Beta reader matching system
+- Writing prompt generator with daily challenges
+- Genre leaderboards and featured stories
+- Admin panel with content moderation and featured picks
+- Book-themed elegant responsive design`
+  },
+  {
+    id: 111,
+    title: "Fitness Social Network",
+    category: "social",
+    emoji: "💪",
+    prompt: `Build a fitness-focused social platform:
+
+**Features:**
+- Workout logging with exercise library and custom routines
+- Progress photo timeline with body composition tracking
+- Workout sharing feed with likes, comments, and form tips
+- Challenge creation (30-day abs, running milestones)
+- Gym buddy matching by location and fitness level
+- Leaderboards for various fitness metrics
+- Trainer profiles with client management
+- Meal prep sharing with macro breakdowns
+- Transformation stories showcase
+- Exercise form check video sharing
+- Admin dashboard with content moderation
+- Energetic, motivational responsive design`
+  },
+  {
+    id: 112,
+    title: "Plant Parent Community",
+    category: "social",
+    emoji: "🪴",
+    prompt: `Build a plant care and trading social platform:
+
+**Features:**
+- Plant collection gallery with species identification
+- Care schedule reminders (watering, fertilizing, repotting)
+- Plant identification from photo upload (AI-powered)
+- Plant swap/trade system with local matching
+- Growth progress journals with photo timelines
+- Community Q&A for plant care troubleshooting
+- Local plant shop and nursery directory
+- Propagation guides and tutorial sharing
+- Rare plant marketplace with verified sellers
+- Seasonal care guides by climate zone
+- Admin panel with community moderation
+- Nature-inspired green responsive design`
+  },
+  {
+    id: 113,
+    title: "Podcast Community Platform",
+    category: "social",
+    emoji: "🎙️",
+    prompt: `Build a podcast discovery and discussion social platform:
+
+**Features:**
+- Podcast directory with genre browsing and search
+- Episode discussion threads with timestamp-linked comments
+- Clip sharing (highlight 30-60 second segments)
+- Listening lists and queue management
+- Podcast rating and review system
+- Host/creator profiles with episode analytics
+- Live listening parties with synchronized playback
+- Recommendation engine based on listening history
+- Transcription search across episodes
+- Guest booking marketplace for podcasters
+- Admin panel with podcast verification
+- Audio-focused dark theme responsive design`
+  },
+  {
+    id: 114,
+    title: "Travel Story Sharing Platform",
+    category: "social",
+    emoji: "🗺️",
+    prompt: `Build a travel story and itinerary sharing social platform:
+
+**Features:**
+- Trip story creation with photos, maps, and day-by-day itineraries
+- Interactive trip map with pinned locations and routes
+- Budget breakdown sharing per trip
+- Packing list templates and sharing
+- Local tips and hidden gem recommendations
+- Travel buddy matching by destination and dates
+- Country/city guides crowdsourced from travelers
+- Photo contests for best travel shots
+- Trip planning collaboration tools
+- Follow travelers with similar interests
+- Admin panel with content moderation and featured trips
+- Map-centric wanderlust responsive design`
+  },
+
+  // === Education (7) ===
+  {
+    id: 115,
+    title: "Interactive Math Tutor",
+    category: "education",
+    emoji: "🧮",
+    prompt: `Build an interactive math tutoring platform:
+
+**Features:**
+- Step-by-step problem solving with visual explanations
+- Handwriting recognition for math input (draw equations)
+- Adaptive difficulty based on student performance
+- Topic tree covering arithmetic through calculus
+- Practice problem generator with infinite variations
+- Mistake analysis showing common error patterns
+- Virtual whiteboard for teacher-student sessions
+- Progress reports with skill gap identification
+- Gamification with math badges and streaks
+- Parent dashboard with child's progress overview
+- Graphing calculator integration
+- Admin panel with curriculum management
+- Clean, distraction-free responsive learning UI`
+  },
+  {
+    id: 116,
+    title: "Virtual Science Lab",
+    category: "education",
+    emoji: "🔬",
+    prompt: `Build a virtual science laboratory simulation platform:
+
+**Features:**
+- Physics simulations (pendulum, circuits, optics, mechanics)
+- Chemistry lab with virtual mixing, reactions, and safety protocols
+- Biology dissection and cell exploration simulations
+- Experiment procedure builder with hypothesis tracking
+- Data collection and graphing tools
+- Lab report generator with proper scientific format
+- Pre-lab quizzes and post-lab assessments
+- Safety training modules
+- Teacher dashboard to assign and grade experiments
+- Collaborative lab sessions for group work
+- Admin panel with simulation management
+- Scientific, professional responsive UI`
+  },
+  {
+    id: 117,
+    title: "Language Learning RPG",
+    category: "education",
+    emoji: "🗡️",
+    prompt: `Build a gamified language learning platform with RPG elements:
+
+**Features:**
+- Character creation with avatar customization
+- Language quests organized by difficulty levels (villages to castles)
+- Vocabulary battles (word combat system)
+- Grammar dungeons with puzzle-based learning
+- NPC conversations for speaking practice
+- Party system for group learning challenges
+- Experience points, leveling, and skill trees
+- Daily quest system with streak rewards
+- Boss battles (comprehensive tests)
+- Leaderboards and guild rankings
+- Multiple language support (Japanese, Korean, Spanish, French)
+- Admin panel with content and quest management
+- Fantasy RPG-themed responsive design`
+  },
+  {
+    id: 118,
+    title: "Music Theory Trainer",
+    category: "education",
+    emoji: "🎼",
+    prompt: `Build an interactive music theory learning platform:
+
+**Features:**
+- Interactive piano/guitar keyboard for note identification
+- Ear training exercises (intervals, chords, scales)
+- Rhythm practice with metronome and beat counting
+- Music notation reader and writer
+- Chord progression builder with audio playback
+- Scale and mode explorer with fingering charts
+- Composition exercises with theory constraints
+- Progress tracking across all theory topics
+- Practice session timer with daily goals
+- Theory quiz generator with instant feedback
+- Integration with MIDI controllers
+- Admin panel with lesson management
+- Musical, elegant responsive design`
+  },
+  {
+    id: 119,
+    title: "Debate Practice Platform",
+    category: "education",
+    emoji: "🎤",
+    prompt: `Build a debate practice and tournament platform:
+
+**Features:**
+- Topic database with pro/con argument banks
+- Timed debate rounds with speech timer
+- AI opponent for practice sessions
+- Tournament bracket creation and management
+- Judge scoring system with criteria rubrics
+- Video recording of practice sessions with playback
+- Research tools with source citation management
+- Argument strength analyzer
+- Community voting on debate topics
+- Debate club management tools
+- Performance analytics and improvement tracking
+- Admin panel with tournament oversight
+- Professional, academic responsive design`
+  },
+  {
+    id: 120,
+    title: "History Timeline Explorer",
+    category: "education",
+    emoji: "📜",
+    prompt: `Build an interactive history timeline exploration platform:
+
+**Features:**
+- Zoomable timeline spanning from ancient history to modern era
+- Interactive map showing historical events geographically
+- Event cards with primary sources, images, and context
+- Cause-and-effect chain visualization between events
+- Compare timelines across different civilizations
+- Quiz mode testing chronological knowledge
+- User-created timeline sharing
+- Historical figure biography explorer
+- "This day in history" daily feature
+- Source credibility rating system
+- Collaborative annotation on events
+- Admin panel with content curation
+- Vintage map-inspired responsive design`
+  },
+  {
+    id: 121,
+    title: "Coding Bootcamp Platform",
+    category: "education",
+    emoji: "👨‍💻",
+    prompt: `Build a self-paced coding bootcamp platform:
+
+**Features:**
+- Structured learning paths (Frontend, Backend, Full-Stack, Data Science)
+- In-browser code editor with live preview
+- Project-based curriculum with milestone submissions
+- Automated code grading with test suites
+- Peer code review system
+- Mock interview preparation with coding challenges
+- Portfolio builder from completed projects
+- Mentor matching and 1-on-1 session booking
+- Job board integration for graduates
+- Community forum with topic-specific channels
+- Certificate and badge system
+- Admin panel with curriculum management and student tracking
+- Developer-focused dark mode responsive design`
+  },
+
+  // === Health & Fitness (7) ===
+  {
+    id: 122,
+    title: "Mental Health Journal",
+    category: "health",
+    emoji: "🧠",
+    prompt: `Build a mental health journaling and mood tracking application:
+
+**Features:**
+- Daily mood check-in with emotion wheel selection
+- Guided journaling prompts based on CBT techniques
+- Mood pattern visualization over time (charts, heatmaps)
+- Anxiety and stress level tracking
+- Breathing exercises with guided animations
+- Sleep quality logging and analysis
+- Gratitude journal section
+- Trigger identification and coping strategy database
+- Therapist sharing (export journal entries securely)
+- Crisis resources and helpline quick access
+- Medication reminder integration
+- Admin panel with content management
+- Calming, accessible responsive design with soft colors`
+  },
+  {
+    id: 123,
+    title: "Yoga & Meditation Studio",
+    category: "health",
+    emoji: "🧘",
+    prompt: `Build an online yoga and meditation studio platform:
+
+**Features:**
+- Video class library organized by style (Vinyasa, Hatha, Yin, Kundalini)
+- Live class streaming with instructor interaction
+- Meditation timer with ambient sounds (rain, bowls, forest)
+- Personalized practice recommendations based on goals
+- 30-day challenge programs
+- Progress tracking (flexibility, mindfulness minutes, streak)
+- Instructor profiles with specialization and certifications
+- Community forum for practice discussions
+- Class scheduling and reminder system
+- Subscription tiers (free, premium, unlimited)
+- Admin panel with class and instructor management
+- Zen, minimalist responsive design`
+  },
+  {
+    id: 124,
+    title: "Nutrition Macro Tracker",
+    category: "health",
+    emoji: "🥗",
+    prompt: `Build a comprehensive nutrition and macro tracking application:
+
+**Features:**
+- Food database with barcode scanner integration
+- Meal logging with portion size estimation
+- Macro breakdown (protein, carbs, fat) with daily goals
+- Micronutrient tracking (vitamins, minerals)
+- Meal prep planning with grocery list generation
+- Recipe database with nutritional analysis
+- Custom diet plan support (keto, vegan, paleo, IF)
+- Water intake tracking with reminders
+- Weight and body measurement logging
+- Progress photos with side-by-side comparison
+- AI meal suggestions to hit remaining macros
+- Admin panel with food database management
+- Clean, health-focused responsive design`
+  },
+  {
+    id: 125,
+    title: "Physical Therapy Tracker",
+    category: "health",
+    emoji: "🏥",
+    prompt: `Build a physical therapy exercise and recovery tracking platform:
+
+**Features:**
+- Exercise library with video demonstrations and proper form guides
+- Custom rehab program builder for therapists
+- Pain level tracking with body map visualization
+- Range of motion measurement logging
+- Session notes and progress documentation
+- Patient-therapist secure messaging
+- Appointment scheduling and reminders
+- Exercise completion tracking with adherence reports
+- Insurance and billing integration
+- Home exercise program (HEP) sharing
+- Recovery milestone celebrations
+- Admin panel with patient and therapist management
+- Medical-professional responsive design`
+  },
+  {
+    id: 126,
+    title: "Running Training App",
+    category: "health",
+    emoji: "🏃",
+    prompt: `Build a running training and race preparation platform:
+
+**Features:**
+- Training plan generator (5K, 10K, half marathon, marathon)
+- GPS route tracking with pace, distance, elevation
+- Run logging with weather and terrain conditions
+- Interval and tempo workout builder
+- Race calendar with registration links
+- Personal records tracking and milestones
+- Running shoe mileage tracker
+- Heart rate zone training guides
+- Social running groups and challenges
+- Post-run analytics with split times
+- Injury prevention tips and stretching routines
+- Admin panel with race and content management
+- Energetic, athletic responsive design`
+  },
+  {
+    id: 127,
+    title: "Sleep Optimization App",
+    category: "health",
+    emoji: "😴",
+    prompt: `Build a sleep tracking and optimization application:
+
+**Features:**
+- Sleep logging with bedtime/wake time, quality rating
+- Sleep stage estimation and analysis
+- Sleep environment optimization tips
+- Bedtime routine builder with reminders
+- Sleep debt calculator
+- Dream journal integration
+- White noise and sleep sound library
+- Smart alarm (wake during light sleep window)
+- Caffeine and screen time impact tracking
+- Weekly and monthly sleep reports
+- Sleep hygiene education modules
+- Admin panel with content management
+- Relaxing, dark-mode-first responsive design`
+  },
+  {
+    id: 128,
+    title: "Allergy Management App",
+    category: "health",
+    emoji: "🤧",
+    prompt: `Build an allergy tracking and management application:
+
+**Features:**
+- Allergen profile with known allergies and sensitivities
+- Daily symptom logging with severity tracking
+- Pollen count and air quality dashboard by location
+- Food diary with ingredient scanning
+- Medication tracking with dosage reminders
+- Allergy-safe restaurant finder
+- Emergency action plan storage (EpiPen instructions)
+- Doctor appointment tracking and visit notes
+- Seasonal allergy forecast notifications
+- Community tips for managing specific allergies
+- Emergency contact quick-dial
+- Admin panel with allergen database management
+- Clean, medical-professional responsive design`
+  },
+
+  // === Finance (7) ===
+  {
+    id: 129,
+    title: "Freelancer Invoice Manager",
+    category: "finance",
+    emoji: "📋",
+    prompt: `Build a freelancer invoicing and financial management platform:
+
+**Features:**
+- Professional invoice template builder with branding
+- Recurring invoice automation
+- Time tracking integration with hourly billing
+- Expense categorization and receipt scanning
+- Client management with payment history
+- Tax estimation and quarterly payment reminders
+- Multiple currency support
+- Payment gateway integration (Stripe, PayPal)
+- Overdue payment reminders and follow-ups
+- Annual income and expense reports
+- Profit and loss statements
+- Contract and proposal template library
+- Admin panel with system configuration
+- Professional, minimal responsive design`
+  },
+  {
+    id: 130,
+    title: "Cryptocurrency Portfolio Tracker",
+    category: "finance",
+    emoji: "₿",
+    prompt: `Build a cryptocurrency portfolio tracking and analytics platform:
+
+**Features:**
+- Multi-exchange portfolio aggregation
+- Real-time price tracking with customizable watchlists
+- Profit/loss calculation with cost basis methods (FIFO, LIFO)
+- Tax report generation for crypto transactions
+- Price alert system with push notifications
+- DeFi position tracking (staking, lending, LP)
+- NFT collection valuation
+- Market sentiment analysis dashboard
+- Portfolio allocation pie charts and rebalancing suggestions
+- Historical performance charts with benchmarks
+- News aggregation for tracked assets
+- Admin panel with exchange integration management
+- Dark-mode crypto-themed responsive design`
+  },
+  {
+    id: 131,
+    title: "Family Budget Planner",
+    category: "finance",
+    emoji: "👨‍👩‍👧‍👦",
+    prompt: `Build a family budget planning and financial goal application:
+
+**Features:**
+- Shared family budget with member contributions
+- Envelope budgeting system with visual envelopes
+- Savings goal tracker with progress animations
+- Bill calendar with due date reminders
+- Allowance management for children
+- Subscription tracker with cancellation recommendations
+- Net worth calculator with asset tracking
+- Financial milestone celebrations
+- Comparison shopping tool for big purchases
+- Emergency fund progress tracker
+- Family meeting agenda generator for budget reviews
+- Admin panel for family account management
+- Friendly, family-oriented responsive design`
+  },
+  {
+    id: 132,
+    title: "Stock Market Simulator",
+    category: "finance",
+    emoji: "📈",
+    prompt: `Build a stock market trading simulator for learning:
+
+**Features:**
+- Virtual portfolio with play money ($100K starting balance)
+- Real-time stock data with charts (candlestick, line, volume)
+- Buy/sell/short selling simulation
+- Options trading simulator
+- Portfolio performance vs S&P 500 benchmark
+- Trading journal with strategy notes
+- Leaderboard for top performers
+- Educational modules on trading strategies
+- Risk assessment tools
+- Dividend tracking and reinvestment
+- News feed integration for market events
+- Admin panel with simulation and user management
+- Financial terminal-inspired responsive design`
+  },
+  {
+    id: 133,
+    title: "Debt Payoff Planner",
+    category: "finance",
+    emoji: "💳",
+    prompt: `Build a debt payoff strategy and tracking application:
+
+**Features:**
+- Debt inventory with balances, rates, and minimum payments
+- Payoff strategy comparison (avalanche vs snowball vs hybrid)
+- Payoff timeline calculator with extra payment scenarios
+- Visual debt-free countdown timer
+- Payment scheduling with bank integration
+- Interest saved calculator
+- Milestone celebrations as debts are paid off
+- Motivational progress charts and graphs
+- Refinancing opportunity alerts
+- Credit score impact estimation
+- Community success stories
+- Admin panel with financial resource management
+- Motivational, progress-focused responsive design`
+  },
+  {
+    id: 134,
+    title: "Expense Splitting App",
+    category: "finance",
+    emoji: "🤝",
+    prompt: `Build a group expense splitting and settlement application:
+
+**Features:**
+- Group creation for trips, roommates, events
+- Expense logging with receipt photo upload
+- Smart splitting (equal, percentage, exact amounts, shares)
+- Running balance between all group members
+- Optimal settlement calculation (minimize transactions)
+- Payment recording and confirmation
+- Expense categories and spending analytics per group
+- Recurring expense support (rent, utilities)
+- Multi-currency support with auto conversion
+- Export expense reports as PDF/CSV
+- Push notifications for new expenses and settlements
+- Admin panel with user management
+- Clean, intuitive responsive design`
+  },
+  {
+    id: 135,
+    title: "Retirement Planning Calculator",
+    category: "finance",
+    emoji: "🏖️",
+    prompt: `Build a comprehensive retirement planning and projection tool:
+
+**Features:**
+- Current financial snapshot input (savings, investments, debts)
+- Retirement goal calculator (target age, lifestyle, location)
+- Monte Carlo simulation for portfolio projections
+- Social Security benefit estimator
+- 401k/IRA contribution optimizer
+- Healthcare cost projections
+- Inflation-adjusted spending calculator
+- Withdrawal strategy comparison (4% rule, bucket, guardrails)
+- Tax-efficient withdrawal sequencing
+- Part-time income scenario modeling
+- Visual timeline from now to retirement
+- Admin panel with financial model configuration
+- Trust-inspiring, professional responsive design`
+  },
+
+  // === Productivity (7) ===
+  {
+    id: 136,
+    title: "OKR Tracking System",
+    category: "productivity",
+    emoji: "🎯",
+    prompt: `Build an OKR (Objectives and Key Results) tracking platform:
+
+**Features:**
+- Company, team, and individual OKR creation
+- Key result progress tracking with percentage completion
+- OKR alignment visualization (cascading goals)
+- Check-in scheduling with progress updates
+- Scoring system (0.0 to 1.0 scale)
+- Quarterly planning and review workflows
+- Team dashboard with aggregate progress
+- Historical OKR archive and reflection
+- Integration with project management tools
+- Automated progress reminders
+- Analytics on goal completion rates
+- Admin panel with organizational structure management
+- Clean, focused professional responsive design`
+  },
+  {
+    id: 137,
+    title: "Meeting Notes Manager",
+    category: "productivity",
+    emoji: "📝",
+    prompt: `Build a smart meeting notes and action item tracking application:
+
+**Features:**
+- Meeting template library (standup, retrospective, 1:1, brainstorm)
+- Real-time collaborative note-taking
+- Action item extraction with assignee and deadline
+- Meeting agenda builder with time allocations
+- Automatic meeting summary generation
+- Action item tracking across all meetings
+- Integration with calendar for scheduling
+- Meeting effectiveness scoring
+- Follow-up reminder automation
+- Searchable meeting archive
+- Attendee participation tracking
+- Admin panel with template and team management
+- Distraction-free, minimal responsive design`
+  },
+  {
+    id: 138,
+    title: "Habit Tracker Pro",
+    category: "productivity",
+    emoji: "📊",
+    prompt: `Build an advanced habit tracking and behavior change application:
+
+**Features:**
+- Habit creation with frequency, time, and cue settings
+- Streak tracking with visual calendar heatmap
+- Habit stacking and routine builder
+- Accountability partner matching
+- Progress analytics with completion rate trends
+- Habit category organization (health, learning, mindfulness)
+- Morning and evening routine checklists
+- Missed habit reflection prompts
+- Scientific habit formation tips
+- Weekly and monthly review reports
+- Gamification with levels and achievement badges
+- Admin panel with content and challenge management
+- Motivational, clean responsive design`
+  },
+  {
+    id: 139,
+    title: "Personal Knowledge Base",
+    category: "productivity",
+    emoji: "🧠",
+    prompt: `Build a personal knowledge management system (second brain):
+
+**Features:**
+- Note creation with bi-directional linking (wiki-style)
+- Knowledge graph visualization of connected notes
+- Daily notes and fleeting thoughts capture
+- Tagging system with tag-based exploration
+- Full-text search across all notes
+- Web clipper for saving articles and snippets
+- Templates for different note types (book notes, meeting, project)
+- Spaced repetition review for important concepts
+- PDF and image annotation
+- Export to markdown, PDF, HTML
+- Offline support with sync
+- Admin panel for user and storage management
+- Notion-inspired clean responsive design`
+  },
+  {
+    id: 140,
+    title: "Time Blocking Planner",
+    category: "productivity",
+    emoji: "⏰",
+    prompt: `Build a time blocking and deep work planning application:
+
+**Features:**
+- Visual day planner with drag-and-drop time blocks
+- Color-coded block categories (deep work, meetings, admin, personal)
+- Focus timer with Pomodoro and custom intervals
+- Daily and weekly time block templates
+- Time tracking with automatic categorization
+- Distraction blocker integration suggestions
+- Energy level tracking to optimize block placement
+- Weekly review with time allocation analysis
+- Goal linking (connect blocks to larger objectives)
+- Calendar integration for syncing commitments
+- Productivity score and trends
+- Admin panel with workspace management
+- Minimalist, focus-oriented responsive design`
+  },
+  {
+    id: 141,
+    title: "Remote Team Dashboard",
+    category: "productivity",
+    emoji: "🌍",
+    prompt: `Build a remote team collaboration and status dashboard:
+
+**Features:**
+- Team timezone visualization with world clock
+- Status updates (working, in meeting, away, deep focus)
+- Async standup check-ins with daily updates
+- Team availability calendar overlay
+- Virtual water cooler / random coffee matching
+- Project progress at-a-glance widgets
+- Document collaboration links hub
+- Meeting-free time finder across timezones
+- Team celebrations and shout-outs board
+- Work hours overlap calculator
+- Communication preference profiles
+- Admin panel with team and workspace management
+- Modern, collaborative responsive design`
+  },
+  {
+    id: 142,
+    title: "Digital Declutter Tool",
+    category: "productivity",
+    emoji: "🧹",
+    prompt: `Build a digital decluttering and organization application:
+
+**Features:**
+- Email subscription audit with one-click unsubscribe
+- App usage audit with delete recommendations
+- File duplicate finder and cleanup
+- Cloud storage analyzer with size visualization
+- Social media account cleanup checklist
+- Password audit (weak, reused, compromised)
+- Browser bookmark organizer
+- Digital footprint assessment
+- Photo library duplicate and blur detection
+- Notification audit and optimization
+- Monthly digital declutter challenge
+- Admin panel with feature management
+- Clean, spacious, calming responsive design`
+  },
+
+  // === Entertainment (7) ===
+  {
+    id: 143,
+    title: "Movie Watchlist & Reviews",
+    category: "entertainment",
+    emoji: "🎬",
+    prompt: `Build a movie discovery, watchlist, and review platform:
+
+**Features:**
+- Movie database with details (cast, crew, genre, runtime, ratings)
+- Watchlist management with priority ordering
+- Rating and detailed review system
+- Movie recommendation engine based on taste profile
+- Watch party scheduling with friends
+- Streaming availability checker (Netflix, Disney+, etc.)
+- Movie diary with watch date and mood logging
+- Annual statistics (movies watched, genres, total hours)
+- List creation and sharing (Best Sci-Fi, Comfort Movies, etc.)
+- Spoiler-tagged discussion threads
+- Award season prediction game
+- Admin panel with movie database management
+- Cinematic dark-theme responsive design`
+  },
+  {
+    id: 144,
+    title: "Board Game Companion",
+    category: "entertainment",
+    emoji: "🎲",
+    prompt: `Build a board game companion and collection management app:
+
+**Features:**
+- Game collection catalog with BGG integration
+- Score tracking for multiple game sessions
+- Game night planner with RSVP and game voting
+- Player statistics and win/loss records
+- Game recommendation based on player count and preferences
+- Rules quick-reference cards
+- Timer and turn tracker for long games
+- Trade/sell/lend tracking between friends
+- New release alerts for wishlisted games
+- Teaching guides for complex games
+- House rules documentation
+- Admin panel with game database management
+- Playful, tabletop-inspired responsive design`
+  },
+  {
+    id: 145,
+    title: "Virtual Karaoke Platform",
+    category: "entertainment",
+    emoji: "🎤",
+    prompt: `Build an online karaoke and singing platform:
+
+**Features:**
+- Song library with lyrics display and backing tracks
+- Real-time pitch detection and scoring
+- Recording and playback of performances
+- Duet mode for remote singing together
+- Genre and decade browsing (Pop, Rock, K-Pop, Oldies)
+- Performance sharing with community
+- Karaoke room creation for private sessions
+- Leaderboards and singing competitions
+- Voice effects and filters
+- Favorite songs and playlist creation
+- Challenge friends to song battles
+- Admin panel with song and content management
+- Neon-lit karaoke bar responsive design`
+  },
+  {
+    id: 146,
+    title: "Trivia Quiz Platform",
+    category: "entertainment",
+    emoji: "❓",
+    prompt: `Build a multiplayer trivia quiz platform:
+
+**Features:**
+- Quiz categories (Science, History, Pop Culture, Sports, Geography)
+- Real-time multiplayer quiz rooms
+- Question creation and submission by users
+- Difficulty levels with adaptive questioning
+- Daily quiz challenge with leaderboard
+- Tournament brackets for competitive play
+- Lifelines (50/50, skip, hint)
+- Statistics dashboard (accuracy by category, streaks)
+- Custom quiz creation for parties/events
+- Image and video-based questions
+- Achievement badges and XP system
+- Admin panel with question review and moderation
+- Fun, game-show-inspired responsive design`
+  },
+  {
+    id: 147,
+    title: "Meme Generator & Gallery",
+    category: "entertainment",
+    emoji: "😂",
+    prompt: `Build a meme creation and sharing platform:
+
+**Features:**
+- Meme template library with popular formats
+- Text overlay editor with font, size, and position controls
+- Image upload for custom meme creation
+- Meme feed with trending, new, and top sorting
+- Upvote/downvote and comment system
+- Meme collections and albums
+- AI meme caption generator
+- GIF meme support
+- Watermark option for creators
+- Share to social media integration
+- Meme contest events
+- Admin panel with content moderation
+- Fun, meme-culture responsive design`
+  },
+  {
+    id: 148,
+    title: "Virtual Escape Room Builder",
+    category: "entertainment",
+    emoji: "🔐",
+    prompt: `Build a virtual escape room creation and play platform:
+
+**Features:**
+- Room builder with puzzle creation tools (logic, cipher, visual)
+- Multiple puzzle types (combination lock, jigsaw, riddle, hidden object)
+- Room linking for multi-room adventures
+- Hint system with progressive clues
+- Timer with difficulty-based time limits
+- Multiplayer support for team solving
+- Leaderboards by room and completion time
+- Room rating and review system
+- Story/narrative wrapper for puzzles
+- Creator analytics (plays, completion rate, average time)
+- Seasonal themed rooms
+- Admin panel with room moderation and quality control
+- Mysterious, atmospheric responsive design`
+  },
+  {
+    id: 149,
+    title: "Interactive Fiction Engine",
+    category: "entertainment",
+    emoji: "📖",
+    prompt: `Build an interactive fiction / choose-your-own-adventure platform:
+
+**Features:**
+- Story creation with branching narrative editor (node-based)
+- Rich text with embedded images, sound, and character portraits
+- Character stats and inventory system
+- Decision tracking with story analytics
+- Multiple endings with achievement system
+- Community story sharing and browsing
+- Reader bookmarking and save states
+- Collaborative story writing
+- Genre categorization (Fantasy, Sci-Fi, Romance, Mystery)
+- Story length and branch complexity indicators
+- Reader ratings and reviews
+- Admin panel with content moderation
+- Storybook-themed responsive design`
+  },
+
+  // === Food & Restaurant (7) ===
+  {
+    id: 150,
+    title: "Recipe Social Network",
+    category: "food",
+    emoji: "👨‍🍳",
+    prompt: `Build a recipe sharing and cooking social platform:
+
+**Features:**
+- Recipe publishing with step-by-step instructions and photos
+- Ingredient list with auto-scaling for servings
+- Cooking timer integration for each step
+- Nutritional info auto-calculation
+- Meal planning calendar with recipe scheduling
+- Grocery list generation from selected recipes
+- Community recipe ratings and reviews
+- Cook-along mode with hands-free voice guidance
+- Recipe collections and cookbooks
+- Ingredient substitution suggestions
+- Cooking technique video library
+- Admin panel with recipe moderation
+- Warm, kitchen-inspired responsive design`
+  },
+  {
+    id: 151,
+    title: "Food Truck Finder",
+    category: "food",
+    emoji: "🚚",
+    prompt: `Build a food truck location and ordering platform:
+
+**Features:**
+- Real-time food truck map with current locations
+- Menu browsing with photos and dietary filters
+- Mobile pre-ordering for pickup
+- Food truck schedule and route planning
+- Customer reviews and ratings
+- Favorite trucks with notification alerts
+- Event booking for private catering
+- Food truck owner dashboard (location updates, menu management)
+- Push notifications when favorite trucks are nearby
+- Festival and event listings with participating trucks
+- Revenue analytics for truck owners
+- Admin panel with truck verification and management
+- Street food-themed vibrant responsive design`
+  },
+  {
+    id: 152,
+    title: "Wine & Spirits Cellar",
+    category: "food",
+    emoji: "🍷",
+    prompt: `Build a wine and spirits collection management application:
+
+**Features:**
+- Bottle inventory with label photo scanning
+- Tasting notes with aroma wheel and flavor profile
+- Cellar organization (rack position, temperature zone)
+- Drinking window recommendations
+- Food pairing suggestions
+- Price tracking and collection valuation
+- Wine region explorer with interactive maps
+- Vintage chart reference
+- Wishlist with purchase alerts
+- Social sharing of tasting notes
+- Wine club and tasting event management
+- Admin panel with wine database management
+- Elegant, vineyard-inspired responsive design`
+  },
+  {
+    id: 153,
+    title: "Meal Kit Service Platform",
+    category: "food",
+    emoji: "📦",
+    prompt: `Build a meal kit delivery service platform:
+
+**Features:**
+- Weekly menu selection with dietary customization
+- Recipe cards with step-by-step instructions and videos
+- Ingredient sourcing transparency (farm origins)
+- Subscription management (pause, skip, change plan)
+- Dietary preference profiles (vegan, gluten-free, keto)
+- Calorie and macro information per meal
+- Customer reviews and recipe ratings
+- Delivery tracking with time slot selection
+- Gift card and referral program
+- Leftover recipe suggestions from extra ingredients
+- Chef profiles and story behind each recipe
+- Admin panel with menu planning and logistics
+- Fresh, appetizing responsive design`
+  },
+  {
+    id: 154,
+    title: "Restaurant Table Reservation",
+    category: "food",
+    emoji: "🪑",
+    prompt: `Build a restaurant table reservation and management system:
+
+**Features:**
+- Restaurant search with filters (cuisine, price, location, rating)
+- Real-time table availability display
+- Online reservation with party size, date, time
+- Special requests and occasion notes
+- Waitlist management with estimated wait times
+- Table layout management for restaurant owners
+- SMS/email confirmation and reminders
+- Walk-in queue management
+- Customer history and preferences for returning guests
+- Peak hours analytics and demand forecasting
+- Menu preview and pre-ordering
+- Admin panel with multi-restaurant management
+- Sophisticated dining-themed responsive design`
+  },
+  {
+    id: 155,
+    title: "Barista Coffee Guide",
+    category: "food",
+    emoji: "☕",
+    prompt: `Build a coffee brewing guide and café discovery application:
+
+**Features:**
+- Brewing method guides (pour-over, espresso, French press, AeroPress)
+- Bean database with origin, roast level, flavor notes
+- Brew recipe calculator (ratio, grind, temperature, time)
+- Local café directory with specialty drink menus
+- Coffee tasting journal with flavor wheel
+- Equipment reviews and recommendations
+- Subscription coffee delivery matching
+- Latte art tutorial library
+- Barista certification progress tracking
+- Community bean reviews and recommendations
+- Coffee origin country explorer with maps
+- Admin panel with café and bean database management
+- Warm, coffeehouse-inspired responsive design`
+  },
+  {
+    id: 156,
+    title: "Dietary Restriction Restaurant Finder",
+    category: "food",
+    emoji: "🥜",
+    prompt: `Build a restaurant finder specialized for dietary restrictions:
+
+**Features:**
+- Search by dietary need (celiac, nut allergy, vegan, halal, kosher)
+- Menu item filtering with allergen warnings
+- User-verified safe dishes at restaurants
+- Allergy card generator in multiple languages
+- Restaurant allergen training certification display
+- Community reviews focused on dietary safety
+- Chef Q&A for specific allergy concerns
+- Cross-contamination risk ratings
+- Emergency nearby hospital/pharmacy locator
+- Travel mode for finding safe food abroad
+- Restaurant partner program for verified menus
+- Admin panel with restaurant verification
+- Safe, trustworthy responsive design`
+  },
+
+  // === Travel (7) ===
+  {
+    id: 157,
+    title: "Digital Nomad Hub",
+    category: "travel",
+    emoji: "💻",
+    prompt: `Build a digital nomad destination guide and community platform:
+
+**Features:**
+- City profiles with cost of living, internet speed, safety scores
+- Coworking space directory with reviews and pricing
+- Visa requirement checker by nationality
+- Monthly cost calculator per destination
+- Community forums organized by city
+- Coliving space listings and reviews
+- Meetup events for nomads in each city
+- Internet speed test aggregation and reliability ratings
+- Tax implications guide by country
+- Flight deal alerts between nomad-popular cities
+- Weather and climate comparison tools
+- Admin panel with city data and community management
+- Wanderlust-inspiring responsive design`
+  },
+  {
+    id: 158,
+    title: "Road Trip Planner",
+    category: "travel",
+    emoji: "🚗",
+    prompt: `Build a road trip planning and navigation companion:
+
+**Features:**
+- Route planning with multiple waypoints on interactive map
+- Points of interest discovery along route (scenic, food, gas, rest)
+- Fuel cost calculator with gas station pricing
+- Drive time estimates with traffic consideration
+- Hotel/camping spot booking along route
+- Packing checklist generator based on trip type
+- Trip budget tracker (gas, food, lodging, activities)
+- Offline map download for areas without signal
+- Photo journal tied to map locations
+- Road trip game suggestions for passengers
+- Vehicle maintenance checklist before departure
+- Admin panel with POI and content management
+- Adventure-themed responsive design`
+  },
+  {
+    id: 159,
+    title: "Cultural Experience Marketplace",
+    category: "travel",
+    emoji: "🎭",
+    prompt: `Build a cultural experience and local tour booking platform:
+
+**Features:**
+- Experience listings (cooking classes, art tours, music workshops)
+- Local host profiles with verification and reviews
+- Small group size guarantees
+- Instant and request booking options
+- Multi-language experience offerings
+- Experience gifting with custom greeting cards
+- Weather-dependent alternative suggestions
+- Accessibility information for each experience
+- Cultural etiquette guides for travelers
+- Photo and video reviews from past participants
+- Seasonal and festival-based experience collections
+- Admin panel with host verification and quality control
+- Culturally rich responsive design`
+  },
+  {
+    id: 160,
+    title: "Airport Companion App",
+    category: "travel",
+    emoji: "✈️",
+    prompt: `Build an airport navigation and services companion application:
+
+**Features:**
+- Airport terminal maps with indoor navigation
+- Flight status tracking with delay notifications
+- Gate change alerts with walking time estimates
+- Lounge finder with access eligibility checker
+- Restaurant and shop directory with reviews
+- Duty-free price comparison
+- Power outlet and WiFi spot locator
+- TSA/security wait time estimates
+- Parking spot reservation
+- Ground transportation options comparison
+- Currency exchange rate comparison within airport
+- Admin panel with airport data management
+- Travel-efficient responsive design`
+  },
+  {
+    id: 161,
+    title: "Sustainable Travel Guide",
+    category: "travel",
+    emoji: "🌱",
+    prompt: `Build a sustainable and eco-friendly travel planning platform:
+
+**Features:**
+- Carbon footprint calculator for flights, trains, buses
+- Eco-certified accommodation directory
+- Sustainable tour operator listings
+- Carbon offset purchasing integration
+- Low-impact activity suggestions per destination
+- Responsible wildlife tourism guidelines
+- Plastic-free travel tips and packing guides
+- Local community support initiatives
+- Public transportation guides for each city
+- Sustainable restaurant finder (farm-to-table, zero-waste)
+- Travel impact dashboard for personal tracking
+- Admin panel with certification verification
+- Nature-inspired, green responsive design`
+  },
+  {
+    id: 162,
+    title: "Group Travel Organizer",
+    category: "travel",
+    emoji: "👥",
+    prompt: `Build a group travel planning and coordination platform:
+
+**Features:**
+- Trip creation with itinerary collaboration
+- Voting system for destinations, activities, restaurants
+- Shared expense tracking with splitting
+- Group chat with trip-specific channels
+- Accommodation comparison and group booking
+- Activity scheduling with preference matching
+- Document sharing (passports, tickets, reservations)
+- Countdown timer to trip date
+- Packing list collaboration
+- Photo album sharing after trip
+- Task assignment for trip preparation
+- Admin panel with trip and user management
+- Fun, collaborative responsive design`
+  },
+  {
+    id: 163,
+    title: "Travel Insurance Comparison",
+    category: "travel",
+    emoji: "🛡️",
+    prompt: `Build a travel insurance comparison and management platform:
+
+**Features:**
+- Trip details input for accurate quotes
+- Side-by-side policy comparison
+- Coverage breakdown (medical, cancellation, baggage, delays)
+- Pre-existing condition coverage finder
+- Adventure sports coverage options
+- Family and group policy options
+- Claim filing system with document upload
+- Policy document storage and quick access
+- Emergency assistance contact directory
+- Travel advisory integration by destination
+- Review system for insurance providers
+- Admin panel with provider and policy management
+- Trustworthy, professional responsive design`
+  },
+
+  // === Real Estate (7) ===
+  {
+    id: 164,
+    title: "Property Management Dashboard",
+    category: "realestate",
+    emoji: "🏢",
+    prompt: `Build a property management dashboard for landlords:
+
+**Features:**
+- Property portfolio overview with occupancy status
+- Tenant management with lease tracking
+- Rent collection with online payment portal
+- Maintenance request system with priority and status
+- Financial reporting (income, expenses, profit per property)
+- Document storage (leases, insurance, inspections)
+- Tenant communication portal
+- Vacancy listing and application management
+- Lease renewal reminders and automation
+- Vendor management for repairs and services
+- Property value tracking with market comparisons
+- Admin panel with multi-property management
+- Professional, dashboard-focused responsive design`
+  },
+  {
+    id: 165,
+    title: "Home Renovation Planner",
+    category: "realestate",
+    emoji: "🔨",
+    prompt: `Build a home renovation planning and project management tool:
+
+**Features:**
+- Room-by-room project planning
+- Budget tracker with cost estimates and actuals
+- Contractor directory with reviews and quotes
+- Before and after photo comparison
+- Material selection with price comparisons
+- Project timeline with Gantt chart visualization
+- Permit requirement checklist by project type
+- DIY tutorial library with difficulty ratings
+- Inspiration gallery organized by room and style
+- Shopping list aggregation across projects
+- ROI calculator for renovation investments
+- Admin panel with contractor and content management
+- Home-improvement-themed responsive design`
+  },
+  {
+    id: 166,
+    title: "Real Estate Investment Analyzer",
+    category: "realestate",
+    emoji: "📊",
+    prompt: `Build a real estate investment analysis platform:
+
+**Features:**
+- Property analysis calculator (cap rate, cash-on-cash, IRR)
+- Rental income projections with vacancy assumptions
+- Mortgage comparison with multiple scenarios
+- Neighborhood data analysis (crime, schools, amenities)
+- Comparable property analysis (comps)
+- Portfolio tracking with total return calculations
+- Market trend charts and forecasting
+- 1031 exchange planning tool
+- Property management expense estimation
+- Tax benefit calculator (depreciation, deductions)
+- Investment property report generation
+- Admin panel with market data management
+- Data-driven, analytical responsive design`
+  },
+  {
+    id: 167,
+    title: "Roommate Matching Platform",
+    category: "realestate",
+    emoji: "🤝",
+    prompt: `Build a roommate matching and shared housing platform:
+
+**Features:**
+- Detailed profile with lifestyle preferences (sleep, cleanliness, pets, noise)
+- Compatibility scoring algorithm
+- Room/apartment listing with virtual tour photos
+- Budget range matching
+- Lease term preference matching
+- In-app messaging for potential matches
+- Roommate agreement template builder
+- Shared expense setup integration
+- House rules preference quiz
+- Safety features (background check integration, verified profiles)
+- University/college housing specific mode
+- Admin panel with user verification and moderation
+- Friendly, approachable responsive design`
+  },
+  {
+    id: 168,
+    title: "Vacation Rental Manager",
+    category: "realestate",
+    emoji: "🏖️",
+    prompt: `Build a vacation rental property management platform:
+
+**Features:**
+- Multi-platform listing sync (Airbnb, VRBO, Booking.com)
+- Unified calendar with availability management
+- Dynamic pricing engine based on demand and season
+- Automated guest communication templates
+- Check-in/check-out instruction automation
+- Cleaning schedule coordination with service providers
+- Review management across platforms
+- Revenue reporting and tax document generation
+- Guest screening and verification
+- Maintenance scheduling between bookings
+- Smart lock integration for keyless entry
+- Admin panel with property and booking management
+- Hospitality-themed professional responsive design`
+  },
+  {
+    id: 169,
+    title: "Construction Project Tracker",
+    category: "realestate",
+    emoji: "🏗️",
+    prompt: `Build a construction project tracking and management platform:
+
+**Features:**
+- Project phases with milestone tracking
+- Daily progress logs with photo documentation
+- Budget tracking with change order management
+- Subcontractor management and scheduling
+- Material ordering and delivery tracking
+- Inspection scheduling and compliance checklist
+- Blueprint and document version management
+- Weather delay impact assessment
+- Safety incident reporting
+- Client portal for progress updates
+- Punch list management for project completion
+- Admin panel with multi-project oversight
+- Industrial, professional responsive design`
+  },
+  {
+    id: 170,
+    title: "Smart Home Dashboard",
+    category: "realestate",
+    emoji: "🏠",
+    prompt: `Build a smart home device management dashboard:
+
+**Features:**
+- Device discovery and registration
+- Room-by-room device organization
+- Scene creation (movie night, good morning, away mode)
+- Automation rules builder (if this, then that)
+- Energy consumption monitoring with cost estimates
+- Temperature and thermostat control
+- Security camera feed viewing
+- Door lock status and control
+- Light dimming and color control
+- Usage analytics and energy saving recommendations
+- Voice command integration
+- Admin panel with device and user management
+- Futuristic, smart-home responsive design`
+  },
+
+  // === CRM & Business (7) ===
+  {
+    id: 171,
+    title: "Client Onboarding System",
+    category: "crm",
+    emoji: "🎯",
+    prompt: `Build a client onboarding and project kickoff platform:
+
+**Features:**
+- Customizable onboarding checklist templates
+- Welcome packet generation with branding
+- Document collection and e-signature integration
+- Client questionnaire builder
+- Onboarding progress tracking per client
+- Automated welcome email sequences
+- Team member introduction and role assignment
+- Kickoff meeting scheduler with agenda template
+- Knowledge base with FAQ for new clients
+- Client portal with onboarding status
+- SLA setup and milestone definitions
+- Admin panel with template and workflow management
+- Professional, welcoming responsive design`
+  },
+  {
+    id: 172,
+    title: "Sales Pipeline Manager",
+    category: "crm",
+    emoji: "🔄",
+    prompt: `Build a visual sales pipeline and deal management platform:
+
+**Features:**
+- Kanban board with customizable deal stages
+- Deal card with value, probability, and close date
+- Drag-and-drop deal movement between stages
+- Revenue forecasting based on pipeline
+- Activity logging (calls, emails, meetings)
+- Contact and company management
+- Email template library with merge fields
+- Task and follow-up reminders
+- Win/loss analysis with reason tracking
+- Sales rep performance dashboard
+- Custom pipeline creation per product line
+- Admin panel with team and pipeline management
+- Sales-focused, data-rich responsive design`
+  },
+  {
+    id: 173,
+    title: "Customer Feedback Hub",
+    category: "crm",
+    emoji: "💬",
+    prompt: `Build a customer feedback collection and analysis platform:
+
+**Features:**
+- Multi-channel feedback collection (email, in-app, QR code, link)
+- NPS, CSAT, and CES survey builders
+- Sentiment analysis on text feedback
+- Feature request board with voting
+- Bug report management with status tracking
+- Feedback categorization and tagging
+- Response management with SLA tracking
+- Trends dashboard with satisfaction over time
+- Integration with support ticket systems
+- Customer journey touchpoint mapping
+- Automated feedback request triggers
+- Admin panel with survey and response management
+- Customer-centric responsive design`
+  },
+  {
+    id: 174,
+    title: "HR Employee Portal",
+    category: "crm",
+    emoji: "👥",
+    prompt: `Build an HR employee self-service portal:
+
+**Features:**
+- Employee directory with org chart visualization
+- Leave request and approval workflow
+- Timesheet management with project allocation
+- Pay stub and tax document access
+- Benefits enrollment and management
+- Company policy and handbook library
+- Performance review cycle management
+- Training and certification tracking
+- Expense report submission and approval
+- Employee onboarding checklist
+- Announcement and company news feed
+- Admin panel with HR management tools
+- Corporate, professional responsive design`
+  },
+  {
+    id: 175,
+    title: "Event Management Platform",
+    category: "crm",
+    emoji: "🎪",
+    prompt: `Build a comprehensive event management and ticketing platform:
+
+**Features:**
+- Event creation with multi-day and multi-track support
+- Ticket types (early bird, VIP, group, student)
+- Seating chart designer for assigned seating
+- Attendee registration with custom form fields
+- Check-in system with QR code scanning
+- Speaker/performer management and scheduling
+- Sponsor management with tier levels
+- Email campaign builder for attendees
+- Event analytics (registrations, check-ins, revenue)
+- Post-event survey integration
+- Badge and certificate generation
+- Admin panel with multi-event management
+- Event-branded responsive design`
+  },
+  {
+    id: 176,
+    title: "Inventory Management System",
+    category: "crm",
+    emoji: "📦",
+    prompt: `Build a comprehensive inventory management system:
+
+**Features:**
+- Product catalog with SKU, barcode, and image management
+- Stock level tracking with low-stock alerts
+- Multi-warehouse/location management
+- Purchase order creation and tracking
+- Supplier management with lead time tracking
+- Batch/lot tracking with expiration dates
+- Stock transfer between locations
+- Cycle counting and stock adjustment
+- Inventory valuation (FIFO, LIFO, weighted average)
+- Barcode scanning for quick operations
+- Report generation (stock aging, turnover, reorder)
+- Admin panel with warehouse and user management
+- Industrial, efficient responsive design`
+  },
+  {
+    id: 177,
+    title: "Appointment Booking System",
+    category: "crm",
+    emoji: "📅",
+    prompt: `Build a versatile appointment booking and scheduling system:
+
+**Features:**
+- Service catalog with duration and pricing
+- Staff management with individual availability calendars
+- Online booking widget embeddable on websites
+- Calendar view with day, week, and month layouts
+- Automated email and SMS reminders
+- Buffer time configuration between appointments
+- Group booking and class scheduling
+- Recurring appointment support
+- Waitlist management
+- No-show tracking and cancellation policies
+- Payment collection at booking
+- Admin panel with multi-location management
+- Professional, calendar-focused responsive design`
+  },
+
+  // === Portfolio & Blog (7) ===
+  {
+    id: 178,
+    title: "Developer Portfolio Builder",
+    category: "portfolio",
+    emoji: "💻",
+    prompt: `Build a developer portfolio generator and hosting platform:
+
+**Features:**
+- GitHub integration for project import
+- Multiple portfolio themes and templates
+- Project showcase with live demo links and tech stack tags
+- Blog section with markdown editor
+- Skills visualization (charts, progress bars, tag clouds)
+- Work experience timeline
+- Testimonial section with client quotes
+- Contact form with spam protection
+- Resume/CV download generation
+- Analytics dashboard (page views, project clicks)
+- Custom domain support
+- Admin panel with theme and template management
+- Developer-focused, modern responsive design`
+  },
+  {
+    id: 179,
+    title: "Photography Portfolio",
+    category: "portfolio",
+    emoji: "📸",
+    prompt: `Build a photography portfolio and client gallery platform:
+
+**Features:**
+- Photo galleries with masonry/grid/slideshow layouts
+- Client proofing galleries with selection and commenting
+- EXIF data display (camera, lens, settings)
+- Watermarking system for proofing
+- Print ordering integration
+- Photo categories and series organization
+- Full-screen lightbox viewer
+- Client login for private galleries
+- Download permissions management
+- Social media sharing integration
+- SEO-optimized with Open Graph images
+- Admin panel with gallery and client management
+- Minimal, image-first responsive design`
+  },
+  {
+    id: 180,
+    title: "Newsletter Publishing Platform",
+    category: "portfolio",
+    emoji: "📧",
+    prompt: `Build a newsletter creation and publishing platform:
+
+**Features:**
+- Rich text newsletter editor with templates
+- Subscriber management with segmentation
+- Scheduling and automated sending
+- A/B testing for subject lines
+- Analytics (open rate, click rate, unsubscribe rate)
+- Free and paid newsletter tiers
+- Subscriber growth analytics
+- Archive of past newsletters with public access
+- Referral program for subscriber growth
+- Embeddable signup forms
+- Integration with website/blog
+- Admin panel with publisher and content management
+- Editorial, clean responsive design`
+  },
+  {
+    id: 181,
+    title: "Podcast Hosting Platform",
+    category: "portfolio",
+    emoji: "🎧",
+    prompt: `Build a podcast hosting and distribution platform:
+
+**Features:**
+- Episode upload with audio processing and optimization
+- RSS feed generation for distribution (Apple, Spotify, Google)
+- Episode page with show notes, transcript, and links
+- Podcast analytics (downloads, listeners, geography)
+- Website builder for podcast landing page
+- Monetization tools (premium episodes, donations, sponsorships)
+- Episode scheduling and auto-publish
+- Guest management and booking
+- Listener comments and reviews
+- Chapter markers and timestamps
+- Embeddable player widget
+- Admin panel with podcast and analytics management
+- Audio-focused, modern responsive design`
+  },
+  {
+    id: 182,
+    title: "Online Magazine Builder",
+    category: "portfolio",
+    emoji: "📰",
+    prompt: `Build a digital magazine creation and publishing platform:
+
+**Features:**
+- Visual page layout editor (drag-and-drop)
+- Article templates for different content types
+- Cover design tool with image and typography
+- Issue management with table of contents
+- Multi-author collaboration with roles
+- Reader subscription management
+- Ad placement and sponsorship management
+- Social sharing with article excerpts
+- Print-ready PDF export
+- Reader analytics per article and issue
+- Archive browsing by issue/date
+- Admin panel with editorial workflow management
+- Magazine-quality typography responsive design`
+  },
+  {
+    id: 183,
+    title: "Recipe Blog Platform",
+    category: "portfolio",
+    emoji: "🍴",
+    prompt: `Build a recipe blogging and food content platform:
+
+**Features:**
+- Recipe card format with structured data (schema.org)
+- Step-by-step instructions with photos
+- Nutritional information calculator
+- Print-friendly recipe layout
+- Recipe scaling for different serving sizes
+- Ingredient shopping list export
+- Search by ingredient, cuisine, dietary restriction
+- Meal planning integration
+- User recipe collections and favorites
+- Rating and review system
+- Video recipe support
+- Admin panel with content management
+- Food photography-focused responsive design`
+  },
+  {
+    id: 184,
+    title: "Artist Portfolio & Store",
+    category: "portfolio",
+    emoji: "🎨",
+    prompt: `Build an artist portfolio with integrated online store:
+
+**Features:**
+- Gallery display with fullscreen viewing
+- Series and collection organization
+- Art print store with size and framing options
+- Original artwork sales with certificate of authenticity
+- Commission inquiry form
+- Artist bio and exhibition history
+- Press and media page
+- Newsletter signup for new releases
+- Instagram feed integration
+- Collector account with purchase history
+- Virtual exhibition walkthrough
+- Admin panel with gallery and store management
+- Gallery-quality responsive design`
+  },
+
+  // === Utility & Tools (7) ===
+  {
+    id: 185,
+    title: "URL Shortener & Analytics",
+    category: "utility",
+    emoji: "🔗",
+    prompt: `Build a URL shortener with comprehensive analytics:
+
+**Features:**
+- Custom short URL creation with vanity slugs
+- Bulk URL shortening
+- Click analytics (total, unique, over time)
+- Geographic breakdown of clicks (country, city)
+- Device and browser analytics
+- Referrer tracking
+- QR code generation for each short URL
+- Link expiration and scheduling
+- Password-protected links
+- A/B testing with traffic splitting
+- API access for programmatic use
+- Admin panel with link and user management
+- Data-driven, minimal responsive design`
+  },
+  {
+    id: 186,
+    title: "File Conversion Tool",
+    category: "utility",
+    emoji: "🔄",
+    prompt: `Build a web-based file conversion utility platform:
+
+**Features:**
+- Image conversion (PNG, JPG, WebP, SVG, ICO)
+- Document conversion (PDF, DOCX, TXT, Markdown)
+- Video format conversion with compression options
+- Audio format conversion (MP3, WAV, FLAC, OGG)
+- Batch conversion support
+- Drag-and-drop upload interface
+- Conversion quality/size presets
+- Preview before and after conversion
+- Download history with re-download option
+- API access for developers
+- Client-side processing for privacy (where possible)
+- Admin panel with usage analytics
+- Clean, utility-focused responsive design`
+  },
+  {
+    id: 187,
+    title: "Color Palette Generator",
+    category: "utility",
+    emoji: "🎨",
+    prompt: `Build a color palette generation and management tool:
+
+**Features:**
+- AI-powered palette generation from keywords or mood
+- Extract colors from uploaded images
+- Color harmony rules (complementary, analogous, triadic)
+- Accessibility contrast checker (WCAG AA/AAA)
+- Palette saving and collection management
+- Export formats (CSS variables, Tailwind config, SCSS, JSON)
+- Color blindness simulation preview
+- Gradient generator with CSS output
+- Brand color system builder
+- Community palette sharing and trending
+- Color naming and categorization
+- Admin panel with content management
+- Colorful, design-tool responsive design`
+  },
+  {
+    id: 188,
+    title: "Regex Builder & Tester",
+    category: "utility",
+    emoji: "🔍",
+    prompt: `Build a visual regex pattern builder and tester:
+
+**Features:**
+- Visual regex construction with building blocks
+- Real-time pattern testing against sample text
+- Match highlighting with group extraction
+- Regex explanation in plain language
+- Common pattern library (email, phone, URL, date)
+- Multiple regex flavors (JavaScript, Python, Go, Java)
+- Regex cheat sheet reference
+- Save and share regex patterns
+- Substitution preview
+- Performance benchmarking for patterns
+- Step-by-step match debugging
+- Admin panel with pattern library management
+- Developer-focused dark theme responsive design`
+  },
+  {
+    id: 189,
+    title: "API Documentation Generator",
+    category: "utility",
+    emoji: "📄",
+    prompt: `Build an API documentation creation and hosting platform:
+
+**Features:**
+- OpenAPI/Swagger spec import and editor
+- Interactive API explorer with try-it-out requests
+- Multiple documentation themes and layouts
+- Code example generation in multiple languages
+- Authentication setup guides
+- Endpoint grouping and versioning
+- Search across all endpoints
+- Changelog management
+- SDK generation links
+- Rate limit and pricing tier documentation
+- Custom domain support
+- Admin panel with project and team management
+- Developer-focused responsive documentation design`
+  },
+  {
+    id: 190,
+    title: "Screenshot & Mockup Tool",
+    category: "utility",
+    emoji: "📱",
+    prompt: `Build a screenshot beautifier and device mockup generator:
+
+**Features:**
+- Upload screenshot and place in device frames (iPhone, MacBook, iPad)
+- Background customization (gradients, images, patterns)
+- Shadow and reflection effects
+- Text and annotation overlay
+- Browser frame mockup generator
+- Social media post size templates
+- Batch processing for multiple screenshots
+- App store screenshot layout generator
+- Custom watermark addition
+- Export in multiple resolutions
+- Template saving and reuse
+- Admin panel with template management
+- Design-tool responsive creative design`
+  },
+  {
+    id: 191,
+    title: "Markdown Editor & Preview",
+    category: "utility",
+    emoji: "📝",
+    prompt: `Build a feature-rich markdown editor with live preview:
+
+**Features:**
+- Split-pane editor with live preview
+- Syntax highlighting for code blocks
+- Table editor with visual builder
+- Image upload and embedding
+- Document outline/table of contents generation
+- Multiple export formats (HTML, PDF, DOCX)
+- Custom CSS theme application to preview
+- Vim and Emacs keybinding modes
+- Collaborative editing with real-time sync
+- Version history with diff viewer
+- Template library for common document types
+- Admin panel with user and storage management
+- Distraction-free writing responsive design`
+  },
+
+  // === AI & ML (9) ===
+  {
+    id: 192,
+    title: "AI Writing Assistant",
+    category: "ai",
+    emoji: "✍️",
+    prompt: `Build an AI-powered writing assistant application:
+
+**Features:**
+- Document editor with AI-powered writing suggestions
+- Tone adjustment (formal, casual, persuasive, academic)
+- Grammar and spell checking with explanations
+- Content expansion and summarization
+- Plagiarism detection
+- Readability scoring (Flesch-Kincaid)
+- Multi-language translation
+- SEO optimization suggestions for web content
+- Writing templates (blog post, email, report, social media)
+- Version history with AI suggestion tracking
+- Word count and reading time estimation
+- Admin panel with model and feature management
+- Clean, writer-focused responsive design`
+  },
+  {
+    id: 193,
+    title: "AI Resume Builder",
+    category: "ai",
+    emoji: "📄",
+    prompt: `Build an AI-powered resume and cover letter builder:
+
+**Features:**
+- Multiple professional resume templates
+- AI content suggestions based on job title and experience
+- Job description analyzer with skill matching
+- Cover letter generator tailored to specific job postings
+- ATS (Applicant Tracking System) optimization scoring
+- Keyword optimization suggestions
+- Multiple export formats (PDF, DOCX)
+- LinkedIn profile import
+- Portfolio link integration
+- Reference management
+- Interview preparation tips based on resume content
+- Admin panel with template and AI model management
+- Professional, career-focused responsive design`
+  },
+  {
+    id: 194,
+    title: "AI Data Visualization",
+    category: "ai",
+    emoji: "📊",
+    prompt: `Build an AI-assisted data visualization and dashboard builder:
+
+**Features:**
+- CSV/JSON/API data source import
+- AI-suggested chart types based on data patterns
+- Natural language query to chart (ask questions about data)
+- Drag-and-drop dashboard builder
+- Multiple chart types (bar, line, pie, scatter, heatmap, treemap)
+- Interactive filters and drill-down
+- Dashboard sharing with embed codes
+- Automated insight generation from data
+- Anomaly detection highlighting
+- Data transformation and pivot tools
+- Scheduled report generation
+- Admin panel with data source and user management
+- Data-centric, analytical responsive design`
+  },
+  {
+    id: 195,
+    title: "AI Meeting Transcriber",
+    category: "ai",
+    emoji: "🎙️",
+    prompt: `Build an AI-powered meeting transcription and analysis platform:
+
+**Features:**
+- Audio/video upload for transcription
+- Real-time transcription during meetings
+- Speaker diarization (identify who said what)
+- Action item extraction with assignees
+- Key topic and decision identification
+- Meeting summary generation
+- Searchable transcript archive
+- Highlight and bookmark important moments
+- Integration with calendar for meeting context
+- Sentiment analysis per speaker
+- Follow-up task tracking from meetings
+- Admin panel with transcription and user management
+- Professional, productivity-focused responsive design`
+  },
+  {
+    id: 196,
+    title: "AI Story Generator",
+    category: "ai",
+    emoji: "📚",
+    prompt: `Build an AI-powered creative story generation platform:
+
+**Features:**
+- Story prompt builder with genre, setting, characters, and themes
+- Chapter-by-chapter story generation with branching options
+- Character profile manager with personality traits
+- World-building tools (maps, lore, timelines)
+- Writing style customization (Hemingway, Tolkien, sci-fi, noir)
+- Illustration generation for story scenes
+- Story outline and beat sheet generator
+- Dialogue enhancer and character voice differentiation
+- Plot hole detection
+- Community sharing and reading
+- Export as ebook format (ePub, PDF)
+- Admin panel with model and content management
+- Storybook-themed responsive design`
+  },
+  {
+    id: 197,
+    title: "AI Logo Generator",
+    category: "ai",
+    emoji: "🎯",
+    prompt: `Build an AI-powered logo design and branding tool:
+
+**Features:**
+- Logo generation from business name and description
+- Style preference quiz (modern, vintage, playful, corporate)
+- Color palette suggestions based on industry
+- Multiple logo variations (icon, wordmark, combination)
+- Logo editing with element repositioning
+- Font pairing suggestions
+- Brand guideline document generation
+- Social media avatar and cover generation from logo
+- Business card mockup with logo
+- Favicon and app icon generation
+- High-resolution export (SVG, PNG, PDF)
+- Admin panel with model and asset management
+- Creative, brand-focused responsive design`
+  },
+  {
+    id: 198,
+    title: "AI Language Translator Hub",
+    category: "ai",
+    emoji: "🌍",
+    prompt: `Build a comprehensive AI translation and localization platform:
+
+**Features:**
+- Text translation with multiple AI model options
+- Document translation with formatting preservation
+- Website translation with URL input
+- Translation memory for consistent terminology
+- Glossary management for specialized terms
+- Context-aware translation with domain selection
+- Side-by-side original and translation view
+- Collaborative translation review
+- Translation quality scoring
+- Batch file translation
+- API access for developer integration
+- Admin panel with language and model management
+- Multi-lingual, accessible responsive design`
+  },
+  {
+    id: 199,
+    title: "AI Music Generator",
+    category: "ai",
+    emoji: "🎵",
+    prompt: `Build an AI-powered music composition and generation platform:
+
+**Features:**
+- Text-to-music generation (describe the music you want)
+- Genre and mood selection for music generation
+- Instrument and arrangement customization
+- Melody and chord progression generator
+- Beat and rhythm pattern creator
+- Music length and tempo control
+- Audio waveform editor for fine-tuning
+- Royalty-free music library from generated tracks
+- Project saving and version management
+- Export in multiple audio formats
+- Community sharing and collaboration
+- Admin panel with model and content management
+- Music studio-inspired dark responsive design`
+  },
+  {
+    id: 200,
+    title: "AI Personal Finance Advisor",
+    category: "ai",
+    emoji: "💡",
+    prompt: `Build an AI-powered personal finance advisory platform:
+
+**Features:**
+- Financial health assessment questionnaire
+- AI chatbot for financial questions and advice
+- Budget recommendation based on income and goals
+- Investment portfolio suggestions by risk tolerance
+- Debt payoff strategy optimizer
+- Tax optimization suggestions
+- Savings goal planning with AI projections
+- Spending pattern analysis with improvement tips
+- Financial literacy quiz and education modules
+- Scenario modeling (what-if analysis)
+- Monthly financial health reports
+- Admin panel with AI model and content management
+- Trust-inspiring, professional responsive design`
+  },
 ];

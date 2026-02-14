@@ -70,14 +70,18 @@ const PromptGeneratorTab = () => {
     setCategory(randItem(CATEGORIES).id);
     setTone(randItem(TONES));
 
+    const domains = ["science fiction storytelling", "educational game design", "philosophical debate simulation", "historical event recreation", "music composition guidance", "architectural visualization", "psychological analysis", "culinary innovation", "space exploration scenario", "environmental sustainability plan", "artistic movement manifesto", "medical diagnosis training", "legal argument construction", "sports strategy optimization", "fashion trend forecasting", "wildlife documentary narration", "cryptocurrency analysis", "urban planning proposal", "theatrical script writing", "robotics programming challenge", "language translation nuance", "dream interpretation guide", "mythological world building", "data visualization storytelling", "mindfulness meditation script"];
+    const constraints = ["must include an unexpected twist", "should blend two unrelated fields", "needs a controversial angle", "requires step-by-step breakdown", "should challenge common assumptions", "must incorporate sensory details", "needs measurable outcomes", "should tell a personal story", "requires cultural sensitivity", "must be implementable in 24 hours"];
+    const seed = `Domain focus: ${randItem(domains)}. Constraint: ${randItem(constraints)}. Random seed: ${Math.random().toString(36).slice(2, 8)}`;
+
     try {
       const { data, error } = await supabase.functions.invoke("generate-prompt", {
         body: {
-          topic: "Generate a unique, creative topic idea for AI prompt generation",
+          topic: `Generate a wildly creative and unique topic idea. ${seed}`,
           category: "random-general-idea",
           categoryDescription: "Random General Idea Generator",
           tone: "Creative",
-          context: `Generate a single, short (1-2 sentences) creative topic idea that someone could use to generate an AI prompt. It can be about any subject - coding, writing, business, education, art, etc. Return ONLY the topic text, nothing else. No quotes, no explanations.`,
+          context: `You are a creative genius generating UNIQUE, NEVER-BEFORE-SEEN topic ideas. ${seed}. Generate ONE short (1-2 sentences) creative and SURPRISING topic idea. It must be DIFFERENT from common AI prompts. Be bold, unconventional, and specific. Return ONLY the topic text. No quotes, no explanations, no numbering.`,
         },
       });
       if (error) throw new Error(error.message);
