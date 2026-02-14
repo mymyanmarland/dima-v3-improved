@@ -77,14 +77,18 @@ const CodingPromptTab = () => {
     setComplexity(randItem(COMPLEXITY_LEVELS).id);
     setPromptStyle(randItem(PROMPT_STYLES).id);
 
+    const techDomains = ["WebRTC video streaming", "blockchain smart contracts", "IoT device dashboard", "machine learning pipeline", "geolocation-based social app", "real-time multiplayer game", "browser extension", "CLI developer tool", "GraphQL API gateway", "serverless microservice", "progressive web app", "accessibility auditing tool", "code playground/sandbox", "data pipeline ETL", "payment processing system", "notification engine", "search engine with ranking", "file encryption service", "CI/CD pipeline manager", "API rate limiter", "WebAssembly module", "natural language processing", "computer vision app", "recommendation engine", "workflow automation builder"];
+    const twists = ["with AI-powered features", "using only edge functions", "with real-time collaboration", "that works offline-first", "with voice control interface", "using WebSocket streams", "with gamification mechanics", "using peer-to-peer architecture", "with end-to-end encryption", "that generates visualizations", "with plugin/extension system", "using event-driven architecture"];
+    const seed = `Tech: ${randItem(techDomains)}. Twist: ${randItem(twists)}. Seed: ${Math.random().toString(36).slice(2, 8)}`;
+
     try {
       const { data, error } = await supabase.functions.invoke("generate-prompt", {
         body: {
-          topic: "Generate a unique, creative coding project idea",
+          topic: `Generate a unique coding project idea. ${seed}`,
           category: "random-coding-idea",
           categoryDescription: "Random Coding Idea Generator",
           tone: "Technical",
-          context: `Generate a single, short (1-2 sentences) creative coding project or feature idea. It should be practical, interesting, and suitable for a developer to build. Return ONLY the project description text, nothing else. No quotes, no explanations, no numbering.`,
+          context: `You are a senior developer brainstorming UNIQUE project ideas. ${seed}. Generate ONE short (1-2 sentences) innovative coding project idea that is SPECIFIC and ACTIONABLE. Avoid generic ideas like "todo app" or "blog". Be creative and technically interesting. Return ONLY the project description. No quotes, no explanations, no numbering.`,
         },
       });
       if (error) throw new Error(error.message);

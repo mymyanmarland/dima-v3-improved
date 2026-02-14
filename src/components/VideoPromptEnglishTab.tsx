@@ -154,15 +154,18 @@ const VideoPromptEnglishTab = () => {
     setTransition(randItem(TRANSITION_STYLES));
     setSound(randItem(SOUND_DESIGN));
 
+    const scenarios = ["time-reversed destruction becoming creation", "a single raindrop's journey from cloud to ocean", "parallel lives of strangers connected by one object", "seasons changing in a single continuous camera move", "microscopic world inside a drop of morning dew", "last human on Earth discovering alien message", "street musician whose music transforms surroundings", "ancient warrior awakening in modern city", "child's drawing coming to life around them", "gravity shifting in a grand cathedral", "two timelines merging at a crossroads", "ocean receding to reveal lost civilization", "paper crane origami transforming into real bird in flight", "abandoned amusement park awakening at midnight", "astronaut's first steps on alien planet with two suns", "seeds growing through cracked concrete in timelapse", "dancer whose movements control the weather", "mirror world where reflections move independently", "lighthouse beam revealing hidden worlds in fog", "volcanic eruption frozen in crystalline ice"];
+    const techniques = ["one continuous unbroken shot", "split-screen showing dual perspectives", "extreme slow motion at 1000fps", "reverse chronological storytelling", "POV through a non-human eye", "miniature tilt-shift perspective", "seamless morph transitions between scenes", "long tracking shot through multiple environments", "underwater-to-surface single take", "drone ascending from ground to stratosphere"];
+    const seed = `Scenario: ${randItem(scenarios)}. Technique: ${randItem(techniques)}. Seed: ${Math.random().toString(36).slice(2, 8)}`;
+
     try {
       const { data, error } = await supabase.functions.invoke("generate-prompt", {
         body: {
-          topic: "Generate a unique, creative, cinematic video concept idea",
+          topic: `Generate a breathtaking cinematic video concept. ${seed}`,
           category: "random-video-idea",
           categoryDescription: "Random Video Idea Generator",
           tone: "Creative",
-          context: `Generate a single, short (2-3 sentences) creative video description idea for video generation AI like Veo 3.1.
-The idea should be visually striking, unique, and inspiring. Return ONLY the video description text, nothing else. No quotes, no explanations, no numbering.`,
+          context: `You are an award-winning cinematographer creating UNIQUE video concepts. ${seed}. Generate ONE vivid (2-3 sentences) video description that is CINEMATIC, SPECIFIC, and emotionally powerful. Describe the visual journey, camera work, and atmosphere. Be ORIGINAL - avoid cliché sunset/ocean scenes. Return ONLY the description. No quotes, no explanations, no numbering.`,
         },
       });
 

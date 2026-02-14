@@ -53,14 +53,18 @@ const ImagePromptTab = () => {
     setCameraAngle(randItem(CAMERA_ANGLES));
     setAspectRatio(randItem(ASPECT_RATIOS).id);
 
+    const subjects = ["abandoned space station interior", "bioluminescent deep sea creature", "ancient temple in jungle ruins", "steampunk clockwork city", "crystal cave with underground lake", "floating island above clouds", "cyberpunk street food market", "aurora borealis over volcano", "microscopic cell universe", "post-apocalyptic nature reclaim", "underwater ancient civilization", "magical library with living books", "desert oasis mirage at sunset", "mechanical garden of metal flowers", "parallel dimension portal opening", "ice palace interior with prismatic light", "giant tree city at golden hour", "storm chaser capturing tornado", "zen garden in autumn rain", "forgotten robot in overgrown field"];
+    const artStyles = ["Renaissance painting style", "Studio Ghibli dreamscape", "hyperrealistic macro photography", "surrealist Dalí-inspired", "ukiyo-e woodblock print", "art nouveau poster", "brutalist architecture study", "biopunk organic technology", "vaporwave aesthetic", "double exposure photography", "tilt-shift miniature effect", "infrared photography", "cyanotype print process", "pointillism technique", "low-poly 3D render"];
+    const seed = `Subject: ${randItem(subjects)}. Style influence: ${randItem(artStyles)}. Seed: ${Math.random().toString(36).slice(2, 8)}`;
+
     try {
       const { data, error } = await supabase.functions.invoke("generate-prompt", {
         body: {
-          topic: "Generate a unique, creative image concept idea",
+          topic: `Generate a visually stunning image concept. ${seed}`,
           category: "random-image-idea",
           categoryDescription: "Random Image Idea Generator",
           tone: "Creative",
-          context: `Generate a single, short (1-2 sentences) creative image description idea for AI image generators like Midjourney or DALL-E. The idea should be visually striking, unique, and inspiring. Return ONLY the image description text, nothing else. No quotes, no explanations.`,
+          context: `You are a visionary digital artist generating UNIQUE image concepts. ${seed}. Generate ONE short (1-2 sentences) SPECIFIC and VIVID image description. Focus on unexpected combinations, dramatic compositions, and emotional impact. Be HIGHLY SPECIFIC about colors, mood, and scene details. Return ONLY the description. No quotes, no explanations.`,
         },
       });
       if (error) throw new Error(error.message);
