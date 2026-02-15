@@ -312,7 +312,6 @@ const ChatBotPopup = () => {
           background: isOpen
             ? `radial-gradient(circle 80px at 80% -10%, hsl(var(--destructive) / 0.6), hsl(var(--background)))`
             : `radial-gradient(circle 80px at 80% -10%, hsl(var(--foreground) / 0.3), hsl(var(--background)))`,
-          position: "relative",
           transition: "transform 0.3s ease",
         }}
       >
