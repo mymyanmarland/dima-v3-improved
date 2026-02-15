@@ -6,6 +6,7 @@ export interface SuggestionField {
   key: string;
   label: string;
   options: string[];
+  multiple?: boolean; // allow multiple selections
 }
 
 export function useAiSuggestion() {
@@ -14,7 +15,7 @@ export function useAiSuggestion() {
   const suggest = async (
     topic: string,
     fields: SuggestionField[]
-  ): Promise<Record<string, string> | null> => {
+  ): Promise<Record<string, string | string[]> | null> => {
     if (!topic.trim()) {
       toast.error("အကြောင်းအရာ အရင်ရေးထည့်ပါ");
       return null;
@@ -26,7 +27,9 @@ export function useAiSuggestion() {
       const fieldDescriptions = fields
         .map(
           (f) =>
-            `"${f.key}": one of [${f.options.map((o) => `"${o}"`).join(", ")}]`
+            f.multiple
+              ? `"${f.key}": an array of 1-3 best matching values from [${f.options.map((o) => `"${o}"`).join(", ")}]`
+              : `"${f.key}": one of [${f.options.map((o) => `"${o}"`).join(", ")}]`
         )
         .join("\n");
 
@@ -47,7 +50,9 @@ ${fieldDescriptions}
 
 CRITICAL RULES:
 - Return ONLY a valid JSON object with the exact field keys
-- Each value MUST be exactly one of the provided options (copy the exact string)
+- Each value MUST be exactly from the provided options (copy the exact string)
+- For array fields, return an array of 1-3 best matches
+- For single fields, return exactly one string value
 - Do NOT add any explanation, markdown, or extra text
 - Analyze the user's input carefully and choose the most relevant option for each field
 - If unsure, pick the most commonly appropriate option
@@ -70,17 +75,33 @@ Example output format:
           const parsed = JSON.parse(jsonMatch[1].trim());
 
           // Validate that values are from allowed options
-          const result: Record<string, string> = {};
+          const result: Record<string, string | string[]> = {};
           for (const field of fields) {
             const val = parsed[field.key];
-            if (val && field.options.includes(val)) {
-              result[field.key] = val;
-            } else {
-              // Find closest match (case-insensitive)
-              const match = field.options.find(
-                (o) => o.toLowerCase() === String(val).toLowerCase()
-              );
-              if (match) result[field.key] = match;
+            
+            if (field.multiple && Array.isArray(val)) {
+              // Handle multiple selection fields
+              const validValues = val
+                .map((v: string) => {
+                  if (field.options.includes(v)) return v;
+                  const match = field.options.find(
+                    (o) => o.toLowerCase() === String(v).toLowerCase()
+                  );
+                  return match || null;
+                })
+                .filter(Boolean) as string[];
+              if (validValues.length > 0) result[field.key] = validValues;
+            } else if (!field.multiple) {
+              // Handle single selection fields
+              const strVal = Array.isArray(val) ? val[0] : val;
+              if (strVal && field.options.includes(strVal)) {
+                result[field.key] = strVal;
+              } else {
+                const match = field.options.find(
+                  (o) => o.toLowerCase() === String(strVal).toLowerCase()
+                );
+                if (match) result[field.key] = match;
+              }
             }
           }
 

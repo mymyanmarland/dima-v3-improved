@@ -56,10 +56,10 @@ const ImagePromptTab = () => {
       { key: "aspectRatio", label: "Aspect Ratio", options: ASPECT_RATIOS.map((a) => a.id) },
     ]);
     if (result) {
-      if (result.style) setStyle(result.style);
-      if (result.lighting) setLighting(result.lighting);
-      if (result.cameraAngle) setCameraAngle(result.cameraAngle);
-      if (result.aspectRatio) setAspectRatio(result.aspectRatio);
+      if (result.style) setStyle(result.style as string);
+      if (result.lighting) setLighting(result.lighting as string);
+      if (result.cameraAngle) setCameraAngle(result.cameraAngle as string);
+      if (result.aspectRatio) setAspectRatio(result.aspectRatio as string);
     }
   };
 

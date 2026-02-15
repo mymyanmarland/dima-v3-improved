@@ -85,11 +85,11 @@ const LogoPromptTab = () => {
       { key: "iconType", label: "Icon Type", options: ICON_TYPES },
     ]);
     if (result) {
-      if (result.logoStyle) setLogoStyle(result.logoStyle);
-      if (result.industry) setIndustry(result.industry);
-      if (result.colorScheme) setColorScheme(result.colorScheme);
-      if (result.typographyStyle) setTypographyStyle(result.typographyStyle);
-      if (result.iconType) setIconType(result.iconType);
+      if (result.logoStyle) setLogoStyle(result.logoStyle as string);
+      if (result.industry) setIndustry(result.industry as string);
+      if (result.colorScheme) setColorScheme(result.colorScheme as string);
+      if (result.typographyStyle) setTypographyStyle(result.typographyStyle as string);
+      if (result.iconType) setIconType(result.iconType as string);
     }
   };
 
