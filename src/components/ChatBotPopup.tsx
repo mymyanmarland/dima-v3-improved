@@ -193,66 +193,144 @@ const ChatBotPopup = () => {
 
   return (
     <>
-      {/* Floating Button */}
+      {/* Floating Button - Cute animated bot */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg hover:scale-110 transition-all duration-300 flex items-center justify-center group"
+        className="fixed bottom-6 right-6 z-50 group"
         aria-label="Chat Assistant"
       >
-        {isOpen ? (
-          <X className="w-6 h-6" />
-        ) : (
-          <>
-            <MessageCircle className="w-6 h-6" />
-            <span className="absolute -top-1 -right-1 w-4 h-4 bg-destructive rounded-full animate-pulse" />
-          </>
+        <div className={`relative w-16 h-16 rounded-full flex items-center justify-center transition-all duration-500 ${
+          isOpen 
+            ? "bg-destructive/90 scale-90 rotate-90" 
+            : "bg-gradient-to-br from-primary via-accent to-primary scale-100"
+        }`}
+          style={{
+            boxShadow: isOpen
+              ? "0 4px 20px hsl(var(--destructive) / 0.4)"
+              : "0 4px 30px hsl(var(--primary) / 0.5), 0 0 60px hsl(var(--accent) / 0.2)",
+          }}
+        >
+          {isOpen ? (
+            <X className="w-6 h-6 text-primary-foreground transition-transform duration-300" />
+          ) : (
+            <div className="relative">
+              {/* Cute robot face */}
+              <div className="text-2xl animate-bounce" style={{ animationDuration: "2s" }}>🤖</div>
+              {/* Online dot */}
+              <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-400 rounded-full border-2 border-background animate-pulse" />
+            </div>
+          )}
+        </div>
+        {/* Ripple ring */}
+        {!isOpen && (
+          <span className="absolute inset-0 rounded-full border-2 border-primary/40 animate-ping" style={{ animationDuration: "2.5s" }} />
         )}
       </button>
 
-      {/* Popup */}
+      {/* Popup Window */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 z-50 w-[360px] max-w-[calc(100vw-2rem)] h-[500px] max-h-[70vh] rounded-2xl border border-border bg-card shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-4 fade-in duration-300">
-          {/* Header */}
-          <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-secondary/50">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-                <Bot className="w-4 h-4 text-primary-foreground" />
+        <div 
+          className="fixed bottom-[5.5rem] right-6 z-50 w-[370px] max-w-[calc(100vw-2rem)] h-[520px] max-h-[72vh] flex flex-col overflow-hidden animate-scale-in"
+          style={{
+            borderRadius: "1.5rem",
+            background: "hsl(var(--card) / 0.85)",
+            backdropFilter: "blur(20px) saturate(1.4)",
+            WebkitBackdropFilter: "blur(20px) saturate(1.4)",
+            border: "1px solid hsl(var(--border) / 0.5)",
+            boxShadow: "0 25px 60px -12px hsl(var(--primary) / 0.2), 0 0 0 1px hsl(var(--border) / 0.3), inset 0 1px 0 hsl(var(--foreground) / 0.05)",
+          }}
+        >
+          {/* Header - Gradient glassmorphism */}
+          <div 
+            className="relative flex items-center justify-between px-4 py-3.5 overflow-hidden"
+            style={{
+              background: "linear-gradient(135deg, hsl(var(--primary) / 0.15), hsl(var(--accent) / 0.1))",
+              borderBottom: "1px solid hsl(var(--border) / 0.4)",
+            }}
+          >
+            {/* Decorative blobs */}
+            <div className="absolute -top-6 -left-6 w-20 h-20 rounded-full bg-primary/10 blur-2xl" />
+            <div className="absolute -top-4 right-10 w-14 h-14 rounded-full bg-accent/10 blur-xl" />
+            
+            <div className="flex items-center gap-3 relative z-10">
+              <div className="relative">
+                <div 
+                  className="w-10 h-10 rounded-2xl flex items-center justify-center text-lg"
+                  style={{
+                    background: "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)))",
+                    boxShadow: "0 4px 12px hsl(var(--primary) / 0.4)",
+                  }}
+                >
+                  🤖
+                </div>
+                <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-400 rounded-full border-2 border-card" />
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-foreground flex items-center gap-1">
-                  Guide Bot <Sparkles className="w-3 h-3 text-primary" />
+                <h3 className="text-sm font-bold text-foreground flex items-center gap-1.5">
+                  Guide Bot
+                  <Sparkles className="w-3.5 h-3.5 text-accent" />
                 </h3>
-                <p className="text-[10px] text-muted-foreground">သုံးနည်း သင်ပေးမယ် ✨</p>
+                <p className="text-[10px] text-muted-foreground font-medium">သုံးနည်း သင်ပေးမယ် 💫</p>
               </div>
             </div>
-            {messages.length > 0 && (
+            
+            <div className="flex items-center gap-1 relative z-10">
+              {messages.length > 0 && (
+                <button
+                  onClick={() => setMessages([])}
+                  className="p-1.5 rounded-xl text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-all duration-200"
+                >
+                  <Trash2 className="w-3.5 h-3.5" />
+                </button>
+              )}
               <button
-                onClick={() => setMessages([])}
-                className="text-xs text-muted-foreground hover:text-destructive p-1 rounded-lg transition-colors"
+                onClick={() => setIsOpen(false)}
+                className="p-1.5 rounded-xl text-muted-foreground hover:text-foreground hover:bg-secondary transition-all duration-200"
               >
-                <Trash2 className="w-3.5 h-3.5" />
+                <X className="w-3.5 h-3.5" />
               </button>
-            )}
+            </div>
           </div>
 
-          {/* Messages */}
-          <div ref={scrollRef} className="flex-1 overflow-y-auto px-3 py-3 space-y-3">
+          {/* Messages Area */}
+          <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-3 space-y-3">
             {messages.length === 0 && (
-              <div className="flex flex-col items-center justify-center h-full gap-3 animate-fade-in">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                  <Bot className="w-6 h-6 text-primary/50" />
+              <div className="flex flex-col items-center justify-center h-full gap-4 animate-fade-in">
+                {/* Cute welcome illustration */}
+                <div className="relative">
+                  <div 
+                    className="w-16 h-16 rounded-3xl flex items-center justify-center text-3xl"
+                    style={{
+                      background: "linear-gradient(135deg, hsl(var(--primary) / 0.12), hsl(var(--accent) / 0.12))",
+                      border: "1px solid hsl(var(--primary) / 0.15)",
+                    }}
+                  >
+                    <span className="animate-bounce" style={{ animationDuration: "2s" }}>👋</span>
+                  </div>
+                  <div className="absolute -bottom-1 -right-1 text-lg">✨</div>
                 </div>
-                <p className="text-xs text-muted-foreground text-center">
-                  Website သုံးနည်း မေးခွန်းမေးလို့ရပါတယ် 🚀
-                </p>
-                <div className="flex flex-col gap-1.5 w-full mt-1">
-                  {SUGGESTIONS.map((s) => (
+                
+                <div className="text-center space-y-1">
+                  <p className="text-sm font-semibold text-foreground/80">မင်္ဂလာပါ!</p>
+                  <p className="text-[11px] text-muted-foreground leading-relaxed">
+                    Website သုံးနည်း မေးခွန်းမေးလို့ရပါတယ် 🚀
+                  </p>
+                </div>
+                
+                <div className="flex flex-col gap-2 w-full mt-1">
+                  {SUGGESTIONS.map((s, i) => (
                     <button
                       key={s}
                       onClick={() => send(s)}
-                      className="text-xs text-left px-3 py-2 rounded-xl bg-secondary/60 hover:bg-secondary text-foreground/80 transition-colors border border-border/50"
+                      className="group/chip text-xs text-left px-4 py-2.5 rounded-2xl transition-all duration-300 flex items-center gap-2"
+                      style={{
+                        background: "hsl(var(--secondary) / 0.5)",
+                        border: "1px solid hsl(var(--border) / 0.4)",
+                        animationDelay: `${i * 0.1}s`,
+                      }}
                     >
-                      {s}
+                      <span className="text-base">{["💡", "🔑", "⚡"][i]}</span>
+                      <span className="text-foreground/70 group-hover/chip:text-foreground transition-colors">{s}</span>
                     </button>
                   ))}
                 </div>
@@ -260,57 +338,117 @@ const ChatBotPopup = () => {
             )}
 
             {messages.map((msg, i) => (
-              <div key={i} className={`flex gap-2 ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
+              <div 
+                key={i} 
+                className={`flex gap-2.5 animate-fade-in ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+                style={{ animationDelay: `${i * 0.03}s` }}
+              >
                 {msg.role === "assistant" && (
-                  <div className="w-6 h-6 rounded-full bg-primary/15 flex items-center justify-center shrink-0 mt-1">
-                    <Bot className="w-3 h-3 text-primary" />
+                  <div 
+                    className="w-7 h-7 rounded-xl flex items-center justify-center shrink-0 mt-1 text-sm"
+                    style={{
+                      background: "linear-gradient(135deg, hsl(var(--primary) / 0.15), hsl(var(--accent) / 0.1))",
+                      border: "1px solid hsl(var(--primary) / 0.15)",
+                    }}
+                  >
+                    🤖
                   </div>
                 )}
                 <div
-                  className={`max-w-[80%] rounded-2xl px-3 py-2 text-xs whitespace-pre-wrap leading-relaxed ${
+                  className={`max-w-[80%] px-3.5 py-2.5 text-xs whitespace-pre-wrap leading-relaxed ${
                     msg.role === "user"
-                      ? "bg-primary text-primary-foreground rounded-br-md"
-                      : "bg-secondary text-foreground rounded-bl-md"
+                      ? "rounded-2xl rounded-br-lg text-primary-foreground"
+                      : "rounded-2xl rounded-bl-lg text-foreground"
                   }`}
+                  style={
+                    msg.role === "user"
+                      ? {
+                          background: "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent) / 0.8))",
+                          boxShadow: "0 2px 12px hsl(var(--primary) / 0.25)",
+                        }
+                      : {
+                          background: "hsl(var(--secondary) / 0.6)",
+                          border: "1px solid hsl(var(--border) / 0.3)",
+                        }
+                  }
                 >
                   {msg.content}
                 </div>
                 {msg.role === "user" && (
-                  <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center shrink-0 mt-1">
-                    <User className="w-3 h-3 text-primary-foreground" />
+                  <div 
+                    className="w-7 h-7 rounded-xl flex items-center justify-center shrink-0 mt-1 text-sm"
+                    style={{
+                      background: "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)))",
+                      boxShadow: "0 2px 8px hsl(var(--primary) / 0.3)",
+                    }}
+                  >
+                    😊
                   </div>
                 )}
               </div>
             ))}
 
             {isLoading && messages[messages.length - 1]?.role === "user" && (
-              <div className="flex gap-2">
-                <div className="w-6 h-6 rounded-full bg-primary/15 flex items-center justify-center shrink-0">
-                  <Bot className="w-3 h-3 text-primary" />
+              <div className="flex gap-2.5 animate-fade-in">
+                <div 
+                  className="w-7 h-7 rounded-xl flex items-center justify-center shrink-0 text-sm"
+                  style={{
+                    background: "linear-gradient(135deg, hsl(var(--primary) / 0.15), hsl(var(--accent) / 0.1))",
+                    border: "1px solid hsl(var(--primary) / 0.15)",
+                  }}
+                >
+                  🤖
                 </div>
-                <div className="bg-secondary rounded-2xl rounded-bl-md px-3 py-2">
+                <div 
+                  className="rounded-2xl rounded-bl-lg px-4 py-3"
+                  style={{
+                    background: "hsl(var(--secondary) / 0.6)",
+                    border: "1px solid hsl(var(--border) / 0.3)",
+                  }}
+                >
                   <TypingDots />
                 </div>
               </div>
             )}
           </div>
 
-          {/* Input */}
-          <div className="px-3 py-2 border-t border-border bg-secondary/30">
-            <div className="flex items-center gap-2">
+          {/* Input Area - Glassmorphic */}
+          <div 
+            className="px-3 py-3"
+            style={{
+              borderTop: "1px solid hsl(var(--border) / 0.3)",
+              background: "hsl(var(--secondary) / 0.2)",
+            }}
+          >
+            <div 
+              className="flex items-center gap-2 px-3 py-1.5 rounded-2xl"
+              style={{
+                background: "hsl(var(--background) / 0.7)",
+                border: "1px solid hsl(var(--border) / 0.4)",
+                boxShadow: "inset 0 1px 3px hsl(var(--background) / 0.5)",
+              }}
+            >
               <textarea
                 ref={textareaRef}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="မေးခွန်းမေးပါ..."
-                className="flex-1 resize-none bg-background border border-border rounded-xl px-3 py-2 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+                placeholder="မေးခွန်းမေးပါ... ✨"
+                className="flex-1 resize-none bg-transparent text-xs text-foreground placeholder:text-muted-foreground focus:outline-none py-1.5"
                 rows={1}
               />
               <button
                 onClick={() => send()}
                 disabled={!input.trim() || isLoading}
-                className="w-8 h-8 rounded-xl bg-primary text-primary-foreground flex items-center justify-center disabled:opacity-40 hover:opacity-90 transition-opacity"
+                className="w-8 h-8 rounded-xl flex items-center justify-center text-primary-foreground disabled:opacity-30 transition-all duration-300 hover:scale-105 active:scale-95 shrink-0"
+                style={{
+                  background: input.trim() && !isLoading
+                    ? "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)))"
+                    : "hsl(var(--muted))",
+                  boxShadow: input.trim() && !isLoading
+                    ? "0 2px 10px hsl(var(--primary) / 0.4)"
+                    : "none",
+                }}
               >
                 {isLoading ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Send className="w-3.5 h-3.5" />}
               </button>
