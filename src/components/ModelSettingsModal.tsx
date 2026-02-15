@@ -47,8 +47,13 @@ const OPENROUTER_MODELS = [
   { id: "deepseek/deepseek-chat-v3-0324:free", label: "DeepSeek V3 (Free)", description: "Free DeepSeek model" },
   { id: "allenai/molmo-2-8b", label: "Molmo 2 8B", description: "Allen AI vision-language model" },
   { id: "bytedance-seed/seed-1.6-flash", label: "Seed 1.6 Flash", description: "ByteDance fast model" },
+  { id: "bytedance-seed/seedream-4.5", label: "Seedream 4.5", description: "ByteDance image generation" },
   { id: "anthropic/claude-opus-4.6", label: "Claude Opus 4.6", description: "Anthropic's most powerful" },
   { id: "sourceful/riverflow-v2-pro", label: "Riverflow V2 Pro", description: "Sourceful advanced model" },
+  { id: "sourceful/riverflow-v2-fast", label: "Riverflow V2 Fast", description: "Sourceful fast model" },
+  { id: "openai/gpt-5-image-mini", label: "GPT-5 Image Mini", description: "OpenAI image gen (mini)" },
+  { id: "openai/gpt-5-image", label: "GPT-5 Image", description: "OpenAI image generation" },
+  { id: "google/gemini-2.5-flash-image", label: "Gemini Flash Image", description: "Google image generation" },
   { id: "openrouter/auto", label: "Auto (OpenRouter)", description: "Auto-select best available" },
 ];
 
