@@ -46,6 +46,16 @@ const Auth = () => {
           }
         } else {
           toast.success("Login အောင်မြင်ပါတယ်! 🎉");
+          // Speak welcome message
+          try {
+            const utterance = new SpeechSynthesisUtterance(
+              "Welcome To The Dynamic Idea Maker App, Prompt Generator"
+            );
+            utterance.lang = "en-US";
+            utterance.rate = 0.95;
+            utterance.pitch = 1.1;
+            speechSynthesis.speak(utterance);
+          } catch {}
           navigate("/");
         }
       } else {
