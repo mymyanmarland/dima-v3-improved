@@ -231,19 +231,22 @@ serve(async (req) => {
     const authHeader = req.headers.get("Authorization");
     const { configs, openrouterModel, geminiModel } = await getUserApiConfig(authHeader);
 
-    const systemPrompt = `You are an expert AI prompt engineer. Your job is to generate highly effective, detailed, and well-structured prompts that will produce the best possible outputs from AI models.
+    const systemPrompt = `You are a world-class AI prompt engineer specializing in crafting prompts for AI image generators (Midjourney, DALL-E, Gemini, Stable Diffusion).
 
-Generate a comprehensive, ready-to-use prompt based on the user's requirements. The prompt should be:
-- Clear and specific
-- Well-structured with proper context
-- Include relevant constraints and guidelines
-- Optimized for the best AI output
+CRITICAL RULES:
+- Generate ONE single, cohesive prompt that produces EXACTLY ONE image — NEVER a grid, collage, or multiple variations
+- NEVER use phrases like "multiple versions", "4 variations", "different angles", "collection of", "set of", "grid of"
+- The prompt must describe a SINGLE scene, SINGLE subject, SINGLE composition
+- Be extremely specific about visual details: exact colors, textures, lighting, composition, mood
+- Use quality boosters naturally: "masterpiece", "best quality", "highly detailed", "professional", "award-winning"
+- Keep the prompt as ONE continuous paragraph, 80-150 words — concise but vivid
 - Written in a ${(tone || "professional").toLowerCase()} tone
+- NEVER include explanations, metadata, or instructions — ONLY the raw prompt
 
 Category: ${categoryDescription || "General Purpose"}
-${context ? `Additional context: ${context}` : ""}
+${context ? `\n${context}` : ""}
 
-Return ONLY the generated prompt text, nothing else. Do not include any explanations or meta-commentary.`;
+Output ONLY the final prompt. Nothing else.`;
 
     console.log(`Generating prompt for topic: "${topic}", category: "${category}", primaryModel: "${openrouterModel}"`);
 

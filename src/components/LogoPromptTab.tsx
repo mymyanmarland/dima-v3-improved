@@ -166,27 +166,19 @@ const LogoPromptTab = () => {
   const selectedColor = COLOR_SCHEMES.find((c) => c.id === colorScheme);
 
   const buildLogoContext = () => {
-    return `You are an expert logo designer and brand identity specialist. Create a DETAILED, PROFESSIONAL prompt for generating a logo with these specifications:
+    return `You are an expert logo designer. Generate a prompt that produces EXACTLY ONE clean logo image — NOT multiple versions, NOT a grid, NOT variations side by side.
+
+Specifications:
 — Brand Name: "${brandName.trim()}"
 ${tagline.trim() ? `— Tagline: "${tagline.trim()}"` : ""}
 — Logo Style: ${selectedStyle?.label} (${selectedStyle?.desc})
 — Industry: ${industry}
 — Color Scheme: ${selectedColor?.label}
 — Typography: ${typographyStyle}
-— Icon/Symbol Type: ${iconType}
-${additionalDetails.trim() ? `— Additional Requirements: ${additionalDetails.trim()}` : ""}
+— Icon/Symbol: ${iconType}
+${additionalDetails.trim() ? `— Extra: ${additionalDetails.trim()}` : ""}
 
-The prompt MUST include:
-1. Exact visual description of the logo composition
-2. Color palette with specific color suggestions
-3. Typography treatment details
-4. Icon/symbol description with positioning
-5. Scalability notes (favicon to billboard)
-6. Background variations (light/dark/transparent)
-7. Style mood keywords for AI image generators
-8. Professional design principles applied
-
-Make the prompt suitable for AI image generators like Midjourney, DALL-E, or Stable Diffusion. Be extremely specific about visual details.`;
+CRITICAL: Describe ONE single logo on a clean background. Include the brand name text, icon/symbol composition, exact colors, and style. Add "single logo, centered, clean background, professional logo design, vector style, high resolution" as quality tags. NEVER mention "variations", "options", "versions", or "grid".`;
   };
 
   const generatePromptOnly = async () => {

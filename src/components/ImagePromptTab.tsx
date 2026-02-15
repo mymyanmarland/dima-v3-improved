@@ -165,18 +165,13 @@ const ImagePromptTab = () => {
           category: "image-prompt",
           categoryDescription: "Image Generation Prompt",
           tone: "Technical",
-          context: `Generate a highly detailed image generation prompt. 
-Style: ${style}
-Image Type: ${IMAGE_TYPES.find(t => t.id === imageType)?.label || imageType}
-Lighting: ${lighting}
-Camera Angle: ${cameraAngle}
-Aspect Ratio: ${aspectRatio}
-${additionalDetails ? `Additional Details: ${additionalDetails}` : ""}
-${negativePrompt ? `Things to avoid (negative prompt): ${negativePrompt}` : ""}
+          context: `Generate ONE single image prompt — NEVER a grid, collage, or multiple images.
 
-IMPORTANT: Output ONLY a single, detailed image generation prompt that can be directly used in AI image generators like Midjourney, DALL-E, or Stable Diffusion. 
-Include technical details like resolution quality keywords (8k, ultra HD, masterpiece), style modifiers, composition details, color palette suggestions, and atmosphere/mood descriptors.
-Format it as one continuous prompt, not a list. Do not include explanations.`,
+Style: ${style} | Type: ${IMAGE_TYPES.find(t => t.id === imageType)?.label || imageType} | Lighting: ${lighting} | Camera: ${cameraAngle} | Ratio: ${aspectRatio}
+${additionalDetails ? `Details: ${additionalDetails}` : ""}
+${negativePrompt ? `Avoid: ${negativePrompt}` : ""}
+
+CRITICAL: Output ONE continuous paragraph (80-150 words) describing a SINGLE scene/subject. Include quality tags (masterpiece, 8k, ultra detailed). NEVER mention "variations", "grid", "multiple", "collection". Be vivid and specific about colors, textures, mood, and composition.`,
         },
       });
 
