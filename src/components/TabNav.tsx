@@ -22,7 +22,7 @@ const TABS = [
 const TabNav = ({ activeTab, onTabChange }: TabNavProps) => {
   return (
     <div className="w-full">
-      <div className="flex overflow-x-auto gap-2 md:gap-3 p-2 md:p-3 glass-card rounded-2xl scrollbar-hide md:flex-wrap">
+      <div className="flex flex-wrap gap-3 p-3 glass-card rounded-2xl">
         {TABS.map((tab) => {
           const isActive = activeTab === tab.id;
           return (

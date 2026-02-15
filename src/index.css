@@ -1808,12 +1808,3 @@ select::-ms-expand {
 .light .glossy-project-btn {
   background-color: #1a1a2e;
 }
-
-/* Hide scrollbar for tab nav */
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
