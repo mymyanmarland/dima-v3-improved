@@ -17,6 +17,7 @@ import LogoPromptTab from "../components/LogoPromptTab";
 import RefinePromptTab from "../components/RefinePromptTab";
 import ActivityLogTab from "../components/ActivityLogTab";
 import StarryBackground from "../components/StarryBackground";
+import ChatBotPopup from "../components/ChatBotPopup";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("prompt");
@@ -74,6 +75,8 @@ const Index = () => {
           {renderTab()}
         </main>
       </div>
+
+      <ChatBotPopup />
     </div>
   );
 };
