@@ -14,6 +14,30 @@ const IMAGE_STYLES = [
   "Photorealistic", "Digital Art", "Oil Painting", "Watercolor", "Anime",
   "3D Render", "Pixel Art", "Cinematic", "Comic Book", "Surrealism",
   "Minimalist", "Fantasy Art", "Concept Art", "Sketch", "Pop Art",
+  "Art Nouveau", "Art Deco", "Baroque", "Impressionism", "Expressionism",
+  "Cubism", "Futurism", "Gothic", "Steampunk", "Cyberpunk",
+  "Vaporwave", "Retro/Vintage", "Ukiyo-e", "Stained Glass", "Mosaic",
+  "Pencil Drawing", "Charcoal", "Ink Wash", "Gouache", "Pastel",
+  "Low Poly", "Isometric", "Claymation", "Paper Cut", "Origami",
+  "Graffiti/Street Art", "Psychedelic", "Noir", "Ethereal", "Hyper-Surreal",
+];
+
+const IMAGE_TYPES = [
+  { id: "illustration", label: "🎨 Illustration", desc: "ပန်းချီ / ရုပ်ပုံ" },
+  { id: "photo", label: "📸 Photo", desc: "ဓာတ်ပုံပုံစံ" },
+  { id: "poster", label: "🪧 Poster", desc: "ပိုစတာ ဒီဇိုင်း" },
+  { id: "wallpaper", label: "🖥️ Wallpaper", desc: "နောက်ခံပုံ" },
+  { id: "icon", label: "🔷 Icon/Logo", desc: "အိုင်ကွန် / လိုဂို" },
+  { id: "texture", label: "🧱 Texture/Pattern", desc: "အသွင်အပြင် / ပုံစံ" },
+  { id: "character", label: "🧑‍🎤 Character Design", desc: "ဇာတ်ကောင် ဒီဇိုင်း" },
+  { id: "landscape", label: "🏞️ Landscape/Scene", desc: "ရှုခင်း / မြင်ကွင်း" },
+  { id: "product", label: "📦 Product Shot", desc: "ထုတ်ကုန် ဓာတ်ပုံ" },
+  { id: "fashion", label: "👗 Fashion", desc: "ဖက်ရှင် ဓာတ်ပုံ" },
+  { id: "food", label: "🍽️ Food Photography", desc: "အစားအစာ ဓာတ်ပုံ" },
+  { id: "abstract", label: "🌀 Abstract Art", desc: "စိတ်ကူးယဉ် အနုပညာ" },
+  { id: "meme", label: "😂 Meme/Fun", desc: "ဟာသ / Meme ပုံ" },
+  { id: "book-cover", label: "📚 Book Cover", desc: "စာအုပ်မျက်နှာဖုံး" },
+  { id: "sticker", label: "🏷️ Sticker", desc: "စတစ်ကာ ပုံစံ" },
 ];
 
 const LIGHTING_OPTIONS = [
@@ -42,6 +66,7 @@ const ImagePromptTab = () => {
   const [lighting, setLighting] = useState("Natural Light");
   const [cameraAngle, setCameraAngle] = useState("Eye Level");
   const [aspectRatio, setAspectRatio] = useState("1:1");
+  const [imageType, setImageType] = useState("illustration");
   const [additionalDetails, setAdditionalDetails] = useState("");
   const [negativePrompt, setNegativePrompt] = useState("");
   const [generatedPrompt, setGeneratedPrompt] = useState("");
@@ -158,6 +183,7 @@ const ImagePromptTab = () => {
           tone: "Technical",
           context: `Generate a highly detailed image generation prompt. 
 Style: ${style}
+Image Type: ${IMAGE_TYPES.find(t => t.id === imageType)?.label || imageType}
 Lighting: ${lighting}
 Camera Angle: ${cameraAngle}
 Aspect Ratio: ${aspectRatio}
@@ -242,6 +268,18 @@ Format it as one continuous prompt, not a list. Do not include explanations.`,
         <div className="flex flex-wrap gap-2">
           {IMAGE_STYLES.map((s) => (
             <button key={s} onClick={() => setStyle(s)} className={chipClass(style === s)}>{s}</button>
+          ))}
+        </div>
+      </div>
+
+      {/* Image Type */}
+      <div className="glass-card rounded-2xl p-5">
+        <label className="text-sm font-medium text-foreground mb-3 block">🎯 Image Type (ဘယ်လိုရလဒ်မျိုး ထွက်စေချင်သလဲ)</label>
+        <div className="flex flex-wrap gap-2">
+          {IMAGE_TYPES.map((t) => (
+            <button key={t.id} onClick={() => setImageType(t.id)} className={chipClass(imageType === t.id)} title={t.desc}>
+              {t.label}
+            </button>
           ))}
         </div>
       </div>
