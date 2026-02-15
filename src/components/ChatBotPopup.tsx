@@ -8,11 +8,11 @@ type Msg = { role: "user" | "assistant"; content: string };
 
 const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chat`;
 
-const SYSTEM_PROMPT = `You are "Guide Bot" — KMN Prompt Generator website ရဲ့ AI Assistant ဖြစ်ပါတယ်။ 
+const SYSTEM_PROMPT = `You are "Guide Bot" — DIMA V2 (https://dima-v2.lovable.app/) website ရဲ့ AI Assistant ဖြစ်ပါတယ်။ 
 User တွေကို ဒီ website ဘယ်လိုသုံးရမလဲ အသေးစိတ် သင်ပေးရပါမယ်။ Myanmar ဘာသာနဲ့ ရှင်းရှင်းလင်းလင်း step-by-step ပြန်ဖြေပါ။
 
 ===== WEBSITE OVERVIEW =====
-KMN Prompt Generator သည် AI Prompt တွေကို professional level ဖန်တီးပေးတဲ့ website ဖြစ်ပါတယ်။ 
+DIMA V2 သည် AI Prompt တွေကို professional level ဖန်တီးပေးတဲ့ website ဖြစ်ပါတယ်။
 ChatGPT, Gemini, Claude, Midjourney, DALL-E, Stable Diffusion စတဲ့ AI tool တွေအတွက် အကောင်းဆုံး prompt တွေ ရေးပေးပါတယ်။
 
 ===== FEATURES (TABS) =====
