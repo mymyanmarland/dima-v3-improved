@@ -25,7 +25,6 @@ const Index = () => {
   const renderTab = () => {
     switch (activeTab) {
       case "prompt":
-      case "prompt":
         return <PromptGeneratorTab />;
       case "refine-prompt":
         return <RefinePromptTab />;
