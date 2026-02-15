@@ -13,6 +13,7 @@ import ChatBotTab from "../components/ChatBotTab";
 import ReadyMadePromptTab from "../components/ReadyMadePromptTab";
 import ApiTestTab from "../components/ApiTestTab";
 import TextDesignPromptTab from "../components/TextDesignPromptTab";
+import LogoPromptTab from "../components/LogoPromptTab";
 import ActivityLogTab from "../components/ActivityLogTab";
 import StarryBackground from "../components/StarryBackground";
 
@@ -35,6 +36,8 @@ const Index = () => {
         return <VideoPromptTab />;
       case "video-prompt-en":
         return <VideoPromptEnglishTab />;
+      case "logo-prompt":
+        return <LogoPromptTab />;
       case "image-prompt":
         return <ImagePromptTab />;
       case "image-to-prompt":

@@ -11,6 +11,7 @@ const TABS = [
   { id: "text-design", label: "Text Design Prompt", emoji: "🔤" },
   { id: "video-prompt", label: "Video Prompt", emoji: "🎬" },
   { id: "video-prompt-en", label: "Video Prompt (EN)", emoji: "🎬" },
+  { id: "logo-prompt", label: "Logo Prompt", emoji: "👑" },
   { id: "image-prompt", label: "Image Prompt", emoji: "🎨" },
   { id: "image-to-prompt", label: "Image to Prompt", emoji: "🔄" },
   { id: "chatbot", label: "AI Chat", emoji: "🤖" },
