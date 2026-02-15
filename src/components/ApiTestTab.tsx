@@ -14,8 +14,6 @@ const TESTS: { id: string; name: string; emoji: string; description: string }[] 
   { id: "generate-prompt", name: "Generate Prompt", emoji: "✨", description: "Prompt တစ်ခု generate လုပ်ပါမယ်" },
   { id: "execute-prompt", name: "Execute Prompt", emoji: "⚡", description: "Prompt တစ်ခုကို AI နဲ့ run ပါမယ်" },
   { id: "chat", name: "AI Chat", emoji: "🤖", description: "Chat message တစ်ခု ပို့ပါမယ်" },
-  { id: "generate-image", name: "Image Generate", emoji: "🎨", description: "ပုံတစ်ခု generate ခိုင်းပါမယ်" },
-  { id: "image-to-prompt", name: "Image to Prompt", emoji: "🔄", description: "ပုံမှ prompt ထုတ်ပါမယ်" },
 ];
 
 const ApiTestTab = () => {
@@ -63,20 +61,6 @@ const ApiTestTab = () => {
             method: "POST",
             headers,
             body: JSON.stringify({ messages: [{ role: "user", content: "Hi, just testing. Reply with OK." }] }),
-          });
-          break;
-        case "generate-image":
-          response = await fetch(`${base}/generate-image`, {
-            method: "POST",
-            headers,
-            body: JSON.stringify({ prompt: "A small blue dot on white background" }),
-          });
-          break;
-        case "image-to-prompt":
-          response = await fetch(`${base}/image-to-prompt`, {
-            method: "POST",
-            headers,
-            body: JSON.stringify({ imageUrl: "https://picsum.photos/200" }),
           });
           break;
         default:
