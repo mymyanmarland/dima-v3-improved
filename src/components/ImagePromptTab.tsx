@@ -100,12 +100,14 @@ const ImagePromptTab = () => {
   const handleAiSuggest = async () => {
     const result = await suggest(subject, [
       { key: "style", label: "Art Style", options: IMAGE_STYLES },
+      { key: "imageType", label: "Image Type", options: IMAGE_TYPES.map((t) => t.id) },
       { key: "lighting", label: "Lighting", options: LIGHTING_OPTIONS },
       { key: "cameraAngle", label: "Camera Angle", options: CAMERA_ANGLES },
       { key: "aspectRatio", label: "Aspect Ratio", options: ASPECT_RATIOS.map((a) => a.id) },
     ]);
     if (result) {
       if (result.style) setStyle(result.style as string);
+      if (result.imageType) setImageType(result.imageType as string);
       if (result.lighting) setLighting(result.lighting as string);
       if (result.cameraAngle) setCameraAngle(result.cameraAngle as string);
       if (result.aspectRatio) setAspectRatio(result.aspectRatio as string);
