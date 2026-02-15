@@ -300,38 +300,69 @@ const ChatBotPopup = () => {
 
   return (
     <>
-      {/* Floating Button - Cute animated bot */}
+      {/* Floating Button - Spacious74 inspired design */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-50 group"
+        className="fixed bottom-6 right-6 z-50 group cursor-pointer"
         aria-label="Chat Assistant"
+        style={{
+          borderRadius: "18px",
+          border: "none",
+          padding: "2px",
+          background: isOpen
+            ? `radial-gradient(circle 80px at 80% -10%, hsl(var(--destructive) / 0.6), hsl(var(--background)))`
+            : `radial-gradient(circle 80px at 80% -10%, hsl(var(--foreground) / 0.3), hsl(var(--background)))`,
+          position: "relative",
+          transition: "transform 0.3s ease",
+        }}
       >
-        <div className={`relative w-16 h-16 rounded-full flex items-center justify-center transition-all duration-500 ${
-          isOpen 
-            ? "bg-destructive/90 scale-90 rotate-90" 
-            : "bg-gradient-to-br from-primary via-accent to-primary scale-100"
-        }`}
+        {/* Blob glow */}
+        {!isOpen && (
+          <div
+            className="absolute bottom-0 left-0 w-[70%] h-full pointer-events-none"
+            style={{
+              borderRadius: "18px",
+              background: "radial-gradient(circle 60px at 0% 100%, hsl(190, 100%, 62%), hsl(240, 100%, 50%, 0.5), transparent)",
+              boxShadow: "-10px 10px 30px hsl(220, 100%, 50%, 0.18)",
+            }}
+          />
+        )}
+        {/* After glow */}
+        <div
+          className="absolute top-0 right-0 w-[65%] h-[60%] pointer-events-none"
           style={{
-            boxShadow: isOpen
-              ? "0 4px 20px hsl(var(--destructive) / 0.4)"
-              : "0 4px 30px hsl(var(--primary) / 0.5), 0 0 60px hsl(var(--accent) / 0.2)",
+            borderRadius: "120px",
+            boxShadow: "0 0 20px hsl(var(--foreground) / 0.1)",
+            zIndex: 0,
+          }}
+        />
+        {/* Inner */}
+        <div
+          className="relative z-10 flex items-center justify-center w-14 h-14 transition-transform duration-300 group-hover:scale-105 group-active:scale-95"
+          style={{
+            borderRadius: "16px",
+            background: isOpen
+              ? `radial-gradient(circle 80px at 80% -50%, hsl(var(--destructive) / 0.7), hsl(var(--background) / 0.95))`
+              : `radial-gradient(circle 80px at 80% -50%, hsl(var(--foreground) / 0.25), hsl(var(--card)))`,
           }}
         >
+          {/* Inner overlay */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              borderRadius: "16px",
+              background: "radial-gradient(circle 60px at 0% 100%, hsl(190, 100%, 50%, 0.1), hsl(240, 100%, 50%, 0.07), transparent)",
+            }}
+          />
           {isOpen ? (
-            <X className="w-6 h-6 text-primary-foreground transition-transform duration-300" />
+            <X className="w-5 h-5 text-foreground transition-transform duration-300 rotate-90 relative z-10" />
           ) : (
-            <div className="relative">
-              {/* Cute robot face */}
+            <div className="relative z-10">
               <div className="text-2xl animate-bounce" style={{ animationDuration: "2s" }}>🤖</div>
-              {/* Online dot */}
-              <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-400 rounded-full border-2 border-background animate-pulse" />
+              <span className="absolute -bottom-0.5 -right-1 w-3 h-3 rounded-full border-2 border-card animate-pulse" style={{ background: "hsl(160, 80%, 55%)" }} />
             </div>
           )}
         </div>
-        {/* Ripple ring */}
-        {!isOpen && (
-          <span className="absolute inset-0 rounded-full border-2 border-primary/40 animate-ping" style={{ animationDuration: "2.5s" }} />
-        )}
       </button>
 
       {/* Popup Window */}
