@@ -1,3 +1,12 @@
+import { useIsMobile } from "@/hooks/use-mobile";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
+
 interface TabNavProps {
   activeTab: string;
   onTabChange: (tab: string) => void;
@@ -20,6 +29,34 @@ const TABS = [
 ];
 
 const TabNav = ({ activeTab, onTabChange }: TabNavProps) => {
+  const isMobile = useIsMobile();
+  const activeLabel = TABS.find((t) => t.id === activeTab);
+
+  if (isMobile) {
+    return (
+      <div className="w-full">
+        <Select value={activeTab} onValueChange={onTabChange}>
+          <SelectTrigger className="w-full glass-card rounded-2xl border-white/10 bg-background/80 backdrop-blur-xl text-foreground h-12 text-base font-medium">
+            <SelectValue>
+              {activeLabel ? `${activeLabel.emoji} ${activeLabel.label}` : "Select tab"}
+            </SelectValue>
+          </SelectTrigger>
+          <SelectContent className="bg-background border-white/10 backdrop-blur-xl z-[100] rounded-xl shadow-xl">
+            {TABS.map((tab) => (
+              <SelectItem
+                key={tab.id}
+                value={tab.id}
+                className="text-foreground hover:bg-muted focus:bg-muted cursor-pointer text-sm py-2.5"
+              >
+                {tab.emoji} {tab.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+    );
+  }
+
   return (
     <div className="w-full">
       <div className="flex flex-wrap gap-3 p-3 glass-card rounded-2xl">
