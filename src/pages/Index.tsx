@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import AppHeader from "../components/AppHeader";
 import PriceTicker from "../components/PriceTicker";
 import TabNav from "../components/TabNav";
@@ -16,8 +16,9 @@ import TextDesignPromptTab from "../components/TextDesignPromptTab";
 import LogoPromptTab from "../components/LogoPromptTab";
 import RefinePromptTab from "../components/RefinePromptTab";
 import ActivityLogTab from "../components/ActivityLogTab";
-import StarryBackground from "../components/StarryBackground";
-import ChatBotPopup from "../components/ChatBotPopup";
+
+const StarryBackground = lazy(() => import("../components/StarryBackground"));
+const ChatBotPopup = lazy(() => import("../components/ChatBotPopup"));
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("prompt");
@@ -58,7 +59,9 @@ const Index = () => {
   return (
     <>
       <div className="min-h-screen bg-background relative overflow-hidden">
-        <StarryBackground />
+        <Suspense fallback={null}>
+          <StarryBackground />
+        </Suspense>
 
         <div className="relative z-10">
           <AppHeader />
@@ -75,7 +78,9 @@ const Index = () => {
           </main>
         </div>
       </div>
-      <ChatBotPopup />
+      <Suspense fallback={null}>
+        <ChatBotPopup />
+      </Suspense>
     </>
   );
 };
