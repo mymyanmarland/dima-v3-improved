@@ -45,6 +45,10 @@ const OPENROUTER_MODELS = [
   { id: "mistralai/mistral-small-3.1-24b-instruct:free", label: "Mistral Small (Free)", description: "Free Mistral model" },
   { id: "nousresearch/hermes-3-llama-3.1-405b:free", label: "Hermes 3 405B (Free)", description: "Free large model" },
   { id: "deepseek/deepseek-chat-v3-0324:free", label: "DeepSeek V3 (Free)", description: "Free DeepSeek model" },
+  { id: "allenai/molmo-2-8b", label: "Molmo 2 8B", description: "Allen AI vision-language model" },
+  { id: "bytedance-seed/seed-1.6-flash", label: "Seed 1.6 Flash", description: "ByteDance fast model" },
+  { id: "anthropic/claude-opus-4.6", label: "Claude Opus 4.6", description: "Anthropic's most powerful" },
+  { id: "sourceful/riverflow-v2-pro", label: "Riverflow V2 Pro", description: "Sourceful advanced model" },
   { id: "openrouter/auto", label: "Auto (OpenRouter)", description: "Auto-select best available" },
 ];
 
