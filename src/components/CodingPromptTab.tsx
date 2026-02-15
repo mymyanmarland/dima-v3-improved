@@ -6,7 +6,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { playSuccessSound } from "@/utils/notificationSound";
 import { useAuth } from "@/hooks/useAuth";
 import PromptOutput from "./PromptOutput";
-
+import AiSuggestButton from "./AiSuggestButton";
+import { useAiSuggestion } from "@/hooks/useAiSuggestion";
 const LANGUAGES = [
   { id: "python", label: "🐍 Python" },
   { id: "javascript", label: "⚡ JavaScript" },
@@ -68,6 +69,22 @@ const CodingPromptTab = () => {
   const [generatedPrompt, setGeneratedPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isRandomizing, setIsRandomizing] = useState(false);
+  const { suggest, isSuggesting } = useAiSuggestion();
+
+  const handleAiSuggest = async () => {
+    const result = await suggest(description, [
+      { key: "language", label: "Language", options: LANGUAGES.map((l) => l.id) },
+      { key: "useCase", label: "Use Case", options: USE_CASES.map((u) => u.id) },
+      { key: "complexity", label: "Complexity", options: COMPLEXITY_LEVELS.map((c) => c.id) },
+      { key: "promptStyle", label: "Prompt Style", options: PROMPT_STYLES.map((p) => p.id) },
+    ]);
+    if (result) {
+      if (result.language) setSelectedLanguages([result.language]);
+      if (result.useCase) setUseCase(result.useCase);
+      if (result.complexity) setComplexity(result.complexity);
+      if (result.promptStyle) setPromptStyle(result.promptStyle);
+    }
+  };
 
   const fillRandomIdea = async () => {
     setIsRandomizing(true);
@@ -234,10 +251,11 @@ IMPORTANT RULES:
         <span className="px-3.5 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-accent/20 text-accent">
           💻 Production-Ready Prompts
         </span>
+        <AiSuggestButton onClick={handleAiSuggest} isLoading={isSuggesting} disabled={!description.trim()} />
         <button
           onClick={fillRandomIdea}
           disabled={isRandomizing}
-          className="ml-auto px-4 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-primary/30 text-primary hover:bg-primary/10 transition-colors disabled:opacity-50"
+          className="px-4 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-primary/30 text-primary hover:bg-primary/10 transition-colors disabled:opacity-50"
         >
           {isRandomizing ? (
             <span className="flex items-center gap-1.5">

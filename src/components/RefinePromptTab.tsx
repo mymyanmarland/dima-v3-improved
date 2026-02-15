@@ -5,6 +5,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { playSuccessSound } from "@/utils/notificationSound";
 import { useAuth } from "@/hooks/useAuth";
 import PromptOutput from "./PromptOutput";
+import AiSuggestButton from "./AiSuggestButton";
+import { useAiSuggestion } from "@/hooks/useAiSuggestion";
 
 const REFINE_METHODS = [
   { id: "chain-of-thought", label: "🧠 Chain-of-Thought", desc: "Step-by-step reasoning logic" },
@@ -51,6 +53,22 @@ const RefinePromptTab = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isExecuting, setIsExecuting] = useState(false);
   const [activeMode, setActiveMode] = useState<"generate" | "execute" | null>(null);
+  const { suggest, isSuggesting } = useAiSuggestion();
+
+  const handleAiSuggest = async () => {
+    const result = await suggest(rawPrompt, [
+      { key: "refineMethod", label: "Refinement Method", options: REFINE_METHODS.map((m) => m.id) },
+      { key: "outputFormat", label: "Output Format", options: OUTPUT_FORMATS.map((f) => f.id) },
+      { key: "qualityLevel", label: "Quality Level", options: QUALITY_LEVELS.map((q) => q.id) },
+      { key: "targetAi", label: "Target AI", options: TARGET_AI },
+    ]);
+    if (result) {
+      if (result.refineMethod) setRefineMethod(result.refineMethod);
+      if (result.outputFormat) setOutputFormat(result.outputFormat);
+      if (result.qualityLevel) setQualityLevel(result.qualityLevel);
+      if (result.targetAi) setTargetAi(result.targetAi);
+    }
+  };
 
   const selectedMethod = REFINE_METHODS.find((m) => m.id === refineMethod);
   const selectedFormat = OUTPUT_FORMATS.find((f) => f.id === outputFormat);
@@ -202,6 +220,7 @@ Return ONLY the refined prompt. Do not include explanations about what you chang
         <span className="px-3.5 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-primary/20 text-primary">
           🔬 Refine Prompt (Expert)
         </span>
+        <AiSuggestButton onClick={handleAiSuggest} isLoading={isSuggesting} disabled={!rawPrompt.trim()} />
       </div>
 
       {/* Raw Prompt Input */}

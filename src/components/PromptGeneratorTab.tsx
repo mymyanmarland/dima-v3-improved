@@ -6,6 +6,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { playSuccessSound } from "@/utils/notificationSound";
 import { useAuth } from "@/hooks/useAuth";
 import PromptOutput from "./PromptOutput";
+import AiSuggestButton from "./AiSuggestButton";
+import { useAiSuggestion } from "@/hooks/useAiSuggestion";
 
 const CATEGORIES = [
   { id: "coding", label: "💻 Coding", description: "Programming & Development" },
@@ -63,6 +65,18 @@ const PromptGeneratorTab = () => {
   const [isExecuting, setIsExecuting] = useState(false);
   const [activeMode, setActiveMode] = useState<"generate" | "execute" | null>(null);
   const [isRandomizing, setIsRandomizing] = useState(false);
+  const { suggest, isSuggesting } = useAiSuggestion();
+
+  const handleAiSuggest = async () => {
+    const result = await suggest(topic, [
+      { key: "category", label: "Category", options: CATEGORIES.map((c) => c.id) },
+      { key: "tone", label: "Tone", options: TONES },
+    ]);
+    if (result) {
+      if (result.category) setCategory(result.category);
+      if (result.tone) setTone(result.tone);
+    }
+  };
 
   const fillRandomIdea = async () => {
     setIsRandomizing(true);
@@ -244,10 +258,11 @@ const PromptGeneratorTab = () => {
         <span className="px-3.5 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-primary/20 text-primary">
           ✨ General Prompt
         </span>
+        <AiSuggestButton onClick={handleAiSuggest} isLoading={isSuggesting} disabled={!topic.trim()} />
         <button
           onClick={fillRandomIdea}
           disabled={isRandomizing}
-          className="ml-auto px-4 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-primary/30 text-primary hover:bg-primary/10 transition-colors disabled:opacity-50"
+          className="px-4 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-primary/30 text-primary hover:bg-primary/10 transition-colors disabled:opacity-50"
         >
           {isRandomizing ? (
             <span className="flex items-center gap-1.5">

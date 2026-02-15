@@ -5,6 +5,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { playSuccessSound } from "@/utils/notificationSound";
 import { useAuth } from "@/hooks/useAuth";
 import PromptOutput from "./PromptOutput";
+import AiSuggestButton from "./AiSuggestButton";
+import { useAiSuggestion } from "@/hooks/useAiSuggestion";
 
 const LOGO_STYLES = [
   { id: "minimalist", label: "🔲 Minimalist", desc: "Clean, simple, modern" },
@@ -72,6 +74,24 @@ const LogoPromptTab = () => {
   const [isExecuting, setIsExecuting] = useState(false);
   const [activeMode, setActiveMode] = useState<"generate" | "execute" | null>(null);
   const [isRandomizing, setIsRandomizing] = useState(false);
+  const { suggest, isSuggesting } = useAiSuggestion();
+
+  const handleAiSuggest = async () => {
+    const result = await suggest(brandName + (tagline ? " - " + tagline : ""), [
+      { key: "logoStyle", label: "Logo Style", options: LOGO_STYLES.map((s) => s.id) },
+      { key: "industry", label: "Industry", options: INDUSTRIES },
+      { key: "colorScheme", label: "Color Scheme", options: COLOR_SCHEMES.map((c) => c.id) },
+      { key: "typographyStyle", label: "Typography", options: TYPOGRAPHY_STYLES },
+      { key: "iconType", label: "Icon Type", options: ICON_TYPES },
+    ]);
+    if (result) {
+      if (result.logoStyle) setLogoStyle(result.logoStyle);
+      if (result.industry) setIndustry(result.industry);
+      if (result.colorScheme) setColorScheme(result.colorScheme);
+      if (result.typographyStyle) setTypographyStyle(result.typographyStyle);
+      if (result.iconType) setIconType(result.iconType);
+    }
+  };
 
   const fillRandomIdea = async () => {
     setIsRandomizing(true);
@@ -267,10 +287,11 @@ Make the prompt suitable for AI image generators like Midjourney, DALL-E, or Sta
         <span className="px-3.5 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-primary/20 text-primary">
           👑 Logo Prompt Generator
         </span>
+        <AiSuggestButton onClick={handleAiSuggest} isLoading={isSuggesting} disabled={!brandName.trim()} />
         <button
           onClick={fillRandomIdea}
           disabled={isRandomizing}
-          className="ml-auto px-4 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-primary/30 text-primary hover:bg-primary/10 transition-colors disabled:opacity-50"
+          className="px-4 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-primary/30 text-primary hover:bg-primary/10 transition-colors disabled:opacity-50"
         >
           {isRandomizing ? (
             <span className="flex items-center gap-1.5">
