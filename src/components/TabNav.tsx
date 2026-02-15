@@ -36,19 +36,71 @@ const TabNav = ({ activeTab, onTabChange }: TabNavProps) => {
     return (
       <div className="w-full">
         <Select value={activeTab} onValueChange={onTabChange}>
-          <SelectTrigger className="w-full glass-card rounded-2xl border-white/10 bg-background/80 backdrop-blur-xl text-foreground h-12 text-base font-medium">
+          <SelectTrigger
+            className="w-full h-14 rounded-2xl text-base font-semibold tracking-wide border-none text-primary"
+            style={{
+              background: "hsl(var(--neu-bg))",
+              boxShadow:
+                "-6px -6px 14px hsl(var(--neu-shadow-light)), 6px 6px 14px hsl(var(--neu-shadow-dark)), inset 0 1px 0 hsl(var(--neu-inset-light) / 0.3), 0 0 20px hsl(var(--primary) / 0.1)",
+            }}
+          >
             <SelectValue>
-              {activeLabel ? `${activeLabel.emoji} ${activeLabel.label}` : "Select tab"}
+              {activeLabel ? (
+                <span className="flex items-center gap-2">
+                  <span className="text-lg">{activeLabel.emoji}</span>
+                  <span
+                    className="text-gradient font-bold"
+                  >
+                    {activeLabel.label}
+                  </span>
+                </span>
+              ) : (
+                "Select tab"
+              )}
             </SelectValue>
           </SelectTrigger>
-          <SelectContent className="bg-background border-white/10 backdrop-blur-xl z-[100] rounded-xl shadow-xl">
+          <SelectContent
+            className="z-[200] rounded-2xl border-none p-1.5 max-h-[70vh]"
+            style={{
+              background: "hsl(var(--neu-bg))",
+              boxShadow:
+                "-8px -8px 18px hsl(var(--neu-shadow-light)), 8px 8px 18px hsl(var(--neu-shadow-dark)), 0 0 30px hsl(var(--primary) / 0.12)",
+            }}
+          >
             {TABS.map((tab) => (
               <SelectItem
                 key={tab.id}
                 value={tab.id}
-                className="text-foreground hover:bg-muted focus:bg-muted cursor-pointer text-sm py-2.5"
+                className="rounded-xl cursor-pointer text-sm py-3 px-3 my-0.5 font-medium text-foreground transition-all duration-200 focus:bg-transparent data-[highlighted]:bg-transparent"
+                style={{
+                  ...(activeTab === tab.id
+                    ? {
+                        background: "hsl(var(--primary) / 0.12)",
+                        boxShadow:
+                          "inset -2px -2px 5px hsl(var(--neu-inset-light) / 0.15), inset 2px 2px 5px hsl(var(--neu-inset-dark) / 0.25), 0 0 12px hsl(var(--primary) / 0.08)",
+                      }
+                    : {}),
+                }}
               >
-                {tab.emoji} {tab.label}
+                <span className="flex items-center gap-2.5">
+                  <span className="text-base">{tab.emoji}</span>
+                  <span
+                    className={
+                      activeTab === tab.id
+                        ? "text-primary font-semibold"
+                        : "text-foreground"
+                    }
+                    style={
+                      activeTab === tab.id
+                        ? {
+                            textShadow: "0 0 12px hsl(var(--primary) / 0.4)",
+                          }
+                        : {}
+                    }
+                  >
+                    {tab.label}
+                  </span>
+                </span>
               </SelectItem>
             ))}
           </SelectContent>
