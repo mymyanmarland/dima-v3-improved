@@ -6,6 +6,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { playSuccessSound } from "@/utils/notificationSound";
 import { useAuth } from "@/hooks/useAuth";
 import PromptOutput from "./PromptOutput";
+import AiSuggestButton from "./AiSuggestButton";
+import { useAiSuggestion } from "@/hooks/useAiSuggestion";
 
 const VIDEO_TYPES = [
   { id: "talking-head", label: "🗣️ Talking Head", desc: "လူပြောနေတဲ့ Video" },
@@ -57,6 +59,24 @@ const VideoPromptTab = () => {
   const [mood, setMood] = useState("");
   const [generatedPrompt, setGeneratedPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const { suggest, isSuggesting } = useAiSuggestion();
+
+  const handleAiSuggest = async () => {
+    const result = await suggest(description, [
+      { key: "videoType", label: "Video Type", options: VIDEO_TYPES.map((v) => v.id) },
+      { key: "visualStyle", label: "Visual Style", options: VISUAL_STYLES },
+      { key: "cameraMovement", label: "Camera Movement", options: CAMERA_MOVEMENTS },
+      { key: "duration", label: "Duration", options: DURATIONS.map((d) => d.id) },
+      { key: "aspectRatio", label: "Aspect Ratio", options: ASPECT_RATIOS.map((a) => a.id) },
+    ]);
+    if (result) {
+      if (result.videoType) setVideoType(result.videoType);
+      if (result.visualStyle) setVisualStyle(result.visualStyle);
+      if (result.cameraMovement) setCameraMovement(result.cameraMovement);
+      if (result.duration) setDuration(result.duration);
+      if (result.aspectRatio) setAspectRatio(result.aspectRatio);
+    }
+  };
 
   const selectedType = VIDEO_TYPES.find((t) => t.id === videoType);
 
@@ -141,13 +161,14 @@ Do NOT include any explanations, just the prompt.`,
   return (
     <div className="space-y-6">
       {/* Header badge */}
-      <div className="flex items-center gap-2 px-1">
+      <div className="flex items-center gap-2 px-1 flex-wrap">
         <span className="px-3.5 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-primary/20 text-primary">
           Veo 3.1 Optimized
         </span>
         <span className="px-3.5 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-accent/20 text-accent">
           🇲🇲 Myanmar Language
         </span>
+        <AiSuggestButton onClick={handleAiSuggest} isLoading={isSuggesting} disabled={!description.trim()} />
       </div>
 
       {/* Video Description */}

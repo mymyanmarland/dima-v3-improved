@@ -5,6 +5,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { playSuccessSound } from "@/utils/notificationSound";
 import { useAuth } from "@/hooks/useAuth";
 import PromptOutput from "./PromptOutput";
+import AiSuggestButton from "./AiSuggestButton";
+import { useAiSuggestion } from "@/hooks/useAiSuggestion";
 
 const VIDEO_TYPES = [
   { id: "talking-head", label: "🗣️ Talking Head" },
@@ -139,6 +141,34 @@ const VideoPromptEnglishTab = () => {
   const [generatedPrompt, setGeneratedPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isRandomizing, setIsRandomizing] = useState(false);
+  const { suggest, isSuggesting } = useAiSuggestion();
+
+  const handleAiSuggest = async () => {
+    const result = await suggest(description, [
+      { key: "videoType", label: "Video Type", options: VIDEO_TYPES.map((v) => v.id) },
+      { key: "visualStyle", label: "Visual Style", options: VISUAL_STYLES },
+      { key: "cameraMovement", label: "Camera Movement", options: CAMERA_MOVEMENTS },
+      { key: "mood", label: "Mood", options: MOODS },
+      { key: "lighting", label: "Lighting", options: LIGHTING_STYLES },
+      { key: "colorGrade", label: "Color Grade", options: COLOR_GRADES },
+      { key: "transition", label: "Transition", options: TRANSITION_STYLES },
+      { key: "sound", label: "Sound Design", options: SOUND_DESIGN },
+      { key: "duration", label: "Duration", options: DURATIONS.map((d) => d.id) },
+      { key: "aspectRatio", label: "Aspect Ratio", options: ASPECT_RATIOS.map((a) => a.id) },
+    ]);
+    if (result) {
+      if (result.videoType) setVideoType(result.videoType);
+      if (result.visualStyle) setVisualStyle(result.visualStyle);
+      if (result.cameraMovement) setCameraMovement(result.cameraMovement);
+      if (result.mood) setSelectedMood(result.mood);
+      if (result.lighting) setLighting(result.lighting);
+      if (result.colorGrade) setColorGrade(result.colorGrade);
+      if (result.transition) setTransition(result.transition);
+      if (result.sound) setSound(result.sound);
+      if (result.duration) setDuration(result.duration);
+      if (result.aspectRatio) setAspectRatio(result.aspectRatio);
+    }
+  };
 
   const fillRandomIdea = async () => {
     setIsRandomizing(true);
@@ -274,10 +304,11 @@ Do NOT include any explanations, just the prompt.`,
         <span className="px-3.5 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-accent/20 text-accent">
           🌐 English Version
         </span>
+        <AiSuggestButton onClick={handleAiSuggest} isLoading={isSuggesting} disabled={!description.trim()} />
         <button
           onClick={fillRandomIdea}
           disabled={isRandomizing}
-          className="ml-auto px-4 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-primary/30 text-primary hover:bg-primary/10 transition-colors disabled:opacity-50"
+          className="px-4 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-primary/30 text-primary hover:bg-primary/10 transition-colors disabled:opacity-50"
         >
           {isRandomizing ? (
             <span className="flex items-center gap-1.5">

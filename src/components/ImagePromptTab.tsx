@@ -6,6 +6,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { playSuccessSound } from "@/utils/notificationSound";
 import { useAuth } from "@/hooks/useAuth";
 import PromptOutput from "./PromptOutput";
+import AiSuggestButton from "./AiSuggestButton";
+import { useAiSuggestion } from "@/hooks/useAiSuggestion";
 
 const IMAGE_STYLES = [
   "Photorealistic", "Digital Art", "Oil Painting", "Watercolor", "Anime",
@@ -44,6 +46,22 @@ const ImagePromptTab = () => {
   const [generatedPrompt, setGeneratedPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isRandomizing, setIsRandomizing] = useState(false);
+  const { suggest, isSuggesting } = useAiSuggestion();
+
+  const handleAiSuggest = async () => {
+    const result = await suggest(subject, [
+      { key: "style", label: "Art Style", options: IMAGE_STYLES },
+      { key: "lighting", label: "Lighting", options: LIGHTING_OPTIONS },
+      { key: "cameraAngle", label: "Camera Angle", options: CAMERA_ANGLES },
+      { key: "aspectRatio", label: "Aspect Ratio", options: ASPECT_RATIOS.map((a) => a.id) },
+    ]);
+    if (result) {
+      if (result.style) setStyle(result.style);
+      if (result.lighting) setLighting(result.lighting);
+      if (result.cameraAngle) setCameraAngle(result.cameraAngle);
+      if (result.aspectRatio) setAspectRatio(result.aspectRatio);
+    }
+  };
 
   const fillRandomIdea = async () => {
     setIsRandomizing(true);
@@ -150,10 +168,11 @@ Format it as one continuous prompt, not a list. Do not include explanations.`,
         <span className="px-3.5 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-primary/20 text-primary">
           🖼️ Image Prompt
         </span>
+        <AiSuggestButton onClick={handleAiSuggest} isLoading={isSuggesting} disabled={!subject.trim()} />
         <button
           onClick={fillRandomIdea}
           disabled={isRandomizing}
-          className="ml-auto px-4 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-primary/30 text-primary hover:bg-primary/10 transition-colors disabled:opacity-50"
+          className="px-4 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-primary/30 text-primary hover:bg-primary/10 transition-colors disabled:opacity-50"
         >
           {isRandomizing ? (
             <span className="flex items-center gap-1.5">
