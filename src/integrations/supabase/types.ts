@@ -16,26 +16,38 @@ export type Database = {
     Tables: {
       profiles: {
         Row: {
+          access_expires_at: string | null
           avatar_url: string | null
+          ban_reason: string | null
+          banned_until: string | null
           created_at: string
           display_name: string | null
           id: string
+          is_banned: boolean
           updated_at: string
           user_id: string
         }
         Insert: {
+          access_expires_at?: string | null
           avatar_url?: string | null
+          ban_reason?: string | null
+          banned_until?: string | null
           created_at?: string
           display_name?: string | null
           id?: string
+          is_banned?: boolean
           updated_at?: string
           user_id: string
         }
         Update: {
+          access_expires_at?: string | null
           avatar_url?: string | null
+          ban_reason?: string | null
+          banned_until?: string | null
           created_at?: string
           display_name?: string | null
           id?: string
+          is_banned?: boolean
           updated_at?: string
           user_id?: string
         }
