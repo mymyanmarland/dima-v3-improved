@@ -12,9 +12,9 @@ const ENCRYPTION_PREFIX = "enc:v1:";
 
 // Vision-capable free models for image analysis
 const VISION_MODELS = [
-  "meta-llama/llama-4-scout:free",
-  "google/gemini-2.5-flash-preview-05-20:free",
   "google/gemini-2.0-flash-exp:free",
+  "meta-llama/llama-4-maverick:free",
+  "qwen/qwen-2.5-vl-72b-instruct:free",
 ];
 
 async function deriveKey(): Promise<CryptoKey> {
