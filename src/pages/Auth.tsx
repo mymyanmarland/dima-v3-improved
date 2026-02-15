@@ -52,9 +52,25 @@ const Auth = () => {
               "Welcome To The Dynamic Idea Maker App, Prompt Generator"
             );
             utterance.lang = "en-US";
-            utterance.rate = 0.95;
-            utterance.pitch = 1.1;
-            speechSynthesis.speak(utterance);
+            utterance.rate = 0.9;
+            utterance.pitch = 1.4;
+
+            const pickFemaleVoice = () => {
+              const voices = speechSynthesis.getVoices();
+              const female = voices.find(v =>
+                /female|samantha|zira|karen|moira|tessa|fiona|victoria/i.test(v.name)
+              ) || voices.find(v =>
+                v.lang.startsWith("en") && v.name.toLowerCase().includes("google")
+              );
+              if (female) utterance.voice = female;
+              speechSynthesis.speak(utterance);
+            };
+
+            if (speechSynthesis.getVoices().length > 0) {
+              pickFemaleVoice();
+            } else {
+              speechSynthesis.onvoiceschanged = pickFemaleVoice;
+            }
           } catch {}
           navigate("/");
         }
