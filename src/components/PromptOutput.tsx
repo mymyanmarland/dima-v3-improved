@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { Copy, Check, Wand2, Download, ChevronDown, ChevronUp, Braces, FileText } from "lucide-react";
+import { useState, useRef } from "react";
+import { Copy, Check, Wand2, Download, ChevronDown, ChevronUp, Braces, FileText, FileDown, Image as ImageIcon } from "lucide-react";
+import { toPng } from "html-to-image";
 import BlobLoader from "./BlobLoader";
 
 interface PromptOutputProps {
@@ -78,6 +79,29 @@ const PromptOutput = ({ prompt, isLoading, imageUrl, isImageMode, executedResult
   const [copiedResult, setCopiedResult] = useState(false);
   const [showPrompt, setShowPrompt] = useState(true);
   const [viewMode, setViewMode] = useState<"text" | "json">("text");
+  const promptRef = useRef<HTMLDivElement>(null);
+
+  const handleDownloadMd = () => {
+    if (!prompt) return;
+    const blob = new Blob([prompt], { type: "text/markdown" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `prompt-${Date.now()}.md`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const handleDownloadJpg = async () => {
+    if (!promptRef.current) return;
+    try {
+      const dataUrl = await toPng(promptRef.current, { backgroundColor: "#1a1a2e" });
+      const a = document.createElement("a");
+      a.href = dataUrl;
+      a.download = `prompt-${Date.now()}.jpg`;
+      a.click();
+    } catch {}
+  };
 
   const handleCopy = async (text: string, type: "prompt" | "result") => {
     if (!text) return;
@@ -205,6 +229,22 @@ const PromptOutput = ({ prompt, isLoading, imageUrl, isImageMode, executedResult
                 {copiedPrompt ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                 {copiedPrompt ? "Copied!" : "Copy"}
               </button>
+              <button
+                onClick={handleDownloadMd}
+                className="flex items-center gap-1.5 px-3 py-2 btn-glass rounded-xl text-sm font-medium text-primary"
+                title="Download as .md"
+              >
+                <FileDown className="w-4 h-4" />
+                .md
+              </button>
+              <button
+                onClick={handleDownloadJpg}
+                className="flex items-center gap-1.5 px-3 py-2 btn-glass rounded-xl text-sm font-medium text-primary"
+                title="Download as JPG"
+              >
+                <ImageIcon className="w-4 h-4" />
+                .jpg
+              </button>
               {hasExecutedResult && (
                 <button
                   onClick={() => setShowPrompt(!showPrompt)}
@@ -216,7 +256,7 @@ const PromptOutput = ({ prompt, isLoading, imageUrl, isImageMode, executedResult
             </div>
           </div>
           {showPrompt && (
-            <div className="glass-subtle rounded-xl p-4">
+            <div ref={promptRef} className="glass-subtle rounded-xl p-4">
               {viewMode === "json" ? (
                 <pre className="text-sm text-foreground leading-relaxed whitespace-pre-wrap font-mono overflow-x-auto">
                   {displayPrompt}
