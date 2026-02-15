@@ -7,6 +7,7 @@ import { playSuccessSound } from "@/utils/notificationSound";
 import { useAuth } from "@/hooks/useAuth";
 import PromptOutput from "./PromptOutput";
 import AiSuggestButton from "./AiSuggestButton";
+import RainbowButton from "./RainbowButton";
 import { useAiSuggestion } from "@/hooks/useAiSuggestion";
 
 const IMAGE_STYLES = [
@@ -169,18 +170,14 @@ Format it as one continuous prompt, not a list. Do not include explanations.`,
           🖼️ Image Prompt
         </span>
         <AiSuggestButton onClick={handleAiSuggest} isLoading={isSuggesting} disabled={!subject.trim()} />
-        <button
-          onClick={fillRandomIdea}
-          disabled={isRandomizing}
-          className="px-4 py-1.5 rounded-full text-xs font-semibold glass-subtle border border-primary/30 text-primary hover:bg-primary/10 transition-colors disabled:opacity-50"
-        >
+        <RainbowButton onClick={fillRandomIdea} disabled={isRandomizing}>
           {isRandomizing ? (
-            <span className="flex items-center gap-1.5">
-              <span className="w-3 h-3 rounded-full border-2 border-primary border-t-transparent animate-spin" />
+            <>
+              <span className="w-3 h-3 rounded-full border-2 border-foreground border-t-transparent animate-spin" />
               Generating...
-            </span>
+            </>
           ) : "🎲 Random Idea (AI)"}
-        </button>
+        </RainbowButton>
       </div>
 
       {/* Subject */}

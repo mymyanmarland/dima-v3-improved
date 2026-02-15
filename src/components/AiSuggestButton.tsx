@@ -1,4 +1,5 @@
 import { Wand2 } from "lucide-react";
+import RainbowButton from "./RainbowButton";
 
 interface AiSuggestButtonProps {
   onClick: () => void;
@@ -8,14 +9,10 @@ interface AiSuggestButtonProps {
 
 const AiSuggestButton = ({ onClick, isLoading, disabled }: AiSuggestButtonProps) => {
   return (
-    <button
-      onClick={onClick}
-      disabled={isLoading || disabled}
-      className="px-4 py-1.5 rounded-full text-xs font-semibold border border-accent/40 text-accent hover:bg-accent/10 transition-all disabled:opacity-50 flex items-center gap-1.5 glass-subtle"
-    >
+    <RainbowButton onClick={onClick} disabled={isLoading || disabled}>
       {isLoading ? (
         <>
-          <span className="w-3 h-3 rounded-full border-2 border-accent border-t-transparent animate-spin" />
+          <span className="w-3 h-3 rounded-full border-2 border-foreground border-t-transparent animate-spin" />
           AI Selecting...
         </>
       ) : (
@@ -24,7 +21,7 @@ const AiSuggestButton = ({ onClick, isLoading, disabled }: AiSuggestButtonProps)
           AI Auto-Select
         </>
       )}
-    </button>
+    </RainbowButton>
   );
 };
 

@@ -103,6 +103,10 @@ export default {
           "0%": { transform: "translateX(0) translateY(0)", opacity: "1" },
           "100%": { transform: "translateX(300px) translateY(300px)", opacity: "0" },
         },
+        "rainbow": {
+          "0%": { backgroundPosition: "0%" },
+          "100%": { backgroundPosition: "200%" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
