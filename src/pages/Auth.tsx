@@ -71,6 +71,34 @@ const Auth = () => {
             } else {
               speechSynthesis.onvoiceschanged = pickFemaleVoice;
             }
+            // Play background melody after speech ends
+            utterance.onend = () => {
+              try {
+                const ctx = new AudioContext();
+                const now = ctx.currentTime;
+                const melody = [
+                  { freq: 523.25, start: 0, dur: 0.3 },
+                  { freq: 659.25, start: 0.25, dur: 0.3 },
+                  { freq: 783.99, start: 0.5, dur: 0.3 },
+                  { freq: 1046.5, start: 0.75, dur: 0.5 },
+                  { freq: 783.99, start: 1.1, dur: 0.2 },
+                  { freq: 1046.5, start: 1.3, dur: 0.6 },
+                ];
+                melody.forEach(({ freq, start, dur }) => {
+                  const osc = ctx.createOscillator();
+                  const gain = ctx.createGain();
+                  osc.type = "sine";
+                  osc.frequency.value = freq;
+                  gain.gain.setValueAtTime(0, now + start);
+                  gain.gain.linearRampToValueAtTime(0.18, now + start + 0.05);
+                  gain.gain.exponentialRampToValueAtTime(0.001, now + start + dur);
+                  osc.connect(gain);
+                  gain.connect(ctx.destination);
+                  osc.start(now + start);
+                  osc.stop(now + start + dur);
+                });
+              } catch {}
+            };
           } catch {}
           navigate("/");
         }
