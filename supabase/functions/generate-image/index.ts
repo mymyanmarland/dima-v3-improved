@@ -147,14 +147,10 @@ serve(async (req) => {
 
       try {
         const body: Record<string, unknown> = {
-          model: config.source === "gemini" ? geminiModel : "google/gemini-2.5-flash",
+          model: config.source === "gemini" ? geminiModel : "google/gemini-2.5-flash-preview:free",
           messages: [{ role: "user", content: prompt.trim() }],
+          modalities: ["image", "text"],
         };
-
-        // Gemini API supports modalities for image generation
-        if (config.source === "gemini") {
-          body.modalities = ["image", "text"];
-        }
 
         const response = await fetch(config.apiUrl, {
           method: "POST",
