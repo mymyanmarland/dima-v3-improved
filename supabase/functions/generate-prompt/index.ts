@@ -231,7 +231,21 @@ serve(async (req) => {
     const authHeader = req.headers.get("Authorization");
     const { configs, openrouterModel, geminiModel } = await getUserApiConfig(authHeader);
 
-    const systemPrompt = `You are a world-class AI prompt engineer specializing in crafting prompts for AI image generators (Midjourney, DALL-E, Gemini, Stable Diffusion).
+    // Use different system prompts based on category
+    const isRefine = category === "prompt-refine";
+    const isImageCategory = ["image", "logo", "text-design"].includes(category);
+
+    let systemPrompt: string;
+    let userMessage: string;
+    let maxTokens = 1024;
+
+    if (isRefine && context) {
+      // For refine: the context IS the full system prompt with all instructions
+      systemPrompt = context;
+      userMessage = `Transform and refine the following raw prompt into an expertly engineered, comprehensive, and highly detailed prompt. The refined prompt MUST be significantly longer, more detailed, and more effective than the original. Include specific instructions, context, constraints, examples, and quality markers. Minimum 300 words for the refined output.\n\nRaw prompt: "${topic}"`;
+      maxTokens = 4096;
+    } else if (isImageCategory) {
+      systemPrompt = `You are a world-class AI prompt engineer specializing in crafting prompts for AI image generators (Midjourney, DALL-E, Gemini, Stable Diffusion).
 
 CRITICAL RULES:
 - Generate ONE single, cohesive prompt that produces EXACTLY ONE image — NEVER a grid, collage, or multiple variations
@@ -247,6 +261,22 @@ Category: ${categoryDescription || "General Purpose"}
 ${context ? `\n${context}` : ""}
 
 Output ONLY the final prompt. Nothing else.`;
+      userMessage = `Generate an optimized prompt for: ${topic}`;
+    } else {
+      systemPrompt = `You are a world-class prompt engineer. Generate a highly detailed, comprehensive, and effective prompt based on the user's topic.
+
+RULES:
+- The generated prompt must be thorough, specific, and actionable
+- Include clear role assignment, context, constraints, output format, and quality standards
+- Written in a ${(tone || "professional").toLowerCase()} tone
+- Minimum 200 words for substantive prompts
+- Category: ${categoryDescription || "General Purpose"}
+${context ? `\nAdditional context: ${context}` : ""}
+
+Output ONLY the final prompt. No explanations.`;
+      userMessage = `Generate an expert-level prompt for: ${topic}`;
+      maxTokens = 2048;
+    }
 
     console.log(`Generating prompt for topic: "${topic}", category: "${category}", primaryModel: "${openrouterModel}"`);
 
@@ -266,10 +296,10 @@ Output ONLY the final prompt. Nothing else.`;
             model: config.source === "openrouter" ? modelToUse : geminiModel,
             messages: [
               { role: "system", content: systemPrompt },
-              { role: "user", content: `Generate an optimized prompt for: ${topic}` },
+              { role: "user", content: userMessage },
             ],
-            temperature: 0.9,
-            max_tokens: 1024,
+            temperature: isRefine ? 0.7 : 0.9,
+            max_tokens: maxTokens,
           }),
         },
       })
