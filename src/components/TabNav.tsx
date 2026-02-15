@@ -29,7 +29,7 @@ const TabNav = ({ activeTab, onTabChange }: TabNavProps) => {
             <button
               key={tab.id}
               onClick={() => onTabChange(tab.id)}
-              className={`glossy-tab relative overflow-hidden transition-all duration-200 whitespace-nowrap flex-shrink-0 ${
+              className={`glossy-tab relative overflow-hidden transition-all duration-200 whitespace-nowrap ${
                 isActive ? "glossy-tab--active" : ""
               }`}
             >
