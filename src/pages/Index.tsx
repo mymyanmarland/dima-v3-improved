@@ -14,6 +14,7 @@ import ReadyMadePromptTab from "../components/ReadyMadePromptTab";
 import ApiTestTab from "../components/ApiTestTab";
 import TextDesignPromptTab from "../components/TextDesignPromptTab";
 import LogoPromptTab from "../components/LogoPromptTab";
+import RefinePromptTab from "../components/RefinePromptTab";
 import ActivityLogTab from "../components/ActivityLogTab";
 import StarryBackground from "../components/StarryBackground";
 
@@ -26,6 +27,8 @@ const Index = () => {
         return <HowToUseTab />;
       case "prompt":
         return <PromptGeneratorTab />;
+      case "refine-prompt":
+        return <RefinePromptTab />;
       case "coding-prompt":
         return <CodingPromptTab />;
       case "ready-made":
