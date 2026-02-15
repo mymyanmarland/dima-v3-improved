@@ -167,8 +167,8 @@ async function callAIWithModelFallback(
         console.warn(`${config.source} [${model}] failed [${response.status}]: ${responseText}`);
         lastError = { status: response.status, message: responseText };
 
-        // If rate limit (429), payment issue (402), model not found (404), or blocked (403), try next model
-        if ((response.status === 429 || response.status === 402 || response.status === 404 || response.status === 403) && modelIndex < VISION_MODELS.length - 1) {
+        // If bad model (400), blocked (403), not found (404), rate limit (429), or payment (402), try next model
+        if ((response.status === 400 || response.status === 402 || response.status === 403 || response.status === 404 || response.status === 429) && modelIndex < VISION_MODELS.length - 1) {
           console.log(`Model issue (${response.status}), trying next model...`);
           continue;
         }
