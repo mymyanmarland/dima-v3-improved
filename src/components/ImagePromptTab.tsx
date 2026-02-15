@@ -1,6 +1,5 @@
 import { useState } from "react";
 import GlowTextarea from "./GlowTextarea";
-import { Download, Image as ImageIcon, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { playSuccessSound } from "@/utils/notificationSound";
@@ -92,9 +91,6 @@ const ImagePromptTab = () => {
   const [generatedPrompt, setGeneratedPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isRandomizing, setIsRandomizing] = useState(false);
-  const [autoGenImage, setAutoGenImage] = useState(true);
-  const [generatedImageUrl, setGeneratedImageUrl] = useState("");
-  const [isGeneratingImage, setIsGeneratingImage] = useState(false);
   const { suggest, isSuggesting } = useAiSuggestion();
 
   const handleAiSuggest = async () => {
@@ -152,39 +148,6 @@ const ImagePromptTab = () => {
     }
   };
 
-  const generateImageFromPrompt = async (prompt: string) => {
-    setIsGeneratingImage(true);
-    setGeneratedImageUrl("");
-    try {
-      const { data, error } = await supabase.functions.invoke("generate-image", {
-        body: { prompt },
-      });
-      if (error) throw new Error(error.message);
-      if (data?.error) throw new Error(data.error);
-      if (data?.imageUrl) {
-        setGeneratedImageUrl(data.imageUrl);
-        toast.success("Image ဖန်တီးပြီးပါပြီ! 🖼️");
-      } else {
-        throw new Error("Image generate မရပါ");
-      }
-    } catch (error) {
-      console.error("Image generation error:", error);
-      toast.error(error instanceof Error ? error.message : "Image generate မရပါ");
-    } finally {
-      setIsGeneratingImage(false);
-    }
-  };
-
-  const handleDownloadImage = () => {
-    if (!generatedImageUrl) return;
-    const link = document.createElement("a");
-    link.href = generatedImageUrl;
-    link.download = `generated-image-${Date.now()}.png`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    toast.success("Image download လုပ်ပြီးပါပြီ!");
-  };
 
   const generateImagePrompt = async () => {
     if (!subject.trim()) {
@@ -194,7 +157,6 @@ const ImagePromptTab = () => {
 
     setIsLoading(true);
     setGeneratedPrompt("");
-    setGeneratedImageUrl("");
 
     try {
       const { data, error } = await supabase.functions.invoke("generate-prompt", {
@@ -235,10 +197,6 @@ Format it as one continuous prompt, not a list. Do not include explanations.`,
           });
         }
 
-        // Auto generate image if toggle is on
-        if (autoGenImage) {
-          generateImageFromPrompt(data.prompt);
-        }
       } else {
         throw new Error("Prompt generate မရပါ");
       }
@@ -362,57 +320,16 @@ Format it as one continuous prompt, not a list. Do not include explanations.`,
         />
       </div>
 
-      {/* Auto Generate Image Toggle */}
-      <div className="glass-card rounded-2xl p-4 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <ImageIcon className="w-4 h-4 text-primary" />
-          <span className="text-sm font-medium text-foreground">Prompt နဲ့အတူ Image ပါ auto generate လုပ်မယ်</span>
-        </div>
-        <button
-          onClick={() => setAutoGenImage(!autoGenImage)}
-          className={`relative w-11 h-6 rounded-full transition-colors ${autoGenImage ? "bg-primary" : "bg-muted"}`}
-        >
-          <span className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform ${autoGenImage ? "translate-x-5" : ""}`} />
-        </button>
-      </div>
 
       {/* Generate Button */}
       <button onClick={generateImagePrompt} disabled={isLoading || !subject.trim()} className="gen-btn">
         {isLoading && <div className="w-4 h-4 rounded-full border-2 border-white border-t-transparent animate-spin" />}
-        <span>{autoGenImage ? "Prompt + Image Generate လုပ်မယ်" : "Image Prompt Generate လုပ်မယ်"}</span>
+        <span>Image Prompt Generate လုပ်မယ်</span>
       </button>
 
       {/* Output */}
       <PromptOutput prompt={generatedPrompt} isLoading={isLoading} />
 
-      {/* Image Generation Status & Result */}
-      {isGeneratingImage && (
-        <div className="glass-card rounded-2xl p-8 flex flex-col items-center gap-3">
-          <Loader2 className="w-8 h-8 text-primary animate-spin" />
-          <p className="text-sm text-muted-foreground">Image ဖန်တီးနေပါတယ်... ခဏစောင့်ပါ</p>
-        </div>
-      )}
-
-      {generatedImageUrl && (
-        <div className="glass-card rounded-2xl p-4 space-y-3">
-          <div className="flex items-center justify-between">
-            <span className="text-sm font-medium text-foreground flex items-center gap-2">
-              <ImageIcon className="w-4 h-4 text-primary" /> Generated Image
-            </span>
-            <button
-              onClick={handleDownloadImage}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-primary text-primary-foreground hover:opacity-90 transition-all"
-            >
-              <Download className="w-3.5 h-3.5" /> Download
-            </button>
-          </div>
-          <img
-            src={generatedImageUrl}
-            alt="Generated image"
-            className="w-full rounded-xl border border-border"
-          />
-        </div>
-      )}
     </div>
   );
 };
