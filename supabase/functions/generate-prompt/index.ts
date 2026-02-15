@@ -308,8 +308,9 @@ Return ONLY the generated prompt text, nothing else. Do not include any explanat
       );
     }
 
-    const data = result.data as { choices?: Array<{ message?: { content?: string } }> };
-    const generatedText = data.choices?.[0]?.message?.content;
+    const data = result.data as { choices?: Array<{ message?: { content?: string; reasoning?: string } }> };
+    const msg = data.choices?.[0]?.message;
+    const generatedText = msg?.content?.trim() || msg?.reasoning?.trim();
 
     if (!generatedText) {
       console.error("No text in AI response:", JSON.stringify(data));
