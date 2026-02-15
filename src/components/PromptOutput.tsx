@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Copy, Check, Wand2, Download, ChevronDown, ChevronUp } from "lucide-react";
+import { Copy, Check, Wand2, Download, ChevronDown, ChevronUp, Braces, FileText } from "lucide-react";
 import BlobLoader from "./BlobLoader";
 
 interface PromptOutputProps {
@@ -11,10 +11,73 @@ interface PromptOutputProps {
   isExecuting?: boolean;
 }
 
+/**
+ * Convert a plain-text prompt into a structured JSON object.
+ * Splits by sentence boundaries and groups into logical sections.
+ */
+function toStructuredJson(prompt: string): string {
+  const lines = prompt.split(/\n+/).map((l) => l.trim()).filter(Boolean);
+
+  // Try to detect sections by headings / numbered items / dashes
+  const sections: { title: string; content: string[] }[] = [];
+  let current: { title: string; content: string[] } = { title: "Main Prompt", content: [] };
+
+  for (const line of lines) {
+    // Detect heading-like patterns: "## Heading", "**Heading**", "Heading:", numbered "1. "
+    const headingMatch = line.match(
+      /^(?:#{1,4}\s+|(?:\*\*|__)(.+?)(?:\*\*|__)\s*$|(\d+)\.\s+(.{3,60}):)/
+    );
+    if (headingMatch) {
+      if (current.content.length > 0 || sections.length === 0) {
+        sections.push({ ...current });
+      }
+      const title = line
+        .replace(/^#{1,4}\s+/, "")
+        .replace(/^\*\*|^\__|__$|\*\*$/g, "")
+        .replace(/:$/, "")
+        .trim();
+      current = { title, content: [] };
+    } else {
+      current.content.push(line);
+    }
+  }
+  if (current.content.length > 0 || sections.length === 0) {
+    sections.push(current);
+  }
+
+  // If only one section with everything in it, produce a simpler structure
+  if (sections.length === 1 && sections[0].title === "Main Prompt") {
+    const obj: Record<string, unknown> = {
+      prompt: prompt.trim(),
+      format: "structured",
+      sections: splitIntoSentences(prompt),
+    };
+    return JSON.stringify(obj, null, 2);
+  }
+
+  const obj: Record<string, unknown> = {
+    format: "structured",
+    sections: sections.map((s) => ({
+      title: s.title,
+      content: s.content.length === 1 ? s.content[0] : s.content,
+    })),
+    full_prompt: prompt.trim(),
+  };
+  return JSON.stringify(obj, null, 2);
+}
+
+function splitIntoSentences(text: string): string[] {
+  return text
+    .split(/(?<=[.!?])\s+/)
+    .map((s) => s.trim())
+    .filter((s) => s.length > 0);
+}
+
 const PromptOutput = ({ prompt, isLoading, imageUrl, isImageMode, executedResult, isExecuting }: PromptOutputProps) => {
   const [copiedPrompt, setCopiedPrompt] = useState(false);
   const [copiedResult, setCopiedResult] = useState(false);
   const [showPrompt, setShowPrompt] = useState(true);
+  const [viewMode, setViewMode] = useState<"text" | "json">("text");
 
   const handleCopy = async (text: string, type: "prompt" | "result") => {
     if (!text) return;
@@ -37,6 +100,9 @@ const PromptOutput = ({ prompt, isLoading, imageUrl, isImageMode, executedResult
     link.click();
     document.body.removeChild(link);
   };
+
+  const displayPrompt = viewMode === "json" && prompt ? toStructuredJson(prompt) : prompt;
+  const copyText = viewMode === "json" && prompt ? toStructuredJson(prompt) : prompt;
 
   if (isLoading) {
     return (
@@ -104,8 +170,36 @@ const PromptOutput = ({ prompt, isLoading, imageUrl, isImageMode, executedResult
               {hasExecutedResult ? "📝 Generated Prompt" : "Generated Prompt"}
             </h3>
             <div className="flex items-center gap-2">
+              {/* Text / JSON Toggle */}
+              <div className="flex items-center rounded-lg overflow-hidden border border-primary/20">
+                <button
+                  onClick={() => setViewMode("text")}
+                  className={`flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium transition-all ${
+                    viewMode === "text"
+                      ? "bg-primary/20 text-primary"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                  title="Text ပုံစံ"
+                >
+                  <FileText className="w-3.5 h-3.5" />
+                  Text
+                </button>
+                <button
+                  onClick={() => setViewMode("json")}
+                  className={`flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium transition-all ${
+                    viewMode === "json"
+                      ? "bg-primary/20 text-primary"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                  title="JSON/Structured ပုံစံ"
+                >
+                  <Braces className="w-3.5 h-3.5" />
+                  JSON
+                </button>
+              </div>
+
               <button
-                onClick={() => handleCopy(prompt, "prompt")}
+                onClick={() => handleCopy(copyText, "prompt")}
                 className="flex items-center gap-1.5 px-3.5 py-2 btn-glass rounded-xl text-sm font-medium text-primary"
               >
                 {copiedPrompt ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
@@ -123,7 +217,13 @@ const PromptOutput = ({ prompt, isLoading, imageUrl, isImageMode, executedResult
           </div>
           {showPrompt && (
             <div className="glass-subtle rounded-xl p-4">
-              <p className="text-sm text-foreground leading-relaxed whitespace-pre-wrap">{prompt}</p>
+              {viewMode === "json" ? (
+                <pre className="text-sm text-foreground leading-relaxed whitespace-pre-wrap font-mono overflow-x-auto">
+                  {displayPrompt}
+                </pre>
+              ) : (
+                <p className="text-sm text-foreground leading-relaxed whitespace-pre-wrap">{displayPrompt}</p>
+              )}
             </div>
           )}
         </div>
