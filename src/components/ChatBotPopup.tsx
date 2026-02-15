@@ -303,7 +303,7 @@ const ChatBotPopup = () => {
       {/* Floating Button - Spacious74 inspired design */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-[9999] group cursor-pointer"
+        className="fixed bottom-6 left-4 z-[9999] group cursor-pointer"
         aria-label="Chat Assistant"
         style={{
           borderRadius: "18px",
@@ -368,7 +368,7 @@ const ChatBotPopup = () => {
       {/* Popup Window */}
       {isOpen && (
         <div 
-          className="fixed bottom-[5.5rem] right-6 z-[9999] w-[370px] max-w-[calc(100vw-2rem)] h-[520px] max-h-[72vh] flex flex-col overflow-hidden animate-scale-in"
+          className="fixed bottom-[5.5rem] left-4 z-[9999] w-[370px] max-w-[calc(100vw-2rem)] h-[520px] max-h-[72vh] flex flex-col overflow-hidden animate-scale-in"
           style={{
             borderRadius: "1.5rem",
             background: "hsl(var(--card) / 0.85)",
