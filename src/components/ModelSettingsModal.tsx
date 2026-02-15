@@ -31,6 +31,7 @@ const OPENROUTER_MODELS = [
   { id: "anthropic/claude-3.5-haiku", label: "Claude 3.5 Haiku", description: "Fast Claude model" },
   { id: "google/gemini-2.5-pro", label: "Gemini 2.5 Pro", description: "Google's top model" },
   { id: "google/gemini-2.5-flash", label: "Gemini 2.5 Flash", description: "Fast Gemini model" },
+  { id: "google/gemini-2.5-flash-preview:free", label: "Gemini 2.5 Flash Preview (Free)", description: "Free preview, supports image gen" },
   { id: "google/gemini-2.0-flash-001", label: "Gemini 2.0 Flash", description: "Previous gen fast model" },
   { id: "meta-llama/llama-4-maverick", label: "Llama 4 Maverick", description: "Meta's latest model" },
   { id: "meta-llama/llama-4-scout", label: "Llama 4 Scout", description: "Meta's efficient model" },
