@@ -57,26 +57,27 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden">
-      <StarryBackground />
+    <>
+      <div className="min-h-screen bg-background relative overflow-hidden">
+        <StarryBackground />
 
-      <div className="relative z-10">
-        <AppHeader />
-        <PriceTicker />
+        <div className="relative z-10">
+          <AppHeader />
+          <PriceTicker />
 
-        <main className="max-w-3xl mx-auto px-4 md:px-6 py-6">
-          {/* Tab Navigation */}
-          <div className="mb-6">
-            <TabNav activeTab={activeTab} onTabChange={setActiveTab} />
-          </div>
+          <main className="max-w-3xl mx-auto px-4 md:px-6 py-6">
+            {/* Tab Navigation */}
+            <div className="mb-6">
+              <TabNav activeTab={activeTab} onTabChange={setActiveTab} />
+            </div>
 
-          {/* Tab Content */}
-          {renderTab()}
-        </main>
+            {/* Tab Content */}
+            {renderTab()}
+          </main>
+        </div>
       </div>
-
       <ChatBotPopup />
-    </div>
+    </>
   );
 };
 
