@@ -157,16 +157,16 @@ const VideoPromptEnglishTab = () => {
       { key: "aspectRatio", label: "Aspect Ratio", options: ASPECT_RATIOS.map((a) => a.id) },
     ]);
     if (result) {
-      if (result.videoType) setVideoType(result.videoType);
-      if (result.visualStyle) setVisualStyle(result.visualStyle);
-      if (result.cameraMovement) setCameraMovement(result.cameraMovement);
-      if (result.mood) setSelectedMood(result.mood);
-      if (result.lighting) setLighting(result.lighting);
-      if (result.colorGrade) setColorGrade(result.colorGrade);
-      if (result.transition) setTransition(result.transition);
-      if (result.sound) setSound(result.sound);
-      if (result.duration) setDuration(result.duration);
-      if (result.aspectRatio) setAspectRatio(result.aspectRatio);
+      if (result.videoType) setVideoType(result.videoType as string);
+      if (result.visualStyle) setVisualStyle(result.visualStyle as string);
+      if (result.cameraMovement) setCameraMovement(result.cameraMovement as string);
+      if (result.mood) setSelectedMood(result.mood as string);
+      if (result.lighting) setLighting(result.lighting as string);
+      if (result.colorGrade) setColorGrade(result.colorGrade as string);
+      if (result.transition) setTransition(result.transition as string);
+      if (result.sound) setSound(result.sound as string);
+      if (result.duration) setDuration(result.duration as string);
+      if (result.aspectRatio) setAspectRatio(result.aspectRatio as string);
     }
   };
 

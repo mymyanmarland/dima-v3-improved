@@ -63,10 +63,10 @@ const RefinePromptTab = () => {
       { key: "targetAi", label: "Target AI", options: TARGET_AI },
     ]);
     if (result) {
-      if (result.refineMethod) setRefineMethod(result.refineMethod);
-      if (result.outputFormat) setOutputFormat(result.outputFormat);
-      if (result.qualityLevel) setQualityLevel(result.qualityLevel);
-      if (result.targetAi) setTargetAi(result.targetAi);
+      if (result.refineMethod) setRefineMethod(result.refineMethod as string);
+      if (result.outputFormat) setOutputFormat(result.outputFormat as string);
+      if (result.qualityLevel) setQualityLevel(result.qualityLevel as string);
+      if (result.targetAi) setTargetAi(result.targetAi as string);
     }
   };
 

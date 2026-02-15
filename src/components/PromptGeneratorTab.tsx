@@ -73,8 +73,8 @@ const PromptGeneratorTab = () => {
       { key: "tone", label: "Tone", options: TONES },
     ]);
     if (result) {
-      if (result.category) setCategory(result.category);
-      if (result.tone) setTone(result.tone);
+      if (result.category) setCategory(result.category as string);
+      if (result.tone) setTone(result.tone as string);
     }
   };
 

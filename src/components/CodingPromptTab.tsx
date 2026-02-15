@@ -73,16 +73,16 @@ const CodingPromptTab = () => {
 
   const handleAiSuggest = async () => {
     const result = await suggest(description, [
-      { key: "language", label: "Language", options: LANGUAGES.map((l) => l.id) },
+      { key: "language", label: "Language", options: LANGUAGES.map((l) => l.id), multiple: true },
       { key: "useCase", label: "Use Case", options: USE_CASES.map((u) => u.id) },
       { key: "complexity", label: "Complexity", options: COMPLEXITY_LEVELS.map((c) => c.id) },
       { key: "promptStyle", label: "Prompt Style", options: PROMPT_STYLES.map((p) => p.id) },
     ]);
     if (result) {
-      if (result.language) setSelectedLanguages([result.language]);
-      if (result.useCase) setUseCase(result.useCase);
-      if (result.complexity) setComplexity(result.complexity);
-      if (result.promptStyle) setPromptStyle(result.promptStyle);
+      if (result.language) setSelectedLanguages(Array.isArray(result.language) ? result.language : [result.language]);
+      if (result.useCase) setUseCase(result.useCase as string);
+      if (result.complexity) setComplexity(result.complexity as string);
+      if (result.promptStyle) setPromptStyle(result.promptStyle as string);
     }
   };
 
