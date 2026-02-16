@@ -1,6 +1,6 @@
 import { useState } from "react";
 import GlowTextarea from "./GlowTextarea";
-import { Wand2, Sparkles, Palette, Layout, Layers, Monitor, Zap, Globe, Shield, Database } from "lucide-react";
+import { Wand2, Sparkles, Palette, Layout, Layers, Monitor, Zap } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { playSuccessSound } from "@/utils/notificationSound";
@@ -53,26 +53,9 @@ const TECH_STACKS = [
 
 import { DESIGN_STYLES } from "@/data/designStyles";
 import DesignStyleSelector from "./DesignStyleSelector";
+import FeatureSelector from "./FeatureSelector";
+import { ALL_FEATURES } from "@/data/vibeCodingFeatures";
 
-
-const FEATURES = [
-  { id: "auth", label: "🔐 Authentication", icon: Shield },
-  { id: "database", label: "🗄️ Database CRUD", icon: Database },
-  { id: "responsive", label: "📱 Responsive Design", icon: Monitor },
-  { id: "dark-mode", label: "🌙 Dark Mode", icon: Palette },
-  { id: "animations", label: "✨ Animations", icon: Sparkles },
-  { id: "file-upload", label: "📁 File Upload", icon: Layers },
-  { id: "search", label: "🔍 Search & Filter", icon: Zap },
-  { id: "payments", label: "💳 Payments", icon: Globe },
-  { id: "realtime", label: "⚡ Realtime Updates", icon: Zap },
-  { id: "ai-features", label: "🤖 AI Features", icon: Wand2 },
-  { id: "charts", label: "📊 Charts / Graphs", icon: Layout },
-  { id: "notifications", label: "🔔 Notifications", icon: Sparkles },
-  { id: "i18n", label: "🌍 Multi-language", icon: Globe },
-  { id: "seo", label: "🔎 SEO Optimized", icon: Globe },
-  { id: "api-integration", label: "🔗 API Integration", icon: Zap },
-  { id: "email", label: "📧 Email System", icon: Globe },
-];
 
 const DETAIL_LEVELS = [
   { id: "brief", label: "📝 Brief", desc: "Short & focused prompt" },
@@ -102,7 +85,7 @@ const VibeCodingTab = () => {
       { key: "projectType", label: "Project Type", options: PROJECT_TYPES.map((p) => p.id) },
       { key: "stack", label: "Tech Stack", options: TECH_STACKS.map((s) => s.id), multiple: true },
       { key: "designStyle", label: "Design Style", options: DESIGN_STYLES.map((d) => d.id) },
-      { key: "features", label: "Features", options: FEATURES.map((f) => f.id), multiple: true },
+      { key: "features", label: "Features", options: ALL_FEATURES.map((f) => f.id), multiple: true },
       { key: "detailLevel", label: "Detail Level", options: DETAIL_LEVELS.map((d) => d.id) },
     ]);
     if (result) {
@@ -127,7 +110,7 @@ const VibeCodingTab = () => {
     setProjectType(randItem(PROJECT_TYPES).id);
     setSelectedStacks([randItem(TECH_STACKS).id]);
     setDesignStyle(randItem(DESIGN_STYLES).id);
-    setSelectedFeatures(randItems(FEATURES, 3 + Math.floor(Math.random() * 4)));
+    setSelectedFeatures(randItems(ALL_FEATURES, 3 + Math.floor(Math.random() * 4)));
     setDetailLevel(randItem(DETAIL_LEVELS).id);
 
     const vibeIdeas = [
@@ -178,17 +161,13 @@ const VibeCodingTab = () => {
     );
   };
 
-  const toggleFeature = (id: string) => {
-    setSelectedFeatures((prev) =>
-      prev.includes(id) ? prev.filter((f) => f !== id) : [...prev, id]
-    );
-  };
+
 
   const platformLabel = AI_PLATFORMS.find((p) => p.id === selectedPlatform)?.label || "";
   const projectLabel = PROJECT_TYPES.find((p) => p.id === projectType);
   const stackLabels = TECH_STACKS.filter((s) => selectedStacks.includes(s.id)).map((s) => s.label).join(", ");
   const designLabel = DESIGN_STYLES.find((d) => d.id === designStyle);
-  const featureLabels = FEATURES.filter((f) => selectedFeatures.includes(f.id)).map((f) => f.label).join(", ");
+  const featureLabels = ALL_FEATURES.filter((f) => selectedFeatures.includes(f.id)).map((f) => f.label).join(", ");
   const detailLabel = DETAIL_LEVELS.find((d) => d.id === detailLevel);
 
   const generateVibePrompt = async () => {
@@ -401,17 +380,7 @@ IMPORTANT RULES:
           <Zap className="w-5 h-5 inline mr-2" />
           Features <span className="text-muted-foreground text-xs">(လိုချင်တာတွေ ရွေးပါ)</span>
         </label>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-          {FEATURES.map((f) => (
-            <button
-              key={f.id}
-              onClick={() => toggleFeature(f.id)}
-              className={`glossy-chip ${selectedFeatures.includes(f.id) ? "glossy-chip--active" : ""}`}
-            >
-              {f.label}
-            </button>
-          ))}
-        </div>
+        <FeatureSelector selected={selectedFeatures} onChange={setSelectedFeatures} />
       </div>
 
       {/* Detail Level & Color Scheme */}
