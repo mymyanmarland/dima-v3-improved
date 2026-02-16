@@ -1,6 +1,6 @@
 import { useState } from "react";
 import GlowTextarea from "./GlowTextarea";
-import { Code2, Terminal, Layers, Cpu, Braces, GitBranch, Globe } from "lucide-react";
+import { Code2, Terminal, Layers, Cpu, Braces, GitBranch, Globe, Palette } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { playSuccessSound } from "@/utils/notificationSound";
@@ -9,6 +9,8 @@ import PromptOutput from "./PromptOutput";
 import AiSuggestButton from "./AiSuggestButton";
 import RainbowButton from "./RainbowButton";
 import { useAiSuggestion } from "@/hooks/useAiSuggestion";
+import { DESIGN_STYLES } from "@/data/designStyles";
+
 const LANGUAGES = [
   { id: "python", label: "🐍 Python" },
   { id: "javascript", label: "⚡ JavaScript" },
@@ -80,6 +82,7 @@ const CodingPromptTab = () => {
   const [complexity, setComplexity] = useState("intermediate");
   const [promptStyle, setPromptStyle] = useState("explain-then-code");
   const [websiteType, setWebsiteType] = useState("");
+  const [designStyle, setDesignStyle] = useState("");
   const [additionalContext, setAdditionalContext] = useState("");
   const [generatedPrompt, setGeneratedPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -93,6 +96,7 @@ const CodingPromptTab = () => {
       { key: "complexity", label: "Complexity", options: COMPLEXITY_LEVELS.map((c) => c.id) },
       { key: "promptStyle", label: "Prompt Style", options: PROMPT_STYLES.map((p) => p.id) },
       { key: "websiteType", label: "Website Type", options: WEBSITE_TYPES.map((w) => w.id) },
+      { key: "designStyle", label: "Design Style", options: DESIGN_STYLES.map((d) => d.id) },
     ]);
     if (result) {
       if (result.language) setSelectedLanguages(Array.isArray(result.language) ? result.language : [result.language]);
@@ -100,6 +104,7 @@ const CodingPromptTab = () => {
       if (result.complexity) setComplexity(result.complexity as string);
       if (result.promptStyle) setPromptStyle(result.promptStyle as string);
       if (result.websiteType) setWebsiteType(result.websiteType as string);
+      if (result.designStyle) setDesignStyle(result.designStyle as string);
     }
   };
 
@@ -180,6 +185,7 @@ REQUIREMENTS:
 - Complexity Level: ${selectedComplexity?.label} - ${selectedComplexity?.desc}
 - Output Style: ${selectedStyle?.label}
 ${websiteType ? `- Website Type: ${WEBSITE_TYPES.find(w => w.id === websiteType)?.label} - ${WEBSITE_TYPES.find(w => w.id === websiteType)?.desc}` : ""}
+${designStyle ? `- UI/UX Design Style: ${DESIGN_STYLES.find(d => d.id === designStyle)?.label} - ${DESIGN_STYLES.find(d => d.id === designStyle)?.desc}` : ""}
 ${additionalContext ? `- Additional Context: ${additionalContext}` : ""}
 
 PROMPT OUTPUT FORMAT (based on style "${promptStyle}"):
@@ -352,6 +358,27 @@ IMPORTANT RULES:
           ))}
         </div>
       </div>
+
+      {/* UI/UX Design Style */}
+      <div className="glass-card rounded-2xl p-5">
+        <label className="text-base font-medium text-foreground mb-3 block">
+          <Palette className="w-5 h-5 inline mr-2" />
+          UI/UX Design Style <span className="text-muted-foreground text-xs">(optional - ဒီဇိုင်းစတိုင် ရွေးပါ)</span>
+        </label>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          {DESIGN_STYLES.map((ds) => (
+            <button
+              key={ds.id}
+              onClick={() => setDesignStyle(designStyle === ds.id ? "" : ds.id)}
+              className={`glossy-chip glossy-chip--lg ${designStyle === ds.id ? "glossy-chip--active" : ""}`}
+            >
+              <div>{ds.label}</div>
+              <div className="text-xs opacity-70 mt-0.5">{ds.desc}</div>
+            </button>
+          ))}
+        </div>
+      </div>
+
       {/* Complexity & Prompt Style */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div className="glass-card rounded-2xl p-5">

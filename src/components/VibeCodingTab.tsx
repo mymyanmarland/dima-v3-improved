@@ -51,18 +51,8 @@ const TECH_STACKS = [
   { id: "angular", label: "🅰️ Angular" },
 ];
 
-const DESIGN_STYLES = [
-  { id: "modern-minimal", label: "✨ Modern Minimal", desc: "Clean, spacious" },
-  { id: "glassmorphism", label: "🔮 Glassmorphism", desc: "Frosted glass effects" },
-  { id: "neomorphism", label: "🌑 Neomorphism", desc: "Soft shadow depth" },
-  { id: "brutalist", label: "🏗️ Brutalist", desc: "Raw, bold typography" },
-  { id: "retro", label: "🕹️ Retro / Pixel", desc: "Nostalgic, 8-bit feel" },
-  { id: "corporate", label: "💼 Corporate Pro", desc: "Professional, trustworthy" },
-  { id: "playful", label: "🎨 Playful / Fun", desc: "Colorful, animated" },
-  { id: "dark-premium", label: "🌙 Dark Premium", desc: "Luxurious dark theme" },
-  { id: "gradient-rich", label: "🌈 Gradient Rich", desc: "Bold color transitions" },
-  { id: "editorial", label: "📰 Editorial", desc: "Magazine-like layout" },
-];
+import { DESIGN_STYLES } from "@/data/designStyles";
+
 
 const FEATURES = [
   { id: "auth", label: "🔐 Authentication", icon: Shield },
