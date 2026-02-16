@@ -1,6 +1,6 @@
 import { useState } from "react";
 import GlowTextarea from "./GlowTextarea";
-import { Code2, Terminal, Layers, Cpu, Braces, GitBranch } from "lucide-react";
+import { Code2, Terminal, Layers, Cpu, Braces, GitBranch, Globe } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { playSuccessSound } from "@/utils/notificationSound";
@@ -50,6 +50,29 @@ const COMPLEXITY_LEVELS = [
   { id: "expert", label: "🔥 Expert", desc: "ကျွမ်းကျင်" },
 ];
 
+const WEBSITE_TYPES = [
+  { id: "landing", label: "🏠 Landing Page", desc: "Product/Service landing page" },
+  { id: "ecommerce", label: "🛒 E-Commerce", desc: "Online shopping platform" },
+  { id: "portfolio", label: "🎨 Portfolio", desc: "Personal/Creative portfolio" },
+  { id: "blog", label: "📝 Blog/Magazine", desc: "Content publishing site" },
+  { id: "dashboard", label: "📊 Dashboard/Admin", desc: "Data management panel" },
+  { id: "saas", label: "☁️ SaaS Platform", desc: "Software as a Service app" },
+  { id: "social", label: "💬 Social/Community", desc: "Social network/forum" },
+  { id: "marketplace", label: "🏪 Marketplace", desc: "Multi-vendor platform" },
+  { id: "booking", label: "📅 Booking/Reservation", desc: "Appointment/booking system" },
+  { id: "education", label: "🎓 Education/LMS", desc: "Learning management system" },
+  { id: "news", label: "📰 News/Media", desc: "News portal/media site" },
+  { id: "crm", label: "🤝 CRM", desc: "Customer relationship management" },
+  { id: "healthcare", label: "🏥 Healthcare", desc: "Medical/health platform" },
+  { id: "fintech", label: "💰 Fintech", desc: "Financial services app" },
+  { id: "realestate", label: "🏡 Real Estate", desc: "Property listing platform" },
+  { id: "travel", label: "✈️ Travel", desc: "Travel/tourism platform" },
+  { id: "food", label: "🍕 Food/Restaurant", desc: "Food ordering/restaurant site" },
+  { id: "streaming", label: "🎬 Streaming/Media", desc: "Video/music streaming" },
+  { id: "ai-tool", label: "🤖 AI Tool", desc: "AI-powered web application" },
+  { id: "other", label: "🌐 Other", desc: "Other website type" },
+];
+
 const PROMPT_STYLES = [
   { id: "step-by-step", label: "📋 Step-by-Step Guide" },
   { id: "full-code", label: "💻 Full Code Solution" },
@@ -66,6 +89,7 @@ const CodingPromptTab = () => {
   const [useCase, setUseCase] = useState("build-feature");
   const [complexity, setComplexity] = useState("intermediate");
   const [promptStyle, setPromptStyle] = useState("explain-then-code");
+  const [websiteType, setWebsiteType] = useState("");
   const [additionalContext, setAdditionalContext] = useState("");
   const [generatedPrompt, setGeneratedPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -78,12 +102,14 @@ const CodingPromptTab = () => {
       { key: "useCase", label: "Use Case", options: USE_CASES.map((u) => u.id) },
       { key: "complexity", label: "Complexity", options: COMPLEXITY_LEVELS.map((c) => c.id) },
       { key: "promptStyle", label: "Prompt Style", options: PROMPT_STYLES.map((p) => p.id) },
+      { key: "websiteType", label: "Website Type", options: WEBSITE_TYPES.map((w) => w.id) },
     ]);
     if (result) {
       if (result.language) setSelectedLanguages(Array.isArray(result.language) ? result.language : [result.language]);
       if (result.useCase) setUseCase(result.useCase as string);
       if (result.complexity) setComplexity(result.complexity as string);
       if (result.promptStyle) setPromptStyle(result.promptStyle as string);
+      if (result.websiteType) setWebsiteType(result.websiteType as string);
     }
   };
 
@@ -163,6 +189,7 @@ REQUIREMENTS:
 - Use Case: ${selectedUseCase?.label} - ${selectedUseCase?.desc}
 - Complexity Level: ${selectedComplexity?.label} - ${selectedComplexity?.desc}
 - Output Style: ${selectedStyle?.label}
+${websiteType ? `- Website Type: ${WEBSITE_TYPES.find(w => w.id === websiteType)?.label} - ${WEBSITE_TYPES.find(w => w.id === websiteType)?.desc}` : ""}
 ${additionalContext ? `- Additional Context: ${additionalContext}` : ""}
 
 PROMPT OUTPUT FORMAT (based on style "${promptStyle}"):
@@ -316,6 +343,25 @@ IMPORTANT RULES:
         </div>
       </div>
 
+      {/* Website Type */}
+      <div className="glass-card rounded-2xl p-5">
+        <label className="text-base font-medium text-foreground mb-3 block">
+          <Globe className="w-5 h-5 inline mr-2" />
+          Website အမျိုးအစား <span className="text-muted-foreground text-xs">(Website ဖန်တီးမယ်ဆိုရင် ရွေးပါ)</span>
+        </label>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          {WEBSITE_TYPES.map((wt) => (
+            <button
+              key={wt.id}
+              onClick={() => setWebsiteType(websiteType === wt.id ? "" : wt.id)}
+              className={`glossy-chip glossy-chip--lg ${websiteType === wt.id ? "glossy-chip--active" : ""}`}
+            >
+              <div>{wt.label}</div>
+              <div className="text-xs opacity-70 mt-0.5">{wt.desc}</div>
+            </button>
+          ))}
+        </div>
+      </div>
       {/* Complexity & Prompt Style */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div className="glass-card rounded-2xl p-5">
