@@ -10,6 +10,7 @@ import AiSuggestButton from "./AiSuggestButton";
 import RainbowButton from "./RainbowButton";
 import { useAiSuggestion } from "@/hooks/useAiSuggestion";
 import { DESIGN_STYLES } from "@/data/designStyles";
+import DesignStyleSelector from "./DesignStyleSelector";
 
 const LANGUAGES = [
   { id: "python", label: "🐍 Python" },
@@ -365,18 +366,7 @@ IMPORTANT RULES:
           <Palette className="w-5 h-5 inline mr-2" />
           UI/UX Design Style <span className="text-muted-foreground text-xs">(optional - ဒီဇိုင်းစတိုင် ရွေးပါ)</span>
         </label>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-          {DESIGN_STYLES.map((ds) => (
-            <button
-              key={ds.id}
-              onClick={() => setDesignStyle(designStyle === ds.id ? "" : ds.id)}
-              className={`glossy-chip glossy-chip--lg ${designStyle === ds.id ? "glossy-chip--active" : ""}`}
-            >
-              <div>{ds.label}</div>
-              <div className="text-xs opacity-70 mt-0.5">{ds.desc}</div>
-            </button>
-          ))}
-        </div>
+        <DesignStyleSelector value={designStyle} onChange={setDesignStyle} />
       </div>
 
       {/* Complexity & Prompt Style */}
