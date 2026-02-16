@@ -52,6 +52,7 @@ const TECH_STACKS = [
 ];
 
 import { DESIGN_STYLES } from "@/data/designStyles";
+import DesignStyleSelector from "./DesignStyleSelector";
 
 
 const FEATURES = [
@@ -391,18 +392,7 @@ IMPORTANT RULES:
           <Palette className="w-5 h-5 inline mr-2" />
           Design Style
         </label>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-          {DESIGN_STYLES.map((ds) => (
-            <button
-              key={ds.id}
-              onClick={() => setDesignStyle(ds.id)}
-              className={`glossy-chip glossy-chip--lg ${designStyle === ds.id ? "glossy-chip--active" : ""}`}
-            >
-              <div>{ds.label}</div>
-              <div className="text-xs opacity-70 mt-0.5">{ds.desc}</div>
-            </button>
-          ))}
-        </div>
+        <DesignStyleSelector value={designStyle} onChange={setDesignStyle} allowDeselect={false} />
       </div>
 
       {/* Features */}
