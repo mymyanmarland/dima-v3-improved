@@ -51,26 +51,16 @@ const COMPLEXITY_LEVELS = [
 ];
 
 const WEBSITE_TYPES = [
-  { id: "landing", label: "🏠 Landing Page", desc: "Product/Service landing page" },
-  { id: "ecommerce", label: "🛒 E-Commerce", desc: "Online shopping platform" },
-  { id: "portfolio", label: "🎨 Portfolio", desc: "Personal/Creative portfolio" },
-  { id: "blog", label: "📝 Blog/Magazine", desc: "Content publishing site" },
-  { id: "dashboard", label: "📊 Dashboard/Admin", desc: "Data management panel" },
-  { id: "saas", label: "☁️ SaaS Platform", desc: "Software as a Service app" },
-  { id: "social", label: "💬 Social/Community", desc: "Social network/forum" },
-  { id: "marketplace", label: "🏪 Marketplace", desc: "Multi-vendor platform" },
-  { id: "booking", label: "📅 Booking/Reservation", desc: "Appointment/booking system" },
-  { id: "education", label: "🎓 Education/LMS", desc: "Learning management system" },
-  { id: "news", label: "📰 News/Media", desc: "News portal/media site" },
-  { id: "crm", label: "🤝 CRM", desc: "Customer relationship management" },
-  { id: "healthcare", label: "🏥 Healthcare", desc: "Medical/health platform" },
-  { id: "fintech", label: "💰 Fintech", desc: "Financial services app" },
-  { id: "realestate", label: "🏡 Real Estate", desc: "Property listing platform" },
-  { id: "travel", label: "✈️ Travel", desc: "Travel/tourism platform" },
-  { id: "food", label: "🍕 Food/Restaurant", desc: "Food ordering/restaurant site" },
-  { id: "streaming", label: "🎬 Streaming/Media", desc: "Video/music streaming" },
-  { id: "ai-tool", label: "🤖 AI Tool", desc: "AI-powered web application" },
-  { id: "other", label: "🌐 Other", desc: "Other website type" },
+  { id: "static", label: "📄 Static Website", desc: "HTML/CSS/JS only, no backend" },
+  { id: "dynamic", label: "⚡ Dynamic Website", desc: "Server-side rendering, DB connected" },
+  { id: "spa", label: "🔄 SPA (Single Page App)", desc: "Client-side routing, API-based" },
+  { id: "fullstack", label: "🏗️ Full Stack", desc: "Frontend + Backend + Database" },
+  { id: "jamstack", label: "🥞 JAMstack", desc: "Static gen + APIs + Headless CMS" },
+  { id: "ssr", label: "🖥️ SSR (Server-Side)", desc: "Next.js/Nuxt server rendering" },
+  { id: "pwa", label: "📱 PWA", desc: "Progressive Web App, offline support" },
+  { id: "serverless", label: "☁️ Serverless", desc: "Edge functions, no traditional server" },
+  { id: "headless", label: "🔌 Headless (API Only)", desc: "Backend API without frontend" },
+  { id: "micro-frontend", label: "🧩 Micro Frontend", desc: "Module federation architecture" },
 ];
 
 const PROMPT_STYLES = [
