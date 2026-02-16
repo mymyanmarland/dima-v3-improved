@@ -4,6 +4,7 @@ import PriceTicker from "../components/PriceTicker";
 import TabNav from "../components/TabNav";
 import PromptGeneratorTab from "../components/PromptGeneratorTab";
 import CodingPromptTab from "../components/CodingPromptTab";
+import VibeCodingTab from "../components/VibeCodingTab";
 import ImagePromptTab from "../components/ImagePromptTab";
 import ImageToPromptTab from "../components/ImageToPromptTab";
 import VideoPromptTab from "../components/VideoPromptTab";
@@ -31,6 +32,8 @@ const Index = () => {
         return <RefinePromptTab />;
       case "coding-prompt":
         return <CodingPromptTab />;
+      case "vibe-coding":
+        return <VibeCodingTab />;
       case "ready-made":
         return <ReadyMadePromptTab />;
       case "text-design":
