@@ -8,6 +8,7 @@ import PromptOutput from "./PromptOutput";
 import AiSuggestButton from "./AiSuggestButton";
 import RainbowButton from "./RainbowButton";
 import { useAiSuggestion } from "@/hooks/useAiSuggestion";
+import OutputLanguageSelector, { getLanguageInstruction } from "./OutputLanguageSelector";
 
 const VIDEO_TYPES = [
   { id: "talking-head", label: "🗣️ Talking Head" },
@@ -139,6 +140,7 @@ const VideoPromptEnglishTab = () => {
   const [sound, setSound] = useState("Cinematic Score");
   const [dialogue, setDialogue] = useState("");
   const [sceneDetails, setSceneDetails] = useState("");
+  const [outputLanguage, setOutputLanguage] = useState("english");
   const [generatedPrompt, setGeneratedPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isRandomizing, setIsRandomizing] = useState(false);
@@ -260,8 +262,7 @@ Generate a single, comprehensive Veo 3.1 video prompt that includes:
 9. Mood and atmosphere throughout
 
 Make the prompt highly specific and directly usable in Veo 3.1.
-Write everything in English only.
-Do NOT include any explanations, just the prompt.`,
+Do NOT include any explanations, just the prompt.${getLanguageInstruction(outputLanguage)}`,
         },
       });
 
@@ -461,6 +462,9 @@ Do NOT include any explanations, just the prompt.`,
           rows={3}
         />
       </div>
+
+      {/* Output Language */}
+      <OutputLanguageSelector value={outputLanguage} onChange={setOutputLanguage} />
 
       {/* Generate Button */}
       <button onClick={generateVideoPrompt} disabled={isLoading || !description.trim()} className="gen-btn">
