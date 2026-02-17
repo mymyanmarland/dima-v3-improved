@@ -6799,4 +6799,667 @@ export const READY_MADE_PROJECTS: ReadyMadeProject[] = [
 - Admin model and template management
 - Creative, video-production responsive design`
   },
+
+  // === AI & ML (30 more) ===
+  {
+    id: 301,
+    title: "AI Customer Support Chatbot",
+    category: "ai",
+    emoji: "🤖",
+    prompt: `Build an AI-powered customer support chatbot platform:
+
+**Features:**
+- Conversational AI chatbot with natural language understanding
+- Knowledge base builder (upload docs, FAQs, website URLs)
+- Multi-channel deployment (website widget, API)
+- Conversation history and analytics
+- Human handoff when AI can't resolve
+- Intent recognition and entity extraction
+- Customizable bot personality and tone
+- Quick reply buttons and card carousels
+- User satisfaction rating after conversations
+- Training interface to improve responses
+- Multi-language support
+- Canned responses for common queries
+- Admin dashboard with conversation metrics
+- Modern chat-inspired responsive design`
+  },
+  {
+    id: 302,
+    title: "AI Personal Assistant Chatbot",
+    category: "ai",
+    emoji: "💬",
+    prompt: `Build an AI personal assistant chatbot application:
+
+**Features:**
+- Conversational AI with memory of past interactions
+- Task management (create, update, delete tasks via chat)
+- Calendar scheduling and reminders
+- Weather, news, and general knowledge queries
+- Note-taking through conversation
+- Smart suggestions based on user habits
+- Voice input support (speech-to-text)
+- Multi-conversation threads with context switching
+- Export conversation history
+- Customizable assistant persona and name
+- Dark/light mode with chat bubble UI
+- Typing indicators and message timestamps
+- Mobile-responsive messenger-style design`
+  },
+  {
+    id: 303,
+    title: "AI Code Assistant Chatbot",
+    category: "ai",
+    emoji: "👨‍💻",
+    prompt: `Build an AI-powered code assistant chatbot:
+
+**Features:**
+- Code generation from natural language descriptions
+- Code explanation and documentation generation
+- Bug detection and fix suggestions
+- Multi-language support (Python, JavaScript, TypeScript, etc.)
+- Syntax-highlighted code blocks in chat
+- Code diff view for suggestions
+- Copy code button with one click
+- Conversation history with code snippets
+- Project context awareness (paste code for context)
+- Unit test generation from code
+- Code refactoring suggestions
+- API documentation lookup
+- Dark IDE-themed responsive design`
+  },
+  {
+    id: 304,
+    title: "AI Mental Health Companion",
+    category: "ai",
+    emoji: "🧠",
+    prompt: `Build an AI mental health support chatbot:
+
+**Features:**
+- Empathetic conversational AI for emotional support
+- Mood tracking with daily check-ins
+- Guided breathing and meditation exercises
+- Journaling prompts and reflection questions
+- Crisis detection with emergency resource links
+- CBT-based conversation techniques
+- Progress visualization over time
+- Anonymous usage (no account required option)
+- Conversation themes (anxiety, stress, sleep, relationships)
+- Resource library with coping strategies
+- Weekly mood reports and insights
+- Calming UI with soothing color palette
+- Privacy-focused responsive design`
+  },
+  {
+    id: 305,
+    title: "AI Language Learning Chatbot",
+    category: "ai",
+    emoji: "🌍",
+    prompt: `Build an AI-powered language learning chatbot:
+
+**Features:**
+- Conversational practice in target language
+- Grammar correction with explanations
+- Vocabulary building through context
+- Difficulty level adaptation (beginner to advanced)
+- Role-play scenarios (restaurant, airport, hotel, etc.)
+- Pronunciation tips and phonetic guides
+- Daily conversation challenges
+- Progress tracking with proficiency scores
+- Flashcard generation from conversations
+- Cultural context and idiom explanations
+- Multiple language support (10+ languages)
+- Streak tracking and achievements
+- Colorful, educational responsive design`
+  },
+  {
+    id: 306,
+    title: "AI Sales Assistant Chatbot",
+    category: "ai",
+    emoji: "💼",
+    prompt: `Build an AI sales assistant chatbot for businesses:
+
+**Features:**
+- Lead qualification through conversational flow
+- Product recommendation engine
+- Pricing calculator and quote generation
+- Meeting scheduling integration
+- CRM data integration and lead scoring
+- Objection handling with smart responses
+- Follow-up email generation
+- Conversation analytics and conversion metrics
+- A/B testing for conversation flows
+- Multi-product catalog awareness
+- Handoff to human sales rep
+- Custom branding and widget styling
+- Professional business-themed responsive design`
+  },
+  {
+    id: 307,
+    title: "AI Recipe & Cooking Chatbot",
+    category: "ai",
+    emoji: "👨‍🍳",
+    prompt: `Build an AI cooking assistant chatbot:
+
+**Features:**
+- Recipe suggestions based on available ingredients
+- Step-by-step cooking instructions via chat
+- Dietary restriction awareness (vegan, gluten-free, halal, etc.)
+- Nutritional information and calorie counting
+- Meal planning for the week
+- Grocery list generation from recipes
+- Cooking timer integration
+- Substitution suggestions for missing ingredients
+- Cuisine preference learning over time
+- Save favorite recipes from conversations
+- Photo-based ingredient recognition
+- Cooking tips and technique explanations
+- Warm, kitchen-themed responsive design`
+  },
+  {
+    id: 308,
+    title: "AI Legal Advisor Chatbot",
+    category: "ai",
+    emoji: "⚖️",
+    prompt: `Build an AI legal information chatbot:
+
+**Features:**
+- Legal question answering with jurisdiction awareness
+- Document template generation (contracts, NDAs, agreements)
+- Legal term explanations in plain language
+- Case law reference and citation
+- Rights and obligations information
+- Step-by-step legal process guides
+- Document review suggestions
+- Disclaimer and limitation notices
+- Category-based legal topics (employment, property, family, business)
+- Save and export legal documents
+- Lawyer referral suggestions for complex cases
+- Conversation history with case tracking
+- Professional, trustworthy responsive design`
+  },
+  {
+    id: 309,
+    title: "AI Study Buddy Chatbot",
+    category: "ai",
+    emoji: "📚",
+    prompt: `Build an AI study companion chatbot:
+
+**Features:**
+- Subject-specific tutoring (Math, Science, History, etc.)
+- Concept explanation with examples and analogies
+- Practice problem generation and solving
+- Quiz creation from study materials
+- Flashcard generation from conversations
+- Study schedule and plan creation
+- Homework help with step-by-step solutions
+- Exam preparation with mock tests
+- Note summarization from pasted text
+- Learning style adaptation
+- Progress tracking per subject
+- Pomodoro timer integration
+- Academic, study-friendly responsive design`
+  },
+  {
+    id: 310,
+    title: "AI Travel Planning Chatbot",
+    category: "ai",
+    emoji: "✈️",
+    prompt: `Build an AI travel planning assistant chatbot:
+
+**Features:**
+- Destination recommendations based on preferences
+- Itinerary generation with day-by-day plans
+- Budget estimation and cost breakdown
+- Flight and hotel suggestion (informational)
+- Local attractions and hidden gems
+- Packing list generation based on destination and weather
+- Visa and travel requirement information
+- Currency conversion and travel tips
+- Restaurant and food recommendations
+- Safety tips and emergency contacts
+- Save and export travel plans as PDF
+- Multi-trip management
+- Wanderlust-inspiring responsive design`
+  },
+  {
+    id: 311,
+    title: "AI Fitness Coach Chatbot",
+    category: "ai",
+    emoji: "💪",
+    prompt: `Build an AI fitness coaching chatbot:
+
+**Features:**
+- Personalized workout plan generation
+- Exercise demonstration descriptions and form tips
+- Progress tracking (weight, reps, sets)
+- Nutrition advice and meal suggestions
+- Calorie and macro tracking via chat
+- Workout scheduling and reminders
+- Injury prevention tips
+- Goal setting (weight loss, muscle gain, endurance)
+- Rest day recommendations
+- Weekly progress reports
+- Exercise alternatives for equipment availability
+- Motivational messages and streak tracking
+- Energetic, fitness-themed responsive design`
+  },
+  {
+    id: 312,
+    title: "AI Resume Builder Chatbot",
+    category: "ai",
+    emoji: "📄",
+    prompt: `Build an AI resume building chatbot:
+
+**Features:**
+- Conversational resume creation step by step
+- AI-powered bullet point enhancement
+- Multiple resume template styles
+- Job description matching and optimization
+- ATS compatibility scoring
+- Cover letter generation
+- Skills and keyword suggestions
+- Experience description improvement
+- PDF and DOCX export
+- Multiple resume versions for different roles
+- Interview preparation tips
+- LinkedIn profile optimization suggestions
+- Professional, clean responsive design`
+  },
+  {
+    id: 313,
+    title: "AI Creative Writing Chatbot",
+    category: "ai",
+    emoji: "✍️",
+    prompt: `Build an AI creative writing assistant chatbot:
+
+**Features:**
+- Story idea generation and brainstorming
+- Character development assistance
+- Plot structure suggestions (three-act, hero's journey)
+- Dialogue writing and improvement
+- World-building assistance for fantasy/sci-fi
+- Writing prompt generation
+- Style and tone adjustment
+- Grammar and prose improvement
+- Chapter outline creation
+- Writer's block solutions
+- Genre-specific writing tips
+- Save and organize writing projects
+- Inspiring, literary-themed responsive design`
+  },
+  {
+    id: 314,
+    title: "AI Financial Advisor Chatbot",
+    category: "ai",
+    emoji: "📈",
+    prompt: `Build an AI financial advisory chatbot:
+
+**Features:**
+- Budget planning and expense tracking via chat
+- Investment basics education
+- Savings goal setting and tracking
+- Debt repayment strategy suggestions
+- Tax planning tips and information
+- Retirement planning calculations
+- Risk assessment questionnaire
+- Financial term explanations
+- Monthly financial health reports
+- Spending pattern analysis
+- Bill reminder scheduling
+- Emergency fund planning
+- Trustworthy, finance-themed responsive design`
+  },
+  {
+    id: 315,
+    title: "AI Music Recommendation Chatbot",
+    category: "ai",
+    emoji: "🎵",
+    prompt: `Build an AI music recommendation chatbot:
+
+**Features:**
+- Music recommendations based on mood and preferences
+- Genre exploration and discovery
+- Artist and album information
+- Playlist creation from conversation
+- Similar artist and song suggestions
+- Music trivia and facts
+- Lyrics analysis and meaning
+- Concert and event recommendations
+- Listening history tracking
+- Mood-based playlist generation
+- Music theory explanations
+- New release alerts for favorite artists
+- Vibrant, music-themed responsive design`
+  },
+  {
+    id: 316,
+    title: "AI E-commerce Product Advisor",
+    category: "ai",
+    emoji: "🛍️",
+    prompt: `Build an AI shopping advisor chatbot:
+
+**Features:**
+- Product recommendations based on needs and budget
+- Comparison between similar products
+- Feature explanation in simple terms
+- Price tracking and deal alerts
+- Review summarization for products
+- Size and compatibility checking
+- Gift suggestion based on recipient profile
+- Wishlist creation through conversation
+- Brand information and alternatives
+- Return policy and warranty explanations
+- Seasonal deal recommendations
+- Product category expertise
+- Shopping-inspired responsive design`
+  },
+  {
+    id: 317,
+    title: "AI Interview Prep Chatbot",
+    category: "ai",
+    emoji: "🎤",
+    prompt: `Build an AI interview preparation chatbot:
+
+**Features:**
+- Mock interview simulations by job role
+- Common interview question practice
+- STAR method response coaching
+- Technical interview preparation (coding, system design)
+- Behavioral question practice with feedback
+- Industry-specific question banks
+- Body language and presentation tips
+- Salary negotiation coaching
+- Company research assistance
+- Follow-up email templates
+- Confidence-building exercises
+- Performance scoring and improvement tracking
+- Professional, confidence-inspiring responsive design`
+  },
+  {
+    id: 318,
+    title: "AI Home Design Chatbot",
+    category: "ai",
+    emoji: "🏠",
+    prompt: `Build an AI interior design assistant chatbot:
+
+**Features:**
+- Room design suggestions based on style preferences
+- Color palette recommendations
+- Furniture arrangement tips
+- Budget-friendly decoration ideas
+- Style quiz (modern, minimalist, bohemian, industrial, etc.)
+- Shopping suggestions for furniture and decor
+- Room-by-room design guidance
+- Feng shui and space optimization tips
+- Before/after visualization descriptions
+- Seasonal decoration ideas
+- DIY project suggestions
+- Material and finish recommendations
+- Elegant, design-focused responsive design`
+  },
+  {
+    id: 319,
+    title: "AI Pet Care Chatbot",
+    category: "ai",
+    emoji: "🐾",
+    prompt: `Build an AI pet care assistant chatbot:
+
+**Features:**
+- Pet health symptom checker
+- Breed-specific care information
+- Feeding schedule and nutrition advice
+- Training tips and behavior solutions
+- Vaccination and vet visit reminders
+- Exercise recommendations by breed
+- Grooming guides and schedules
+- Pet-safe food and toxin information
+- New pet owner guides
+- Emergency first aid instructions
+- Pet age calculator and life stage info
+- Local vet and pet service finder
+- Playful, pet-themed responsive design`
+  },
+  {
+    id: 320,
+    title: "AI News Summarizer Chatbot",
+    category: "ai",
+    emoji: "📰",
+    prompt: `Build an AI news summarization chatbot:
+
+**Features:**
+- Daily news briefing by category
+- Article summarization from URLs
+- Topic-based news tracking
+- Multiple news source aggregation
+- Bias detection and balanced perspective
+- Key points extraction with bullet summaries
+- Custom news feed based on interests
+- Breaking news alerts
+- Historical context for current events
+- Related articles and deep dive suggestions
+- Save and bookmark important stories
+- Weekly news digest generation
+- Clean, editorial-style responsive design`
+  },
+  {
+    id: 321,
+    title: "AI Debate Partner Chatbot",
+    category: "ai",
+    emoji: "🗣️",
+    prompt: `Build an AI debate practice chatbot:
+
+**Features:**
+- Take opposing viewpoints on any topic
+- Argument structure coaching
+- Evidence and source suggestions
+- Logical fallacy detection
+- Counterargument generation
+- Debate format practice (Lincoln-Douglas, parliamentary)
+- Topic research assistance
+- Persuasion technique coaching
+- Scoring and feedback on arguments
+- Debate history and improvement tracking
+- Current events debate topics
+- Critical thinking exercises
+- Bold, debate-themed responsive design`
+  },
+  {
+    id: 322,
+    title: "AI Story Game Chatbot",
+    category: "ai",
+    emoji: "🎮",
+    prompt: `Build an AI interactive story game chatbot:
+
+**Features:**
+- Choose-your-own-adventure storytelling
+- Dynamic story generation based on choices
+- Multiple genres (fantasy, sci-fi, mystery, horror, romance)
+- Character creation and customization
+- Inventory and stats system
+- Save and resume stories
+- Branching narrative with multiple endings
+- Dice roll and random event system
+- NPC interactions with personality
+- Achievement and badge system
+- Share completed stories
+- Community story templates
+- Immersive, game-inspired responsive design`
+  },
+  {
+    id: 323,
+    title: "AI Email Writer Chatbot",
+    category: "ai",
+    emoji: "📧",
+    prompt: `Build an AI email composition chatbot:
+
+**Features:**
+- Professional email drafting from brief descriptions
+- Tone adjustment (formal, casual, persuasive, apologetic)
+- Email reply suggestions
+- Follow-up email generation
+- Cold outreach email crafting
+- Subject line optimization
+- Email templates for common scenarios
+- Grammar and clarity improvement
+- Multi-language email support
+- Email thread summarization
+- Meeting request and scheduling emails
+- Complaint and feedback email assistance
+- Clean, productivity-focused responsive design`
+  },
+  {
+    id: 324,
+    title: "AI Data Analysis Chatbot",
+    category: "ai",
+    emoji: "📊",
+    prompt: `Build an AI data analysis assistant chatbot:
+
+**Features:**
+- CSV/JSON data upload and parsing
+- Natural language data querying
+- Chart and visualization generation from data
+- Statistical analysis (mean, median, trends)
+- Data cleaning suggestions
+- Correlation and pattern detection
+- Report generation from analysis
+- SQL query generation from questions
+- Data visualization recommendations
+- Export results as charts or tables
+- Comparative analysis between datasets
+- Insight summarization
+- Data-driven, analytical responsive design`
+  },
+  {
+    id: 325,
+    title: "AI Content Moderator Chatbot",
+    category: "ai",
+    emoji: "🛡️",
+    prompt: `Build an AI content moderation assistant:
+
+**Features:**
+- Text content toxicity detection
+- Spam and promotional content filtering
+- Hate speech and harassment detection
+- Sentiment analysis for user content
+- Custom moderation rules engine
+- Bulk content review queue
+- Moderation decision logging
+- Appeal handling workflow
+- Content categorization and tagging
+- User risk scoring
+- Automated action triggers (warn, mute, ban)
+- Moderation analytics dashboard
+- Admin-focused, security-themed responsive design`
+  },
+  {
+    id: 326,
+    title: "AI Meeting Notes Chatbot",
+    category: "ai",
+    emoji: "📝",
+    prompt: `Build an AI meeting notes assistant chatbot:
+
+**Features:**
+- Meeting transcript summarization
+- Action item extraction from notes
+- Key decision highlighting
+- Attendee and topic tagging
+- Follow-up task generation
+- Meeting agenda creation
+- Previous meeting context recall
+- Search across all meeting notes
+- Share summaries with team members
+- Calendar integration for meeting scheduling
+- Template-based meeting formats
+- Export notes as PDF or markdown
+- Professional, productivity-themed responsive design`
+  },
+  {
+    id: 327,
+    title: "AI Accessibility Advisor Chatbot",
+    category: "ai",
+    emoji: "♿",
+    prompt: `Build an AI web accessibility advisor chatbot:
+
+**Features:**
+- WCAG compliance checking from URL or code
+- Accessibility issue explanation in plain language
+- Fix suggestions with code examples
+- Color contrast checking and alternatives
+- Alt text generation suggestions
+- ARIA attribute guidance
+- Keyboard navigation testing tips
+- Screen reader compatibility advice
+- Accessibility score and reporting
+- Best practices by component type
+- Legal compliance information (ADA, Section 508)
+- Accessibility checklist generation
+- Inclusive, accessibility-focused responsive design`
+  },
+  {
+    id: 328,
+    title: "AI Startup Advisor Chatbot",
+    category: "ai",
+    emoji: "🚀",
+    prompt: `Build an AI startup advisory chatbot:
+
+**Features:**
+- Business idea validation and feedback
+- Market analysis and competitor research
+- Business model canvas generation
+- Pitch deck content assistance
+- Funding strategy and investor matching
+- MVP feature prioritization
+- Go-to-market strategy planning
+- Financial projection assistance
+- Legal structure recommendations
+- Team building and hiring advice
+- Growth hacking strategies
+- Startup terminology glossary
+- Bold, entrepreneurial responsive design`
+  },
+  {
+    id: 329,
+    title: "AI Prompt Engineering Chatbot",
+    category: "ai",
+    emoji: "⚡",
+    prompt: `Build an AI prompt engineering assistant chatbot:
+
+**Features:**
+- Prompt optimization and improvement suggestions
+- Prompt template library for various use cases
+- A/B testing for prompt variations
+- Prompt structure analysis and scoring
+- Chain-of-thought prompt building
+- System prompt crafting assistance
+- Few-shot example generation
+- Prompt debugging and error analysis
+- Model-specific prompt optimization (GPT, Claude, Gemini)
+- Prompt versioning and history
+- Community prompt sharing
+- Prompt performance metrics
+- Tech-savvy, developer-themed responsive design`
+  },
+  {
+    id: 330,
+    title: "AI Multi-Agent Orchestrator",
+    category: "ai",
+    emoji: "🤖",
+    prompt: `Build an AI multi-agent orchestration platform:
+
+**Features:**
+- Create and configure multiple AI agents with different roles
+- Agent-to-agent communication and task delegation
+- Workflow builder for multi-step AI processes
+- Agent performance monitoring and logging
+- Custom tool/function assignment per agent
+- Parallel and sequential task execution
+- Result aggregation from multiple agents
+- Template workflows (research, content creation, analysis)
+- Agent memory and context management
+- Error handling and fallback strategies
+- Cost tracking per agent and workflow
+- Visual workflow designer
+- Futuristic, tech-forward responsive design`
+  },
 ];
