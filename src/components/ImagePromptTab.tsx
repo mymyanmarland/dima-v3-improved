@@ -8,6 +8,7 @@ import PromptOutput from "./PromptOutput";
 import AiSuggestButton from "./AiSuggestButton";
 import RainbowButton from "./RainbowButton";
 import { useAiSuggestion } from "@/hooks/useAiSuggestion";
+import OutputLanguageSelector, { getLanguageInstruction } from "./OutputLanguageSelector";
 
 const IMAGE_STYLES = [
   "Photorealistic", "Digital Art", "Oil Painting", "Watercolor", "Anime",
@@ -88,6 +89,7 @@ const ImagePromptTab = () => {
   const [imageType, setImageType] = useState("illustration");
   const [additionalDetails, setAdditionalDetails] = useState("");
   const [negativePrompt, setNegativePrompt] = useState("");
+  const [outputLanguage, setOutputLanguage] = useState("english");
   const [generatedPrompt, setGeneratedPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isRandomizing, setIsRandomizing] = useState(false);
@@ -171,7 +173,7 @@ Style: ${style} | Type: ${IMAGE_TYPES.find(t => t.id === imageType)?.label || im
 ${additionalDetails ? `Details: ${additionalDetails}` : ""}
 ${negativePrompt ? `Avoid: ${negativePrompt}` : ""}
 
-CRITICAL: Output ONE continuous paragraph (80-150 words) describing a SINGLE scene/subject. Include quality tags (masterpiece, 8k, ultra detailed). NEVER mention "variations", "grid", "multiple", "collection". Be vivid and specific about colors, textures, mood, and composition.`,
+CRITICAL: Output ONE continuous paragraph (80-150 words) describing a SINGLE scene/subject. Include quality tags (masterpiece, 8k, ultra detailed). NEVER mention "variations", "grid", "multiple", "collection". Be vivid and specific about colors, textures, mood, and composition.${getLanguageInstruction(outputLanguage)}`,
         },
       });
 
@@ -315,6 +317,8 @@ CRITICAL: Output ONE continuous paragraph (80-150 words) describing a SINGLE sce
         />
       </div>
 
+      {/* Output Language */}
+      <OutputLanguageSelector value={outputLanguage} onChange={setOutputLanguage} />
 
       {/* Generate Button */}
       <button onClick={generateImagePrompt} disabled={isLoading || !subject.trim()} className="gen-btn">

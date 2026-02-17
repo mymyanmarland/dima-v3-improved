@@ -8,6 +8,7 @@ import PromptOutput from "./PromptOutput";
 import AiSuggestButton from "./AiSuggestButton";
 import RainbowButton from "./RainbowButton";
 import { useAiSuggestion } from "@/hooks/useAiSuggestion";
+import OutputLanguageSelector, { getLanguageInstruction } from "./OutputLanguageSelector";
 
 const LOGO_STYLES = [
   { id: "minimalist", label: "🔲 Minimalist", desc: "Clean, simple, modern" },
@@ -69,6 +70,7 @@ const LogoPromptTab = () => {
   const [typographyStyle, setTypographyStyle] = useState("Sans-Serif (Modern)");
   const [iconType, setIconType] = useState("Abstract Symbol");
   const [additionalDetails, setAdditionalDetails] = useState("");
+  const [outputLanguage, setOutputLanguage] = useState("english");
   const [generatedPrompt, setGeneratedPrompt] = useState("");
   const [executedResult, setExecutedResult] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -178,7 +180,7 @@ ${tagline.trim() ? `— Tagline: "${tagline.trim()}"` : ""}
 — Icon/Symbol: ${iconType}
 ${additionalDetails.trim() ? `— Extra: ${additionalDetails.trim()}` : ""}
 
-CRITICAL: Describe ONE single logo on a clean background. Include the brand name text, icon/symbol composition, exact colors, and style. Add "single logo, centered, clean background, professional logo design, vector style, high resolution" as quality tags. NEVER mention "variations", "options", "versions", or "grid".`;
+CRITICAL: Describe ONE single logo on a clean background. Include the brand name text, icon/symbol composition, exact colors, and style. Add "single logo, centered, clean background, professional logo design, vector style, high resolution" as quality tags. NEVER mention "variations", "options", "versions", or "grid".${getLanguageInstruction(outputLanguage)}`;
   };
 
   const generatePromptOnly = async () => {
@@ -402,6 +404,9 @@ CRITICAL: Describe ONE single logo on a clean background. Include the brand name
           rows={2}
         />
       </div>
+
+      {/* Output Language */}
+      <OutputLanguageSelector value={outputLanguage} onChange={setOutputLanguage} />
 
       {/* Button Descriptions */}
       <div className="glass-subtle rounded-2xl p-3">

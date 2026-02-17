@@ -11,6 +11,7 @@ import RainbowButton from "./RainbowButton";
 import { useAiSuggestion } from "@/hooks/useAiSuggestion";
 import { DESIGN_STYLES } from "@/data/designStyles";
 import DesignStyleSelector from "./DesignStyleSelector";
+import OutputLanguageSelector, { getLanguageInstruction } from "./OutputLanguageSelector";
 
 const LANGUAGES = [
   { id: "python", label: "🐍 Python" },
@@ -85,6 +86,7 @@ const CodingPromptTab = () => {
   const [websiteType, setWebsiteType] = useState("");
   const [designStyle, setDesignStyle] = useState("");
   const [additionalContext, setAdditionalContext] = useState("");
+  const [outputLanguage, setOutputLanguage] = useState("english");
   const [generatedPrompt, setGeneratedPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isRandomizing, setIsRandomizing] = useState(false);
@@ -234,8 +236,7 @@ IMPORTANT RULES:
 - Mention error handling, edge cases, and testing
 - For ${complexity} level, adjust complexity accordingly
 - Make the prompt reusable and well-structured
-- Output ONLY the prompt, no meta-explanations
-- Write the prompt in English for maximum AI compatibility`,
+- Output ONLY the prompt, no meta-explanations${getLanguageInstruction(outputLanguage)}`,
         },
       });
 
@@ -424,6 +425,9 @@ IMPORTANT RULES:
           💡 Tech stack, constraints, requirements စသည် ထပ်ထည့်ပေးနိုင်ပါတယ်
         </p>
       </div>
+
+      {/* Output Language */}
+      <OutputLanguageSelector value={outputLanguage} onChange={setOutputLanguage} />
 
       {/* Generate Button */}
       <button onClick={generateCodingPrompt} disabled={isLoading || !description.trim()} className="gen-btn">

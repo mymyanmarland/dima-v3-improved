@@ -55,6 +55,7 @@ import { DESIGN_STYLES } from "@/data/designStyles";
 import DesignStyleSelector from "./DesignStyleSelector";
 import FeatureSelector from "./FeatureSelector";
 import { ALL_FEATURES } from "@/data/vibeCodingFeatures";
+import OutputLanguageSelector, { getLanguageInstruction } from "./OutputLanguageSelector";
 
 
 const DETAIL_LEVELS = [
@@ -74,6 +75,7 @@ const VibeCodingTab = () => {
   const [detailLevel, setDetailLevel] = useState("detailed");
   const [colorScheme, setColorScheme] = useState("");
   const [additionalNotes, setAdditionalNotes] = useState("");
+  const [outputLanguage, setOutputLanguage] = useState("english");
   const [generatedPrompt, setGeneratedPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isRandomizing, setIsRandomizing] = useState(false);
@@ -240,8 +242,7 @@ IMPORTANT RULES:
 - Use clear, actionable language
 - Include visual references where helpful (describe exactly how things should look)
 - Output ONLY the prompt, no meta-explanations
-- Write in English for maximum AI compatibility
-- Make it feel like a natural "vibe coding" conversation`,
+- Make it feel like a natural "vibe coding" conversation${getLanguageInstruction(outputLanguage)}`,
         },
       });
 
@@ -434,6 +435,9 @@ IMPORTANT RULES:
           💡 သီးသန့် requirements, references, inspirations စသည် ထပ်ထည့်ပေးနိုင်ပါတယ်
         </p>
       </div>
+
+      {/* Output Language */}
+      <OutputLanguageSelector value={outputLanguage} onChange={setOutputLanguage} />
 
       {/* Generate Button */}
       <button onClick={generateVibePrompt} disabled={isLoading || !description.trim()} className="gen-btn">

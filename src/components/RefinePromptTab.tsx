@@ -7,6 +7,7 @@ import { useAuth } from "@/hooks/useAuth";
 import PromptOutput from "./PromptOutput";
 import AiSuggestButton from "./AiSuggestButton";
 import { useAiSuggestion } from "@/hooks/useAiSuggestion";
+import OutputLanguageSelector, { getLanguageInstruction } from "./OutputLanguageSelector";
 
 const REFINE_METHODS = [
   { id: "chain-of-thought", label: "🧠 Chain-of-Thought", desc: "Step-by-step reasoning logic" },
@@ -48,6 +49,7 @@ const RefinePromptTab = () => {
   const [qualityLevel, setQualityLevel] = useState("expert");
   const [targetAi, setTargetAi] = useState("Any AI Model");
   const [additionalNotes, setAdditionalNotes] = useState("");
+  const [outputLanguage, setOutputLanguage] = useState("english");
   const [generatedPrompt, setGeneratedPrompt] = useState("");
   const [executedResult, setExecutedResult] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -118,7 +120,7 @@ Transform the raw prompt into a refined, professional prompt that is:
 - Formatted as ${selectedFormat?.label}
 - At ${selectedQuality?.label} quality standard
 
-Return ONLY the refined prompt. Do not include explanations about what you changed.`;
+Return ONLY the refined prompt. Do not include explanations about what you changed.${getLanguageInstruction(outputLanguage)}`;
   };
 
   const generatePromptOnly = async () => {
@@ -318,6 +320,9 @@ Return ONLY the refined prompt. Do not include explanations about what you chang
           rows={2}
         />
       </div>
+
+      {/* Output Language */}
+      <OutputLanguageSelector value={outputLanguage} onChange={setOutputLanguage} />
 
       {/* Button Descriptions */}
       <div className="glass-subtle rounded-2xl p-3">

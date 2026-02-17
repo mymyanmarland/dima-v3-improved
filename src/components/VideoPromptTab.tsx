@@ -8,6 +8,7 @@ import { useAuth } from "@/hooks/useAuth";
 import PromptOutput from "./PromptOutput";
 import AiSuggestButton from "./AiSuggestButton";
 import { useAiSuggestion } from "@/hooks/useAiSuggestion";
+import OutputLanguageSelector, { getLanguageInstruction } from "./OutputLanguageSelector";
 
 const VIDEO_TYPES = [
   { id: "talking-head", label: "🗣️ Talking Head", desc: "လူပြောနေတဲ့ Video" },
@@ -57,6 +58,7 @@ const VideoPromptTab = () => {
   const [aspectRatio, setAspectRatio] = useState("16:9");
   const [myanmarDialogue, setMyanmarDialogue] = useState("");
   const [mood, setMood] = useState("");
+  const [outputLanguage, setOutputLanguage] = useState("myanmar");
   const [generatedPrompt, setGeneratedPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { suggest, isSuggesting } = useAiSuggestion();
@@ -123,8 +125,7 @@ Generate a single, comprehensive Veo 3.1 video prompt that includes:
 8. Timing and pacing instructions
 
 Make the prompt highly specific and directly usable in Veo 3.1. 
-Write the video description in English but include Myanmar dialogue in Myanmar script.
-Do NOT include any explanations, just the prompt.`,
+Do NOT include any explanations, just the prompt.${getLanguageInstruction(outputLanguage)}`,
         },
       });
 
@@ -270,6 +271,9 @@ Do NOT include any explanations, just the prompt.`,
           className="w-full glass-input rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
         />
       </div>
+
+      {/* Output Language */}
+      <OutputLanguageSelector value={outputLanguage} onChange={setOutputLanguage} />
 
       {/* Generate Button */}
       <button onClick={generateVideoPrompt} disabled={isLoading || !description.trim()} className="gen-btn">

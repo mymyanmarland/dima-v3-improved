@@ -6,6 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { playSuccessSound } from "@/utils/notificationSound";
 import { useAuth } from "@/hooks/useAuth";
 import PromptOutput from "./PromptOutput";
+import OutputLanguageSelector, { getLanguageInstruction } from "./OutputLanguageSelector";
 import AiSuggestButton from "./AiSuggestButton";
 import RainbowButton from "./RainbowButton";
 import { useAiSuggestion } from "@/hooks/useAiSuggestion";
@@ -435,23 +436,7 @@ const PromptGeneratorTab = () => {
 
       {/* Language & Detail Level */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <div className="glass-card rounded-2xl p-5">
-          <label className="text-base font-medium text-foreground mb-3 block">
-            <Globe className="w-5 h-5 inline mr-2" />
-            Output Language
-          </label>
-          <div className="grid grid-cols-2 gap-2">
-            {OUTPUT_LANGUAGES.map((l) => (
-              <button
-                key={l.id}
-                onClick={() => setOutputLanguage(l.id)}
-                className={`glossy-chip ${outputLanguage === l.id ? "glossy-chip--active" : ""}`}
-              >
-                {l.label}
-              </button>
-            ))}
-          </div>
-        </div>
+        <OutputLanguageSelector value={outputLanguage} onChange={setOutputLanguage} />
 
         <div className="glass-card rounded-2xl p-5">
           <label className="text-base font-medium text-foreground mb-3 block">
