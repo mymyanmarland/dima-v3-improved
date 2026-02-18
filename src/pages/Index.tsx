@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense } from "react";
+import { useState, lazy, Suspense, useEffect } from "react";
 import AppHeader from "../components/AppHeader";
 import PriceTicker from "../components/PriceTicker";
 import TabNav from "../components/TabNav";
@@ -17,9 +17,56 @@ import TextDesignPromptTab from "../components/TextDesignPromptTab";
 import LogoPromptTab from "../components/LogoPromptTab";
 import RefinePromptTab from "../components/RefinePromptTab";
 import ActivityLogTab from "../components/ActivityLogTab";
+import { ChevronUp, ChevronDown } from "lucide-react";
 
 const StarryBackground = lazy(() => import("../components/StarryBackground"));
 const ChatBotPopup = lazy(() => import("../components/ChatBotPopup"));
+
+const ScrollButtons = () => {
+  const [showTop, setShowTop] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setShowTop(window.scrollY > 200);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const scrollTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+  const scrollBottom = () => window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+
+  return (
+    <div className="fixed bottom-20 right-4 z-40 flex flex-col gap-2">
+      {showTop && (
+        <button
+          onClick={scrollTop}
+          className="w-10 h-10 rounded-full flex items-center justify-center shadow-lg transition-all duration-200 hover:scale-110 active:scale-95"
+          style={{
+            background: "hsl(var(--primary) / 0.85)",
+            color: "hsl(var(--primary-foreground))",
+            backdropFilter: "blur(8px)",
+            border: "1px solid hsl(var(--primary) / 0.3)",
+          }}
+          title="Page ထိပ်သို့"
+        >
+          <ChevronUp className="w-5 h-5" />
+        </button>
+      )}
+      <button
+        onClick={scrollBottom}
+        className="w-10 h-10 rounded-full flex items-center justify-center shadow-lg transition-all duration-200 hover:scale-110 active:scale-95"
+        style={{
+          background: "hsl(var(--accent) / 0.85)",
+          color: "hsl(var(--accent-foreground))",
+          backdropFilter: "blur(8px)",
+          border: "1px solid hsl(var(--accent) / 0.3)",
+        }}
+        title="Page အောက်သို့"
+      >
+        <ChevronDown className="w-5 h-5" />
+      </button>
+    </div>
+  );
+};
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("prompt");
@@ -81,6 +128,7 @@ const Index = () => {
           </main>
         </div>
       </div>
+      <ScrollButtons />
       <Suspense fallback={null}>
         <ChatBotPopup />
       </Suspense>
