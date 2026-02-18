@@ -340,6 +340,7 @@ const PromptGeneratorTab = () => {
         <GlowTextarea
           value={topic}
           onChange={(e) => setTopic(e.target.value)}
+          onClear={() => setTopic("")}
           placeholder="How to create Gemini API Key စတဲ့အရာ Design ကစခု ဖန်တီးပေးပါ..."
           rows={3}
         />
@@ -466,6 +467,7 @@ const PromptGeneratorTab = () => {
         <GlowTextarea
           value={context}
           onChange={(e) => setContext(e.target.value)}
+          onClear={() => setContext("")}
           placeholder="ထပ်ဖြည့်ချင်တဲ့ details တွေ ထည့်ပါ..."
           rows={2}
         />
