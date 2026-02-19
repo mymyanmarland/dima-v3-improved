@@ -17,6 +17,7 @@ import TextDesignPromptTab from "../components/TextDesignPromptTab";
 import LogoPromptTab from "../components/LogoPromptTab";
 import RefinePromptTab from "../components/RefinePromptTab";
 import ActivityLogTab from "../components/ActivityLogTab";
+import OnboardingHelper from "../components/OnboardingHelper";
 import { ChevronUp, ChevronDown } from "lucide-react";
 
 const StarryBackground = lazy(() => import("../components/StarryBackground"));
@@ -118,6 +119,8 @@ const Index = () => {
           <PriceTicker />
 
           <main className="max-w-3xl mx-auto px-4 md:px-6 py-6">
+            <OnboardingHelper />
+
             {/* Tab Navigation */}
             <div className="mb-6">
               <TabNav activeTab={activeTab} onTabChange={setActiveTab} />

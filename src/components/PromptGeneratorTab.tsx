@@ -475,14 +475,15 @@ const PromptGeneratorTab = () => {
 
       {/* Button descriptions */}
       <div className="glass-subtle rounded-2xl p-3">
-        <div className="grid grid-cols-2 gap-3 text-xs text-foreground/80">
+        <p className="text-[11px] uppercase tracking-wide text-muted-foreground mb-2">Mode Guide</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-foreground/80">
           <div className="flex items-start gap-1.5">
             <span className="text-primary font-bold">①</span>
-            <span>Prompt ကိုပဲ generate လုပ်ပြီး ပြပေးမယ် — copy ယူပြီး ကိုယ်တိုင်သုံးနိုင်ပါတယ်</span>
+            <span><b>Prompt Generate</b> = Prompt ကိုပဲထုတ်ပေးမယ် (copy ယူပြီးနေရာမရွေးသုံးနိုင်)</span>
           </div>
           <div className="flex items-start gap-1.5">
             <span className="text-accent font-bold">②</span>
-            <span>Prompt generate ပြီး AI ကနေ တိုက်ရိုက် အဖြေထုတ်ပေးမယ်</span>
+            <span><b>Generate + Execute</b> = Prompt ထုတ်ပြီး AI ကနေ တိုက်ရိုက်အဖြေပါထုတ်ပေးမယ်</span>
           </div>
         </div>
       </div>
