@@ -489,15 +489,17 @@ const PromptGeneratorTab = () => {
       </div>
 
       {/* Buttons */}
-      <div className="grid grid-cols-2 gap-3">
-        <button onClick={generatePromptOnly} disabled={isDisabled} className="gen-btn gen-sm">
-          {isLoading && activeMode === "generate" && <div className="w-4 h-4 rounded-full border-2 border-white border-t-transparent animate-spin" />}
-          <span>Prompt Generate မယ်</span>
-        </button>
-        <button onClick={generateAndExecute} disabled={isDisabled} className="gen-btn gen-sm">
-          {(isLoading || isExecuting) && activeMode === "execute" && <div className="w-4 h-4 rounded-full border-2 border-white border-t-transparent animate-spin" />}
-          <span>{isExecuting ? "Execute လုပ်နေတယ်..." : "Generate + Execute"}</span>
-        </button>
+      <div className="sticky bottom-2 z-30 md:static md:z-auto bg-background/70 backdrop-blur-sm rounded-2xl p-2 md:p-0 border border-border/40 md:border-0">
+        <div className="grid grid-cols-2 gap-2 md:gap-3">
+          <button onClick={generatePromptOnly} disabled={isDisabled} className="gen-btn gen-sm">
+            {isLoading && activeMode === "generate" && <div className="w-4 h-4 rounded-full border-2 border-white border-t-transparent animate-spin" />}
+            <span>Prompt Generate မယ်</span>
+          </button>
+          <button onClick={generateAndExecute} disabled={isDisabled} className="gen-btn gen-sm">
+            {(isLoading || isExecuting) && activeMode === "execute" && <div className="w-4 h-4 rounded-full border-2 border-white border-t-transparent animate-spin" />}
+            <span>{isExecuting ? "Execute လုပ်နေတယ်..." : "Generate + Execute"}</span>
+          </button>
+        </div>
       </div>
 
       {/* Output */}

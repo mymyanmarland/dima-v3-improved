@@ -14,7 +14,7 @@
 ## Phase 3 — UX/UI
 - [x] Improve onboarding (How to use + API key setup helper)
 - [x] Clarify action labels (Generate vs Generate+Execute)
-- [ ] Improve mobile spacing + sticky action area
+- [x] Improve mobile spacing + sticky action area
 
 ## Phase 4 — Security/Config
 - [ ] Add API key format validation hints (Gemini/OpenRouter)
