@@ -13,6 +13,8 @@ const ENCRYPTION_PREFIX = "enc:v1:";
 // Free OpenRouter models to fallback through (in priority order)
 // Using actual available free models from OpenRouter
 const FREE_MODELS = [
+  "openrouter/auto",
+  "qwen-portal/coder-model",
   "nousresearch/hermes-3-llama-3.1-405b:free",
   "microsoft/phi-3-medium-128k-instruct:free",
   "google/gemma-2-9b-it:free",
@@ -142,6 +144,26 @@ interface CallResult {
   model?: string;
 }
 
+const RETRYABLE_STATUS_CODES = [408, 409, 425, 500, 502, 503, 504];
+
+async function fetchWithRetry(url: string, init: RequestInit, retries = 2): Promise<Response> {
+  let lastError: unknown;
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      const response = await fetch(url, init);
+      if (!RETRYABLE_STATUS_CODES.includes(response.status) || attempt === retries) {
+        return response;
+      }
+    } catch (err) {
+      lastError = err;
+      if (attempt === retries) throw err;
+    }
+    const backoffMs = 400 * Math.pow(2, attempt);
+    await new Promise((resolve) => setTimeout(resolve, backoffMs));
+  }
+  throw lastError ?? new Error("Request failed");
+}
+
 async function callAIWithModelFallback(
   configs: UserApiConfig[],
   primaryModel: string,
@@ -165,7 +187,7 @@ async function callAIWithModelFallback(
       console.log(`Trying AI call via ${config.source} with model ${model}...`);
       
       try {
-        const response = await fetch(url, init);
+        const response = await fetchWithRetry(url, init, 2);
         const responseText = await response.text();
 
         if (response.ok) {
@@ -260,7 +282,15 @@ serve(async (req) => {
           { status: 402, headers: { ...corsHeaders, "Content-Type": "application/json" } });
       }
 
-      return new Response(JSON.stringify({ error: "AI service error" }),
+      if (result.error?.status === 403) {
+        return new Response(JSON.stringify({
+          error: "Provider က ဒီ model/request ကို ပိတ်ထားပါတယ် (403). Region restriction ဖြစ်နိုင်ပါတယ်။ OpenRouter Auto (သို့) Qwen fallback နဲ့ ပြန်စမ်းပါ။",
+          details: result.error?.message,
+        }),
+          { status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" } });
+      }
+
+      return new Response(JSON.stringify({ error: "AI service error", details: result.error?.message }),
         { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } });
     }
 

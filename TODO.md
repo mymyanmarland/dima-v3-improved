@@ -7,9 +7,9 @@
 - [x] Run baseline build/test
 
 ## Phase 2 — Reliability
-- [ ] Add provider fallback policy config (Gemini -> OpenRouter Auto -> Qwen)
-- [ ] Normalize API error handling (region block, quota, auth)
-- [ ] Add retry/backoff utility for transient errors
+- [x] Add provider fallback policy config (Gemini -> OpenRouter Auto -> Qwen)
+- [x] Normalize API error handling (region block, quota, auth)
+- [x] Add retry/backoff utility for transient errors
 
 ## Phase 3 — UX/UI
 - [ ] Improve onboarding (How to use + API key setup helper)

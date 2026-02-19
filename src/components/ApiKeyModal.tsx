@@ -27,6 +27,23 @@ const PROVIDERS: { id: Provider; label: string; placeholder: string; helpUrl: st
   },
 ];
 
+const validateApiKey = (provider: Provider, value: string) => {
+  const key = value.trim();
+  if (!key) return { ok: false, message: "API Key ထည့်ပါ" };
+
+  if (provider === "openrouter") {
+    if (!key.startsWith("sk-or-")) {
+      return { ok: false, message: "OpenRouter key က sk-or- နဲ့ စရပါမယ်" };
+    }
+    return { ok: true, message: "" };
+  }
+
+  if (!key.startsWith("AIza")) {
+    return { ok: false, message: "Gemini key က AIza နဲ့ စရပါမယ်" };
+  }
+  return { ok: true, message: "" };
+};
+
 const ApiKeyModal = ({ onClose }: ApiKeyModalProps) => {
   const { user } = useAuth();
   const [provider, setProvider] = useState<Provider>("openrouter");
@@ -34,6 +51,7 @@ const ApiKeyModal = ({ onClose }: ApiKeyModalProps) => {
   const [showKey, setShowKey] = useState(false);
   const [hasKey, setHasKey] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [validationMsg, setValidationMsg] = useState("");
 
   // Track keys per provider
   const [providerKeys, setProviderKeys] = useState<Record<Provider, { hasKey: boolean; maskedKey: string }>>({
@@ -57,6 +75,7 @@ const ApiKeyModal = ({ onClose }: ApiKeyModalProps) => {
       setHasKey(false);
     }
     setShowKey(false);
+    setValidationMsg("");
   }, [provider, providerKeys]);
 
   const loadAllKeys = async () => {
@@ -79,7 +98,15 @@ const ApiKeyModal = ({ onClose }: ApiKeyModalProps) => {
   };
 
   const handleSave = async () => {
-    if (!apiKey.trim() || !user) return;
+    if (!user) return;
+
+    const validation = validateApiKey(provider, apiKey);
+    if (!validation.ok) {
+      setValidationMsg(validation.message);
+      toast.error(validation.message);
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -195,7 +222,12 @@ const ApiKeyModal = ({ onClose }: ApiKeyModalProps) => {
           <input
             type={showKey ? "text" : "password"}
             value={apiKey}
-            onChange={(e) => setApiKey(e.target.value)}
+            onChange={(e) => {
+              const next = e.target.value;
+              setApiKey(next);
+              const validation = validateApiKey(provider, next);
+              setValidationMsg(validation.ok ? "" : validation.message);
+            }}
             placeholder={currentProvider.placeholder}
             className="w-full bg-secondary/50 border border-border rounded-lg px-4 pr-10 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all font-mono"
           />
@@ -208,10 +240,14 @@ const ApiKeyModal = ({ onClose }: ApiKeyModalProps) => {
           </button>
         </div>
 
+        {validationMsg && (
+          <p className="text-xs text-amber-400 mb-3">⚠️ {validationMsg}</p>
+        )}
+
         <div className="flex gap-2">
           <button
             onClick={handleSave}
-            disabled={!apiKey.trim() || loading}
+            disabled={!apiKey.trim() || loading || !validateApiKey(provider, apiKey).ok}
             className="flex-1 py-2.5 bg-primary text-primary-foreground rounded-lg font-medium text-sm hover:opacity-90 transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
             <Save className="w-4 h-4" />
